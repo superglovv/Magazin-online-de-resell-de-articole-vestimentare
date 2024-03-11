@@ -1,22 +1,84 @@
 #link-top {
+  margin: 8px;
   position: fixed;
   bottom: 0.3em;
   opacity: 0.5;
   left: 0.3em;
   width: 3rem;
-  box-sizing: border-box;
   height: 3rem;
   line-height: 3rem;
   text-align: center;
-  border: 5px solid grey;
-  border-top-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
   background: rgb(220, 220, 220);
+  transition: box-shadow 0.3s ease-in-out;
+  text-decoration: none;
 }
+
 #link-top:hover {
-  opacity: 1;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.66);
 }
-#triunghi {
+
+#link-top:before {
+  opacity: 0.5;
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
+  border: 5px solid aqua;
+  border-top-color: black;
+  border-bottom-color: black;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+#link-top:hover:before {
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
+#link-top .sageata {
+  font-size: 3rem;
+  transform: translateY(-5px);
+  text-decoration: none;
+  color: black;
+  transition: 1s;
+  filter: blur(1.2px);
+}
+
+#link-top:hover .sageata {
+  transition: 1s;
+  filter: blur(0px);
+}
+/* @keyframes rotateBorder {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(90deg);
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+}
+@keyframes rotateBorder2 {
+  0% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+} */
+
+/* #triunghi {
   height: 0px;
   width: 0;
   display: inline-block;
@@ -25,4 +87,18 @@
   border-right: 1rem solid transparent;
   vertical-align: top;
   transform: translateY(30%);
+} */
+
+#tab-orar th,
+#tab-orar td {
+  border: 3px solid black;
+}
+
+#tab-orar {
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+
+#tab-orar th:nth-child(2n + 1) {
+  background-color: aqua;
 }

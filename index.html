@@ -118,15 +118,14 @@
       <nav>
         <ul class="navbar">
           <h1 class="titlu">Hypero</h1>
-          <li><a href="#">Imbracaminte</a></li>
-          <li><a href="#">Incaltaminte</a></li>
-          <li><a href="#">Genti</a></li>
-          <li><a href="#">Accesorii</a></li>
-          <li><a href="#">Cos</a></li>
+          <li class="titlu"><a href="#">Acasa</a></li>
           <ul>
             <li><a href="#welcome">Welcome</a></li>
             <li><a href="#promotii">Promotie</a></li>
           </ul>
+          <li><a href="#">Barbati</a></li>
+          <li><a href="#">Femei</a></li>
+          <li><a href="#">Cos</a></li>
         </ul>
       </nav>
       <link rel="stylesheet" href="resurse/css/stil.css" type="text/css"/>
@@ -136,7 +135,7 @@
     <main>
       <div id="grid-pagina">
         <section id="welcome">
-        <h2>Adidasi Populari:</h2>
+        <h2>!! Bine ai venit in lumea streetwear !!</h2>
         <figure>
           <picture>
             <source
@@ -307,6 +306,77 @@
         </p>
         </section>
         <section id="produse">
+          <table id="tab-orar">
+                    <thead>
+
+                        <tr>
+                            <th>Cod</th>
+                            <th>Perioadă</th>
+                            <th>Zi</th>
+                            <th>Interval dimineata</th>
+                            <th>Pauza de masa</th>
+                            <th>Interval seară</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td rowspan="5">Zile<br/>Lucrătoare</td>
+                            <td>Luni</td>
+                            <td>10-12</td>
+                            <td>12-14</td>
+                            <td>14-20</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            
+                            <td>Marti</td>
+                            <td>9-12</td>
+                            <td>12-14</td>
+                            <td>14-21</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            
+                            <td>Miercuri</td>
+                            <td>9-11</td>
+                            <td>11-13</td>
+                            <td>14-21</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            
+                            <td>Joi</td>
+                            <td>9-11</td>
+                            <td>11-13</td>
+                            <td>14-21</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            
+                            <td>Vineri</td>
+                            <td>9-12</td>
+                            <td>12-14</td>
+                            <td>14-19</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td rowspan="2">Weekend</td>
+                            <td>Sambata</td>
+                            <td>10-12</td>
+                            <td>12-13</td>
+                            <td>13-16</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Duminica</td>
+                            <td>10-14</td>
+                            <td>-</td>
+                            <td>inchis</td>
+                        </tr>
+                    </tbody>
+                    <tfoot><tr><td colspan="6">Închis cu ocazia sărbătorilor legale sau când ne e mai lene așa.</td></tr></tfoot>
+                </table> 
         <details>
           <summary>De ce sa cumperi de la noi?</summary>
           <p>Pentru ca avem cea mai variata gama de produse.</p>
@@ -650,7 +720,10 @@
       </div>
     </main>
     <footer>
-      <a href="#" title="Înapoi sus" id="link-top"><div id="triunghi"></div></a>
+      <a href="#" title="Înapoi sus" id="link-top">
+        <span class="sageata">&#8593;</span>
+      </a>
+      
       <a
         class="black"
         href="https://www.nike.com/ro/?cp=56073097904_search_&Macro=-nike-g-10567125798-103103793023-e-c-RO-pure-449982677430-kwd-11642601-1011837&ds_rl=1252249&gad_source=1&gclid=CjwKCAiA3JCvBhA8EiwA4kujZoZAx6G4CTgW76iIcfVGUDVgHV_PiCRNA8TKOyTDwIyqbHqg0Rtj_RoC5BAQAvD_BwE&gclsrc=aw.ds"

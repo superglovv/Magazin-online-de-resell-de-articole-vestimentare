@@ -27,7 +27,8 @@ html {
 }
 
 #grid-pagina > * {
-  outline: 2px solid skyblue;
+  border: 2px solid black;
+  border-radius: 12px;
   margin: 3px;
 }
 
