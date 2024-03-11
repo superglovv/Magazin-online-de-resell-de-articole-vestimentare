@@ -1,0 +1,12 @@
+body {
+  --culoare1: rgb(255, 0, 179);
+  --spatiere: 100px;
+  --black: black;
+  padding: 0 var(--spatiere) 0 var(--spatiere);
+  /* padding-left: var(--spatiere);
+    padding-right: var(--spatiere); */
+}
+
+p {
+  color: var(--culoare1);
+}

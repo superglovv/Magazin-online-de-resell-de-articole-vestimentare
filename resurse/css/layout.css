@@ -1,0 +1,78 @@
+html {
+  font-size: 18px;
+  font-family: "Madimi One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.info-oferte {
+  font-size: 1.5rem;
+}
+
+.imagine {
+  width: 100%;
+}
+
+#grid-pagina {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "welcome welcome welcome"
+    "promotii promotii orar"
+    "fig1 produse produse"
+    "fig2 produse produse"
+    "fig3 produse produse"
+    "anunturi anunturi anunturi"
+    "index-intrebari index-intrebari index-intrebari";
+}
+
+#grid-pagina > * {
+  outline: 2px solid skyblue;
+  margin: 3px;
+}
+
+#welcome {
+  grid-area: welcome;
+}
+#promotii {
+  grid-area: promotii;
+}
+#anunturi {
+  grid-area: anunturi;
+}
+#orar {
+  grid-area: orar;
+}
+
+#fig1 {
+  grid-area: fig1;
+}
+#fig2 {
+  grid-area: fig2;
+}
+#fig3 {
+  grid-area: fig3;
+}
+#produse {
+  grid-area: produse;
+}
+#index-intrebari {
+  grid-area: index-intrebari;
+}
+@media screen and (max-width: 1200px) {
+  html {
+    font-size: 15px;
+  }
+  #grid-pagina {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  html {
+    font-size: 12px;
+  }
+  #grid-pagina {
+    display: block;
+  }
+}
