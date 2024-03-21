@@ -5,6 +5,16 @@ html {
   font-style: normal;
 }
 
+footer {
+  display: flex;
+  flex-direction: column;
+  background: var(--culoare1);
+}
+
+footer a {
+  color: var(--coolgrey);
+}
+
 .info-oferte {
   font-size: 1.5rem;
 }
@@ -56,51 +66,52 @@ html {
   grid-template-columns: repeat(3, 1fr);
   grid-template-areas:
     "welcome welcome welcome"
-    "promotii promotii orar"
-    "fig1 produse produse"
-    "fig2 produse produse"
-    "fig3 produse produse"
-    "anunturi anunturi anunturi"
-    "index-intrebari index-intrebari index-intrebari";
+    "calendar orar anunturi "
+    "diverse diverse diverse"
+    "datesite utilizatori statistici";
 }
 
 #grid-pagina > * {
-  border: 2px solid black;
-  border-radius: 12px;
-  margin: 3px;
+  border: 2px solid var(--dark);
+  padding: 12px;
 }
 
 #welcome {
   grid-area: welcome;
 }
-#promotii {
-  grid-area: promotii;
-}
 #anunturi {
   grid-area: anunturi;
+}
+#calendar {
+  grid-area: calendar;
 }
 #orar {
   grid-area: orar;
 }
+#datesite {
+  grid-area: datesite;
+}
+#datesite iframe {
+  max-width: 100%;
+}
+#diverse {
+  grid-area: diverse;
+}
+#statistici {
+  grid-area: statistici;
+}
+#utilizatori {
+  grid-area: utilizatori;
+}
 
-#fig1 {
-  grid-area: fig1;
-}
-#fig2 {
-  grid-area: fig2;
-}
-#fig3 {
-  grid-area: fig3;
-}
-#produse {
-  grid-area: produse;
-}
-#index-intrebari {
-  grid-area: index-intrebari;
-}
 @media screen and (max-width: 1200px) {
+  .iframe iframe {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
   html {
-    font-size: 15px;
+    font-size: 2em;
   }
   #grid-pagina {
     display: block;
@@ -108,8 +119,13 @@ html {
 }
 
 @media screen and (max-width: 800px) {
+  .iframe iframe {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
   html {
-    font-size: 12px;
+    font-size: 1em;
   }
   #grid-pagina {
     display: block;
