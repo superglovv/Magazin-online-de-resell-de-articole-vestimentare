@@ -116,20 +116,55 @@
   <body>
     <header>
       <nav>
-        <ul class="navbar">
-          <label id="hamburger"></label>
-          <h1 class="titlu">Hypero</h1>
-          <li class="titlu"><a href="#">Acasa</a></li>
-          <ul>
-            <li><a href="#welcome">Welcome</a></li>
-            <li><a href="#promotii">Promotie</a></li>
-          </ul>
-          <li><a href="#">Barbati</a></li>
-          <li><a href="#">Femei</a></li>
-          <li><a href="#">Cos</a></li>
+        <label id="hamburger" for="ch-menu">
+            <img src="resurse/imagine/Hamburger_icon_alb.png" alt="menu">
+        </label>
+        <input id="ch-menu" type="checkbox">
+        <ul class="meniu">
+            <li>
+              <div id="acasa">
+                <i class="fa fa-home"></i> Acasa
+              </div>
+              <div id="acasa-mediu">
+                <i class="fa fa-home"> </i>
+              </div>
+                <ul>
+                    <li><a href="#welcome">Bine ati venit</a></li>
+                    <li><a href="#promotii">Promotii</a></li>
+                    <li><a href="#anunturi">Anunturi</a></li>
+                    <li><a href="#produse">Oferta</a></li>
+                    <li><a href="#orar">Orar</a></li>
+                    <li><a href="#index-intrebari">Întrebări</a></li>
+                    <li><a href="#retete">Rețete</a></li>
+                </ul>
+            
+            
+            </li>
+            <li><a href="#">Inregistrare</a></li>
+            <li><div>Despre</div>
+                <ul>                        
+                    <li><a href="despre.html#prezentare">Prezentare</a></li>
+                    <li><a href="despre.html#istoric">Istoric</a></li>
+                    <li><a href="despre.html#motivatie">Motivatie</a></li>
+                    <li><a href="despre.html#galerie">Galerie</a></li>
+                </ul>
+            </li>
+            <li><div>Produse</div>
+                <ul>
+                    <li><a href="http://www.google.com">Toate</a></li>
+                    <li><a href="#">Prajituri</a></li>
+                    <li><a href="#">Torturi</a></li>
+                    <li><a href="#">Patiserie</a></li>
+                </ul>
+            
+            </li>
+            <li><a href="#">Contact</a></li>
         </ul>
-      </nav>
+    </nav>
       <link rel="stylesheet" href="resurse/css/stil.css" type="text/css"/>
+      <link rel="stylesheet" href="resurse/css/nav.css" type="text/css"/>
+      <link rel="stylesheet" href="resurse/css/nav1000.css" type="text/css"/>
+      <link rel="stylesheet" href="resurse/css/nav700.css" type="text/css"/>
       <link rel="stylesheet" href="resurse/css/layout.css" type="text/css"/>
       <link rel="stylesheet" href="resurse/css/general.css" type="text/css"/>
     </header>
@@ -158,7 +193,7 @@
           </picture>
           <figcaption>Adidasi noi</figcaption>
         </figure>
-        <p style="color:aqua; font-variant: small-caps;">
+        <p style="color:var(--dark); font-variant: small-caps;">
           <span>
             Cauti <b>ADIDASI</b> la moda? Ai ajuns in locul potrivit.
             <ins>Cele mai <abbr title="populare">hyped</abbr> siluete</ins>, cum
@@ -316,75 +351,54 @@
         <section id="produse">
           <table id="tab-orar">
                     <thead>
-
+                        <caption>ORAR LANSĂRI</caption>
                         <tr>
-                            <th>Cod</th>
-                            <th>Perioadă</th>
-                            <th>Zi</th>
-                            <th>Interval dimineata</th>
-                            <th>Pauza de masa</th>
-                            <th>Interval seară</th>
+                            <th>Brand</th>
+                            <th>Nume</th>
+                            <th>Culoare</th>
+                            <th>Data Lansare</th>
+                            <th>Pret</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td></td>
-                            <td rowspan="5">Zile<br/>Lucrătoare</td>
-                            <td>Luni</td>
-                            <td>10-12</td>
-                            <td>12-14</td>
-                            <td>14-20</td>
+                            <td>Nike SB</td>
+                            <td>Dunk Low</td>
+                            <td>The Rayssa Leal</td>
+                            <td>20 Martie</td>
+                            <td>$125</td>
                         </tr>
                         <tr>
-                            <td></td>
-                            
-                            <td>Marti</td>
-                            <td>9-12</td>
-                            <td>12-14</td>
-                            <td>14-21</td>
+                            <td>Nike</td>
+                            <td>Dunk Low</td>
+                            <td>Plum</td>
+                            <td>21 Martie</td>
+                            <td>$115</td>
                         </tr>
                         <tr>
-                            <td></td>
-                            
-                            <td>Miercuri</td>
-                            <td>9-11</td>
-                            <td>11-13</td>
-                            <td>14-21</td>
+                            <td>ASICS</td>
+                            <td>GEL-KAYANO 14</td>
+                            <td>IMPERFECTION</td>
+                            <td>22 Martie</td>
+                            <td>$160</td>
                         </tr>
                         <tr>
-                            <td></td>
-                            
-                            <td>Joi</td>
-                            <td>9-11</td>
-                            <td>11-13</td>
-                            <td>14-21</td>
+                            <td >Reebok</td>
+                            <td colspan="2">Hunter x Hunter Bundle</td>
+                            <td >22 Martie</td>
+                            <td >de la<br> $110</td>
                         </tr>
                         <tr>
-                            <td></td>
-                            
-                            <td>Vineri</td>
-                            <td>9-12</td>
-                            <td>12-14</td>
-                            <td>14-19</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td rowspan="2">Weekend</td>
-                            <td>Sambata</td>
-                            <td>10-12</td>
-                            <td>12-13</td>
-                            <td>13-16</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>Duminica</td>
-                            <td>10-14</td>
-                            <td>-</td>
-                            <td>inchis</td>
+                            <td>ONE PIECE X PUMA</td>
+                            <td>SUEDE</td>
+                            <td>BUGGY</td>
+                            <td>23 Martie</td>
+                            <td>$85</td>
                         </tr>
                     </tbody>
-                    <tfoot><tr><td colspan="6">Închis cu ocazia sărbătorilor legale sau când ne e mai lene așa.</td></tr></tfoot>
+                    <tfoot><tr><td colspan="6" style="text-align: center;">Vom face update listei pe masura ce apar informatii noi!</td></tr></tfoot>
                 </table> 
+                
         <details>
           <summary>De ce sa cumperi de la noi?</summary>
           <p>Pentru ca avem cea mai variata gama de produse.</p>

@@ -1,11 +1,16 @@
 body {
-  --culoare1: rgb(0, 0, 0);
+  --culoare1: #00ffec;
+  --culoare2: #00aca0;
+  --coolgrey: #5e6167;
+  --dark: #000000;
+  --offwhite: #edeae0;
   --spatiere: 100px;
   padding: 0 var(--spatiere) 0 var(--spatiere);
   /* padding-left: var(--spatiere);
     padding-right: var(--spatiere); */
+  background: var(--offwhite);
 }
 
 p {
-  color: var(--culoare1);
+  color: var(--dark);
 }

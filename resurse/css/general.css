@@ -12,13 +12,13 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background: rgb(220, 220, 220);
+  background: var(--offwhite);
   transition: box-shadow 0.3s ease-in-out;
   text-decoration: none;
 }
 
 #link-top:hover {
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.66);
+  box-shadow: inset 0 0 20px var(--dark);
 }
 
 #link-top:before {
@@ -27,7 +27,7 @@
   position: absolute;
   width: 60px;
   height: 60px;
-  border: 4px solid aqua;
+  border: 4px solid var(--culoare1);
   border-top-color: black;
   border-bottom-color: black;
   border-radius: 50%;
@@ -44,7 +44,7 @@
   font-size: 3rem;
   transform: translateY(-5px);
   text-decoration: none;
-  color: black;
+  color: var(--dark);
   transition: 1s;
   filter: blur(1.2px);
 }
@@ -87,16 +87,56 @@
   transform: translateY(30%);
 } */
 
-#tab-orar th,
-#tab-orar td {
-  border: 3px solid black;
-}
-
 #tab-orar {
-  border-spacing: 0px;
+  margin: 10px;
   border-collapse: collapse;
 }
 
-#tab-orar th:nth-child(2n + 1) {
-  background-color: aqua;
+#tab-orar th,
+#tab-orar td {
+  border: 1px solid black;
+  padding: 12px;
+}
+
+#tab-orar td:nth-child(even) + td:nth-child(odd),
+#tab-orar td:first-child:not(:last-child) {
+  border-right: 3px solid var(--culoare2);
+}
+
+#tab-orar td:nth-child(odd) + td:nth-child(even) {
+  border-right: 3px solid var(--culoare1);
+}
+
+#tab-orar tbody tr:hover,
+tfoot tr:hover {
+  transition: box-shadow 0.5s;
+  box-shadow: inset 0 0 10px 3px rgba(0, 0, 0, 0.5);
+}
+
+#tab-orar tbody {
+  border-bottom: 6px solid black;
+}
+
+#tab-orar tfoot {
+  border-top: 6px solid black;
+}
+
+#tab-orar caption {
+  font-size: small;
+  color: var(--coolgrey);
+  caption-side: bottom;
+  text-align: right;
+  padding-top: 2px;
+}
+
+@media screen and (max-width: 1200px) {
+  .table-container {
+    overflow-x: auto;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .table-container {
+    overflow-x: auto;
+  }
 }
