@@ -12,9 +12,9 @@
 
 Voi realiza o platformă online care facilitează cumpărarea de articole vestimentare populare. Aceasta implică o interfață web intuitivă și atractivă, gestionarea produselor și integrarea unor opțiuni de plată.
 
-#### Culorile
+#### Culorile alese sunt:
 
-alese sunt: culoare1: #00ffec (cunoscut si sub numele de tiffany blue), care este culoarea principala a site-ului deoarece este o culoare mult cautata in mediul streetwear si al articolelor vestimentare comercializate pe Hypero, culoare2: #00aca0, care este o versiune inchisa a primei nuante (utila pentru efecte de hover), coolgrey: #5e6167, care este o culoare clasica in lumea adidasilor, dark: #000000 si offwhite: #edeae0 care sunt nonculori esentiale, dar cu un anumit rafinament care sa inspire calitatea premium a produselor comercializate.
+culoare1: #00ffec (cunoscut si sub numele de tiffany blue), care este culoarea principala a site-ului deoarece este o culoare mult cautata in mediul streetwear si al articolelor vestimentare comercializate pe Hypero, culoare2: #00aca0, care este o versiune inchisa a primei nuante (utila pentru efecte de hover), coolgrey: #5e6167, care este o culoare clasica in lumea adidasilor, dark: #000000 si offwhite: #edeae0 care sunt nonculori esentiale, dar cu un anumit rafinament care sa inspire calitatea premium a produselor comercializate.
 
 #### a) Categorii și subcategorii:
 
