@@ -41,7 +41,7 @@
 }
 
 #link-top .sageata {
-  font-size: 3rem;
+  font-size: 2.6rem;
   transform: translateY(-5px);
   text-decoration: none;
   color: var(--dark);
@@ -52,6 +52,46 @@
 #link-top:hover .sageata {
   transition: 1s;
   filter: blur(0px);
+}
+
+::cue {
+  background-color: white;
+  color: var(--coolgrey);
+  vertical-align: top;
+  text-align: center;
+}
+
+::cue(italic) {
+  font-style: italic;
+}
+
+@media screen and (max-width: 1200px) {
+  #link-top {
+    margin: 8px;
+    position: fixed;
+    bottom: 1em;
+    opacity: 0.5;
+    left: 1em;
+    width: 1.7rem;
+    height: 1.6rem;
+    line-height: 3rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: var(--offwhite);
+    transition: box-shadow 0.3s ease-in-out;
+    text-decoration: none;
+  }
+  #link-top .sageata {
+    font-size: 1.6rem;
+    transform: translateY(-5px);
+    text-decoration: none;
+    color: var(--dark);
+    transition: 1s;
+    filter: blur(1.2px);
+  }
 }
 /* @keyframes rotateBorder {
   0% {

@@ -5,12 +5,72 @@ body {
   --dark: #000000;
   --offwhite: #edeae0;
   --spatiere: 100px;
+  --padd: 20px;
+  --inaltime-meniu: 10px;
   padding: 0 var(--spatiere) 0 var(--spatiere);
   /* padding-left: var(--spatiere);
     padding-right: var(--spatiere); */
   background: var(--offwhite);
 }
 
+footer {
+  padding: 2px var(--padd);
+}
+
 p {
   color: var(--dark);
+}
+
+a:visited {
+  color: var(--coolgrey);
+}
+
+a[href^="http"]::before {
+  content: "⮳";
+  font-size: 150%;
+  display: inline-block;
+}
+
+a[href^="http"]:hover::before {
+  color: var(--culoare2);
+}
+
+main a {
+  color: var(--culoare1);
+  position: relative;
+  overflow: hidden;
+}
+
+main a::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0%;
+  height: 0%;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    var(--culoare1) 0%,
+    var(--culoare1) 40%,
+    transparent 80%,
+    transparent 100%
+  );
+  background-position: center;
+  background-size: 0% 0%;
+  filter: blur(5px);
+  transition: transform 2s ease;
+  z-index: -1;
+}
+
+main a:hover::after {
+  transform: translate(-50%, -50%) scale(1);
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+}
+
+main a:active {
+  outline: 2px solid var(--coolgrey);
 }

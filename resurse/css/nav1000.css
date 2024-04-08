@@ -1,14 +1,166 @@
 @media screen and (max-width: 1200px) {
   nav {
-    --inaltime-meniu: 2.2em;
+    --inaltime-meniu: 1.3em;
     --latime-buton: 120px;
+    height: var(--inaltime-meniu);
   }
 
-  #acasa-mediu {
+  .ham {
+    margin-left: 2px;
+    width: 35px;
+    height: 5px;
+    border-radius: 30px;
+    background: var(--offwhite);
+    margin-top: 5px;
+    animation: apare_hamburger 0.5s ease forwards;
+  }
+  #hamburger {
+    display: block;
+    padding-top: 1px;
+    animation: apare_hamburger 0.5s ease forwards;
+  }
+  @keyframes apare_hamburger {
+    0% {
+      transform: scale(0.9);
+      opacity: 0;
+      background: var(--culoare1);
+    }
+    50% {
+      transform: scale(0.7);
+      opacity: 0.5;
+      background: var(--culoare2);
+    }
+    75% {
+      transform: scale(0.5);
+      opacity: 0.5;
+      background: var(--culoare1);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  .ham:nth-child(1) {
+    animation: apare_hamburger 0.5s ease forwards 300ms;
+  }
+  .ham:nth-child(2) {
+    animation: apare_hamburger 0.5s ease forwards 600ms;
+  }
+  .ham:nth-child(3) {
+    animation: apare_hamburger 0.5s ease forwards 900ms;
+  }
+  #hamburger > img {
+    height: var(--inaltime-meniu);
     display: block;
   }
+  ul.meniu {
+    display: none;
+    position: absolute;
+    width: 100%;
+  }
+  #ch-menu:checked + ul.meniu {
+    display: block;
+    z-index: 2;
+    position: relative;
+    animation-name: aparitie_meniu_p;
+    transform-origin: left top;
+    animation-iteration-count: 1;
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+  }
+  #ch-menu:checked + ul.meniu > li > div,
+  #ch-menu:checked + ul.meniu > li > a {
+    z-index: 2;
+    position: relative;
+    transform-origin: 50% 50%;
+    animation-name: aparitie_meniu_p_btn;
+    transform-origin: left top;
+    animation-iteration-count: 1;
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+  }
+  nav ul.meniu > li li a:before {
+    content: "";
+    color: var(--dark);
+  }
+  nav ul.meniu li {
+    width: 100%;
+  }
+  .meniu li ul li:hover {
+    box-shadow: inset 0 0 40px white;
+    transition: 700ms;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+  }
+  /* nav ul.meniu > li ul {
+    position: absolute;
+    width: 100%;
+    z-index: 200;
+    transform: scale(1, 1) !important;
+    opacity: 1 !important;
+  } */
+  #ch-menu:checked + ul.meniu > li ul > * {
+    position: relative;
+    z-index: 200;
+  }
+  /* @keyframes animatie_submeniu {
+    0% {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+    100% {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+  nav ul.meniu > li:hover > ul {
+    display: block;
+    z-index: 200;
+    animation: animatie_submeniu 0.7s forwards;
+  } */
 
-  #acasa {
+  @keyframes apare_submeniu {
+    0% {
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+    100% {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+  }
+
+  nav ul.meniu > li ul {
+    position: absolute;
+    width: 100%;
+    z-index: 200;
     display: none;
   }
+
+  nav ul.meniu > li:hover > ul {
+    display: block;
+    animation: apare_submeniu 0.5s ease forwards;
+  }
+
+  @keyframes aparitie_meniu_p {
+    0% {
+      opacity: 0;
+      transform: scale(0, 0);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1, 1);
+    }
+  }
+  @keyframes aparitie_meniu_p_btn {
+    0% {
+      transform: scale(0, 0);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
 }
+
+/*# sourceMappingURL=nav700.css.map */
