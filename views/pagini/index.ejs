@@ -78,25 +78,32 @@
     <main>
       <div id="grid-pagina">
         <section id="welcome">
+          <button type="button" class="btn btn-primary btn-lg">Stil-1-mare</button>
           <section id="galerie-statica">
-            <h2>Galerie</h2>
+            <h2 id="text">
+              Galerie
+              <div id="text-reflectat">Galerie</div>
+            </h2>
             <div id="grid-galerie">
                 <%
                   var vLuni=["ianuarie","februarie","martie","aprilie","mai","iunie","iulie","august","septembrie","octombrie","noiembrie","decembrie"];
                   var d=new Date();
                   var lunaCurenta=vLuni[d.getMonth()];
+                  var imagCount = 0;
                   for(let imag of locals.imagini) {
-                    if( imag?.luni?.includes(lunaCurenta) ){ %>
+                    if( imag?.luni?.includes(lunaCurenta) && imagCount < 10){ %>
                 <figure>
                   <picture>
                     <source srcset="<%= imag.fisier %>" media="(max-width:1200px)"/>
                     <img src="<%= imag.fisier %>" alt="briose"/>
                   </picture>
-                <figcaption><%= imag.descriere %></figcaption>
+                <figcaption><h6><%= imag.descriere %></h6></figcaption>
                 </figure>
-                    <% } %>
+                    <% imagCount++;
+                   } %>
                 <%}%>
             </div>
+            
         </section>
         <h2>!! Bine ai venit in lumea streetwear !!</h2>
         <p>Ip: <%- locals.ip -%></p>
@@ -127,8 +134,9 @@
               <track src="./resurse/video/promo2_subs.vtt" kind="subtitles" srclang="ro" label="Română" default>
               <track src="./resurse/video/promo2_subs2.vtt" kind="subtitles" srclang="en" label="Engleză" >
         </video>
-
+        <div class="efect-duotone"></div>
         <p style="color:var(--dark); font-variant: small-caps;">
+          <hr>
           <span>
             Cauti <b>ADIDASI</b> la moda? Ai ajuns in locul potrivit.
             <ins>Cele mai <abbr title="populare">hyped</abbr> siluete</ins>, cum
@@ -294,55 +302,33 @@
         <h3>Calendar</h3>
         <p>
           <span></span>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Pellentesque sed sollicitudin mi. Aenean pharetra ligula metus, at
-            gravida magna feugiat eu. Nunc laoreet ut dui id rutrum. Vivamus at
-            vehicula metus, et hendrerit elit. Ut sed diam sed nulla euismod
-            elementum euismod a turpis. Integer et ipsum id arcu eleifend
-            pulvinar interdum at elit. Mauris leo sem, convallis sed elit
-            pretium, ultrices bibendum nibh. Etiam vitae sem hendrerit, pharetra
-            dui vel, imperdiet tellus. Interdum et malesuada fames ac ante ipsum
-            primis in faucibus. Pellentesque vitae lectus id odio placerat
-            fermentum sed id nisl. Fusce imperdiet luctus scelerisque. Duis in
-            elit scelerisque, malesuada neque nec, venenatis purus. Donec
-            posuere congue nibh eget laoreet. Sed neque mi, vestibulum
-            consectetur diam vel, rutrum vehicula nibh. Duis ut neque nisl.
-            Suspendisse eu ultrices neque. In et rutrum justo. Mauris rhoncus,
-            mauris non pretium tincidunt, odio augue condimentum eros, sit amet
-            consequat diam tellus quis turpis. Curabitur mi felis, hendrerit vel
-            nisl et, suscipit dignissim risus. Duis sit amet dolor est. Cras nec
-            ex eu tellus gravida laoreet. Donec mattis semper orci non blandit.
-            Nulla et sollicitudin lectus, nec accumsan est. Nulla quis arcu
-            suscipit leo dictum convallis. Quisque fringilla, mi id lacinia
-            porttitor, lacus quam pretium risus, ac consectetur lacus elit sed
-            tortor. Quisque ut felis non ante blandit congue. Integer porttitor
-            sed metus nec luctus. Aliquam euismod dui eu libero posuere
-            tristique. Quisque sed urna eu felis lobortis tempor id sit amet
-            libero. Fusce tincidunt auctor velit sit amet suscipit. Aenean
-            viverra a ex sed tincidunt. Aenean ornare ornare accumsan. Etiam eu
-            lectus nec odio vulputate interdum. Quisque non lacus bibendum,
-            sagittis ante ac, semper turpis. Nullam id maximus felis. Sed in
-            tincidunt dolor. Vivamus ut dolor sit amet tortor laoreet lobortis
-            quis quis lorem. Phasellus scelerisque elit eget tortor dapibus
-            aliquam. Duis euismod pretium metus nec lacinia. In tincidunt leo
-            quis facilisis pulvinar. In malesuada elementum justo mollis
-            scelerisque. Aenean in tristique mi, viverra porttitor purus. Donec
-            varius, ipsum et tempus aliquet, augue elit euismod ex, et vehicula
-            velit nunc in justo. Phasellus id nisi suscipit leo commodo dapibus.
-            Morbi elementum placerat aliquam. Integer bibendum nisi a nibh
-            posuere tincidunt. Vestibulum ante ipsum primis in faucibus orci
-            luctus et ultrices posuere cubilia curae; Nam suscipit pretium ipsum
-            id condimentum. Sed hendrerit nisl eget tempor porta. Curabitur ac
-            augue a odio ultricies suscipit. Donec interdum elit sit amet metus
-            fringilla tincidunt. Nam lorem magna, fermentum ut elit at, rutrum
-            iaculis dolor. Nam vulputate, mauris sit amet placerat facilisis,
-            risus risus maximus lectus, vel imperdiet neque nisi interdum leo.
-            Donec venenatis mattis mauris id dictum. Class aptent taciti
-            sociosqu ad litora torquent per conubia nostra, per inceptos
-            himenaeos. Sed non odio non nibh maximus vestibulum ut eu elit.
-            Pellentesque sagittis est sed risus sodales, id posuere diam
-            accumsan. Aenean pretium cursus ex, auctor facilisis tellus faucibus
-            ut.
+            <table class="tarife">
+              <caption>Tarife de livrare</caption>
+              <thead>
+                <tr>
+                  <th>Destinație</th>
+                  <th>Tarif standard</th>
+                  <th>Tarif expres</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Național</td>
+                  <td>10 lei</td>
+                  <td>20 lei</td>
+                </tr>
+                <tr>
+                  <td>Europa</td>
+                  <td>20 euro</td>
+                  <td>30 euro</td>
+                </tr>
+                <tr>
+                  <td>Restul lumii</td>
+                  <td>30 dolari</td>
+                  <td>40 dolari</td>
+                </tr>
+              </tbody>
+            </table>
           </span>
         </p>
         </section>
@@ -431,6 +417,10 @@
         </section>
         <section id="diverse">
         <h3>Noutati:</h3>
+        <div class="container_scroll">
+          <div class="scrolling-text">Ceva text de umplutura sa vad ca da scroll</div>
+          </div>
+        
         <p>
           <a
         href="https://www.nike.com/ro/?cp=56073097904_search_&Macro=-nike-g-10567125798-103103793023-e-c-RO-pure-449982677430-kwd-11642601-1011837&ds_rl=1252249&gad_source=1&gclid=CjwKCAiA3JCvBhA8EiwA4kujZoZAx6G4CTgW76iIcfVGUDVgHV_PiCRNA8TKOyTDwIyqbHqg0Rtj_RoC5BAQAvD_BwE&gclsrc=aw.ds"

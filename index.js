@@ -2,8 +2,23 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
-// const sass=require('sass');
-// const ejs=require('ejs');
+const sass = require("sass");
+const ejs = require("ejs");
+
+const Client = require("pg").Client;
+
+var client = new Client({
+  database: "cti_2024",
+  user: "superuser",
+  password: "superuser",
+  host: "localhost",
+  port: 5432,
+});
+client.connect();
+
+client.query("select * from prajituri", function (err, rez) {
+  console.log(rez);
+});
 
 obGlobal = {
   obErori: null,
@@ -16,7 +31,7 @@ console.log("Director de lucru", process.cwd());
 
 app.set("view engine", "ejs");
 
-vect_foldere = ["temp", "temp1"];
+vect_foldere = ["temp", "temp1", "backup"];
 for (let folder of vect_foldere) {
   let calefolder = path.join(__dirname, folder);
   if (!fs.existsSync(calefolder)) {
@@ -25,6 +40,7 @@ for (let folder of vect_foldere) {
 }
 
 app.use("/resurse", express.static(__dirname + "/resurse"));
+app.use("/node_modules", express.static(__dirname + "/node_modules"));
 
 // app.get("/", function(req, res){
 //     res.sendFile(__dirname+"/index.html")
@@ -37,9 +53,49 @@ app.get(["/", "/home", "/index"], function (req, res) {
   });
 });
 
+// --------------------- Produse ----------------
+
+app.get("/produse", function (req, res) {
+  client.query("select * from prajituri", function (err, rez) {
+    if (err) {
+      console.log(err);
+      afisareEroare(res, 2);
+    } else {
+      res.render("pagini/produse", { produse: rez.rows, optiuni: [] });
+    }
+  });
+});
+
+app.get("/produs/:id", function (req, res) {
+  client.query(
+    `select * from prajituri where id=${req.params.id}`,
+    function (err, rez) {
+      if (err) {
+        console.log(err);
+        afisareEroare(res, 2);
+      } else {
+        res.render("pagini/produs", { prod: rez.rows[0] });
+      }
+    }
+  );
+});
+
 app.get("/despre", function (req, res) {
   res.render("pagini/despre", {
     ip: req.ip,
+  });
+});
+
+app.get("/contact", function (req, res) {
+  res.render("pagini/contact", {
+    ip: req.ip,
+  });
+});
+
+app.get("/galerie", function (req, res) {
+  res.render("pagini/galerie", {
+    ip: req.ip,
+    imagini: obGlobal.obImagini.imagini,
   });
 });
 
@@ -112,6 +168,9 @@ app.get("/*", function (req, res) {
 obGlobal = {
   obErori: null,
   obImagini: null,
+  folderScss: path.join(__dirname, "resurse/scss"),
+  folderCss: path.join(__dirname, "resurse/css"),
+  folderBackup: path.join(__dirname, "backup"),
 };
 
 function initErori() {
@@ -188,6 +247,55 @@ function afisareEroare(res, _identificator, _titlu, _text, _imagine) {
     }
   }
 }
+
+function compileazaScss(caleScss, caleCss) {
+  console.log("cale:", caleCss);
+  if (!caleCss) {
+    let numeFisExt = path.basename(caleScss);
+    let numeFis = numeFisExt.split(".")[0]; /// "a.scss"  -> ["a","scss"]
+    caleCss = numeFis + ".css";
+  }
+
+  if (!path.isAbsolute(caleScss))
+    caleScss = path.join(obGlobal.folderScss, caleScss);
+  if (!path.isAbsolute(caleCss))
+    caleCss = path.join(obGlobal.folderCss, caleCss);
+
+  let caleBackup = path.join(obGlobal.folderBackup, "resurse/css");
+  if (!fs.existsSync(caleBackup)) {
+    fs.mkdirSync(caleBackup, { recursive: true });
+  }
+
+  // la acest punct avem cai absolute in caleScss si  caleCss
+  //TO DO
+  let numeFisCss = path.basename(caleCss);
+  if (fs.existsSync(caleCss)) {
+    fs.copyFileSync(
+      caleCss,
+      path.join(obGlobal.folderBackup, "resurse/css", numeFisCss)
+    ); // +(new Date()).getTime()
+  }
+  rez = sass.compile(caleScss, { sourceMap: true });
+  fs.writeFileSync(caleCss, rez.css);
+  //console.log("Compilare SCSS",rez);
+}
+//compileazaScss("a.scss");
+vFisiere = fs.readdirSync(obGlobal.folderScss);
+for (let numeFis of vFisiere) {
+  if (path.extname(numeFis) == ".scss") {
+    compileazaScss(numeFis);
+  }
+}
+
+fs.watch(obGlobal.folderScss, function (eveniment, numeFis) {
+  console.log(eveniment, numeFis);
+  if (eveniment == "change" || eveniment == "rename") {
+    let caleCompleta = path.join(obGlobal.folderScss, numeFis);
+    if (fs.existsSync(caleCompleta)) {
+      compileazaScss(caleCompleta);
+    }
+  }
+});
 
 app.listen(8080);
 console.log("Serverul a pornit");

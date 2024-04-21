@@ -1,8 +1,13 @@
-html {
-  font-size: 18px;
-  font-family: "Madimi One", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+.my-custom-font {
+  font-family: "Madimi One", sans-serif !important;
 }
 
 footer {
@@ -81,7 +86,14 @@ footer a {
 }
 #anunturi {
   grid-area: anunturi;
+  column-count: 2;
+  column-gap: 20px;
 }
+
+#anunturi p {
+  column-rule: 1px solid var(--coolgrey);
+}
+
 #calendar {
   grid-area: calendar;
 }
@@ -157,6 +169,84 @@ footer a {
     display: none;
   }
 
+  #grid-galerie {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, auto);
+    gap: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+
+  #grid-galerie figure {
+    margin: 0;
+    padding: 0;
+  }
+
+  #grid-galerie picture {
+    display: block;
+    overflow: hidden;
+    position: relative;
+  }
+
+  #grid-galerie img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  #grid-galerie figcaption {
+    text-align: center;
+    margin-top: 10px;
+    transition: background-color 0.5s ease, opacity 0.5s ease;
+  }
+
+  #grid-galerie figcaption:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0.8;
+  }
+
+  /* Poze pe prima coloană, toate rândurile */
+  #grid-galerie figure:nth-child(3n + 1) {
+    grid-column: 1;
+  }
+
+  /* Poze pe ultima coloană, toate rândurile */
+  #grid-galerie figure:nth-child(3n) {
+    grid-column: 3;
+  }
+
+  /* Poze pe primul rând, toate coloanele */
+  #grid-galerie figure:nth-of-type(-n + 3) {
+    grid-row: 1;
+  }
+
+  /* Poze pe ultimul rând, toate coloanele */
+  #grid-galerie figure:nth-last-of-type(-n + 3) {
+    grid-row: 4;
+  }
+
+  #grid-galerie figure picture {
+    transition: transform 1.2s ease, border-width 1.2s ease;
+  }
+
+  #grid-galerie figure picture:hover {
+    transform: scale(1.25) rotate(-10deg);
+    border: 4px solid black;
+  }
+
+  @media (min-width: 1200px) {
+    #grid-galerie {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 800px) {
+    #grid-galerie {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
   @page {
     size: A4 portrait;
     margin-top: 2cm;
@@ -210,6 +300,9 @@ footer a {
   #grid-pagina {
     display: block;
   }
+  #anunturi {
+    column-count: 1;
+  }
 }
 
 @media screen and (max-width: 800px) {
@@ -223,5 +316,8 @@ footer a {
   }
   #grid-pagina {
     display: block;
+  }
+  #anunturi {
+    column-count: 1;
   }
 }

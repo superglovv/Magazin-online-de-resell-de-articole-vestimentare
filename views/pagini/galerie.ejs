@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--
+-->
+<script></script>
+
+<style>
+  /* .navbar {
+    margin: 0;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    background-color: #b91d47;
+    border-radius: 12px;
+    box-shadow: 0px 5px 102px black;
+  }
+
+  .titlu {
+    padding-top: 10px;
+    margin: 0;
+    color: white;
+    font-size: 30px;
+    padding-right: 10px;
+  }
+
+  a {
+    padding-top: 20px;
+    color: white;
+    text-decoration: none;
+    padding-left: 12px;
+  }
+
+  a:hover {
+    color: white;
+    font-size: large;
+    text-decoration: underline;
+    padding-left: 12px;
+  }
+
+  .black {
+    color:var(--black);
+  }
+
+  .black:hover {
+    color:va
+  } */
+
+  .iframe {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    justify-content: space-between;
+  }
+
+  /* p{
+    color: green;
+  } */
+</style>
+
+<html lang="ro">
+  <head>
+    <%- include("../fragmente/head") %>
+    <meta
+      name="keywords"
+      content=": Hypero, magazin haine, magazin adidasi, magazin incaltaminte, Sneaker Shop, Streetwear, Bucuresti, Nike, Adidas, Supreme, Bape, Balenciaga"
+    />
+    <meta
+      name="description"
+      content="Hypero! Avem cei mai hyped sneakersi din Romania. Gasesti la noi ultimele lansari Nike, Yeezy si Jordan.
+         Urmareste-ne pe instagram la @Hypero pentru a fi la curent cu giveaway-urile pe care le facem!"
+    />
+    <title>Hypero</title>
+  </head>
+
+  <body>
+    <%- include("../fragmente/header") %>
+    <main>
+      <h2 id="text">
+        Galerie :
+        <div id="text-reflectat">Galerie</div>
+      </h2>
+      <div id="grid-galerie">
+        <% var
+        vLuni=["ianuarie","februarie","martie","aprilie","mai","iunie","iulie","august","septembrie","octombrie","noiembrie","decembrie"];
+        var d=new Date(); var lunaCurenta=vLuni[d.getMonth()]; var imagCount =
+        0; for(let imag of locals.imagini) { if(
+        imag?.luni?.includes(lunaCurenta) && imagCount < 10){ %>
+        <figure>
+          <picture>
+            <source srcset="<%= imag.fisier %>" media="(max-width:1200px)" />
+            <img src="<%= imag.fisier %>" alt="briose" />
+          </picture>
+          <figcaption><h6><%= imag.descriere %></h6></figcaption>
+        </figure>
+        <% imagCount++; } %> <%}%>
+      </div>
+      <section id="galerie-animata">
+        <h2 id="text">
+          Galerie Animata
+          <div id="text-reflectat">Galerie Animata</div>
+        </h2>
+        <div id="alt-grid-galerie">
+          <% let lungimeImagini = locals.imagini.length; let putereDoua =
+          Math.pow(2, Math.floor(Math.random() * 4) + 1); if (putereDoua <=
+          lungimeImagini && putereDoua < 17) { for(let imagIndex = 0; imagIndex
+          < locals.imagini.length; imagIndex++) { const imag =
+          locals.imagini[imagIndex]; if(imagIndex % 2 === 0) { %>
+          <figure>
+            <picture>
+              <source srcset="<%= imag.fisier %>" media="(max-width:1200px)" />
+              <img src="<%= imag.fisier %>" alt="briose" />
+            </picture>
+            <figcaption><h6><%= imag.descriere %></h6></figcaption>
+          </figure>
+          <% }%> <%}}%>
+        </div>
+      </section>
+    </main>
+    <%- include("../fragmente/footer") %>
+  </body>
+</html>

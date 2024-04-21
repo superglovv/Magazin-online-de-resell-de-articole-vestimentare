@@ -9,8 +9,12 @@
   "author": "Văsii Alexandru-Alin",
   "license": "ISC",
   "dependencies": {
+    "boostrap": "^2.0.0",
+    "bootstrap": "^5.3.3",
     "ejs": "^3.1.9",
     "express": "^4.19.1",
+    "pg": "^8.11.5",
+    "sass": "^1.74.1",
     "sharp": "^0.33.3"
   }
 }

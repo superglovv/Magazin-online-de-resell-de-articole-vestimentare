@@ -1,0 +1,23 @@
+@use "../../node_modules/bootstrap/scss/bootstrap.scss" with (
+  $primary: #00ffec,
+  $secondary: #edeae0
+);
+
+$text-color: #000000;
+$anchor-color: #5e6167;
+$darker-blue: #00aca0;
+
+$screen-sm: 800px;
+$screen-md: 1200px;
+
+$border-radius: 0.25rem;
+$h1-font-size: 2.5rem;
+$h2-font-size: 2rem;
+$h3-font-size: 1.75rem;
+$h6-font-size: 1.5rem;
+
+$body-font-family: "Madimi One", sans-serif;
+
+$spatiere: 100px;
+$padd: 20px;
+$inaltime-meniu: 10px;

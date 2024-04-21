@@ -25,18 +25,18 @@ a:visited {
   color: var(--coolgrey);
 }
 
-a[href^="http"]::before {
+main a[href^="http"]::before {
   content: "⮳";
   font-size: 150%;
   display: inline-block;
 }
 
-a[href^="http"]:hover::before {
+main a[href^="http"]:hover::before {
   color: var(--culoare2);
 }
 
 main a {
-  color: var(--culoare1);
+  color: var(--coolgrey);
   position: relative;
   overflow: hidden;
 }
@@ -73,4 +73,48 @@ main a:hover::after {
 
 main a:active {
   outline: 2px solid var(--coolgrey);
+}
+
+hr {
+  height: 20px;
+  border: none;
+  background-image: linear-gradient(
+      to right,
+      transparent,
+      var(--culoare1) 10%,
+      var(--culoare1) 25%,
+      var(--culoare1) 50%,
+      var(--culoare1) 75%,
+      transparent 10%,
+      transparent 25%,
+      transparent 50%,
+      transparent 75%
+    ),
+    linear-gradient(
+      to right,
+      transparent,
+      var(--coolgrey) 10%,
+      var(--coolgrey) 25%,
+      var(--coolgrey) 50%,
+      var(--coolgrey) 75%,
+      transparent 10%,
+      transparent 20%,
+      transparent 40%,
+      transparent 70%
+    ),
+    linear-gradient(
+      to right,
+      transparent,
+      var(--culoare2) 10%,
+      var(--culoare2) 25%,
+      var(--culoare2) 50%,
+      var(--culoare2) 75%,
+      transparent 10%,
+      transparent 20%,
+      transparent 40%,
+      transparent 70%
+    );
+  background-repeat: repeat-x;
+  background-size: 2% 33.33%;
+  background-position: 0 0, -20% 45%, 0 90%;
 }

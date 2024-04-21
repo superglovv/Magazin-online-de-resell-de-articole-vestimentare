@@ -1,0 +1,33 @@
+#galerie-animata {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 10px;
+}
+
+#alt-grid-galerie figure {
+  position: relative;
+  overflow: hidden;
+}
+
+#alt-grid-galerie img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s ease;
+}
+
+#alt-grid-galerie figure:hover img {
+  transform: scale(1.1);
+}
+
+@keyframes clip-path-animation {
+  0% {
+    clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+#grid-galerie figure img {
+  animation: clip-path-animation 4s infinite;
+}

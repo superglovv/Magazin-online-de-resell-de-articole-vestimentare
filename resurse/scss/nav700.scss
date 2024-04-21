@@ -4,6 +4,7 @@
     --latime-buton: 120px;
     height: var(--inaltime-meniu);
   }
+
   .ham {
     margin-left: 2px;
     width: 35px;
@@ -118,6 +119,7 @@
     z-index: 200;
     animation: animatie_submeniu 0.7s forwards;
   } */
+
   @keyframes apare_submeniu {
     0% {
       transform: scaleY(0);
@@ -128,16 +130,19 @@
       transform-origin: top;
     }
   }
+
   nav ul.meniu > li ul {
     position: absolute;
     width: 100%;
     z-index: 200;
     display: none;
   }
+
   nav ul.meniu > li:hover > ul {
     display: block;
     animation: apare_submeniu 0.5s ease forwards;
   }
+
   @keyframes aparitie_meniu_p {
     0% {
       opacity: 0;
@@ -157,3 +162,5 @@
     }
   }
 }
+
+/*# sourceMappingURL=nav700.css.map */
