@@ -77,3 +77,29 @@ p.marime {
 
   border: 1px solid var(--culoare-mov);
 }
+.produs {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns */
+  grid-template-rows: auto auto auto; /* Three rows, auto for variable content height */
+  gap: 10px; /* Gap between grid items */
+}
+
+.nume {
+  grid-column: 1 / span 2; /* Spanning two columns */
+  text-align: center; /* Centering text */
+}
+
+figure {
+  grid-row: 2; /* Second row */
+  grid-column: 1; /* First column */
+}
+
+ul:first-of-type {
+  grid-row: 3; /* Third row */
+  grid-column: 1; /* First column */
+}
+
+ul:last-of-type {
+  grid-row: 2 / span 2; /* Spanning two rows from the second row */
+  grid-column: 2; /* Second column */
+}

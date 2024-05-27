@@ -28,15 +28,19 @@
                     </div>
                 </div>
             <div class="col-6">
-                <div class="btn-group-toggle" data-toggle="buttons">
+                Marimi populare:
+                <br>
                 <label class="btn btn-outline-primary">
-                    <input type="radio" name="gr_rad" id="i_rad1" autocomplete="off" value="0:350"> S
+                    <input type="radio" name="gr_rad" id="i_rad1" autocomplete="off" value="42.5:43"> 42.5
                 </label>
                 <label class="btn btn-outline-primary">
-                    <input type="radio" name="gr_rad" id="i_rad2" autocomplete="off" value="350:700"> M
+                    <input type="radio" name="gr_rad" id="i_rad1" autocomplete="off" value="43:44"> 43
                 </label>
                 <label class="btn btn-outline-primary">
-                    <input type="radio" name="gr_rad" id="i_rad3" autocomplete="off" value="700:1000000000"> Universal
+                    <input type="radio" name="gr_rad" id="i_rad2" autocomplete="off" value="44:45"> 44
+                </label>
+                <label class="btn btn-outline-primary">
+                    <input type="radio" name="gr_rad" id="i_rad3" autocomplete="off" value="45:46"> 45
                 </label>
                 <label class="btn btn-outline-primary">
                     <input type="radio" name="gr_rad" id="i_rad4" autocomplete="off" value="toate" checked> Toate
@@ -111,7 +115,7 @@
                 <% for( let prod of locals.produse) { %>
                     <article class="produs" >
                         <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>" ><span class="val-nume"><%- prod.nume%></span></a></h3>
-                        <figure>
+                        <figure >
                             <a href="/produs/<%-prod.id %>" ><img src="/resurse/imagine/produse/<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
                         </figure>
                         <!-- <div class="info-prod">
@@ -120,11 +124,23 @@
                             <p class="gramaj">Tip: <span class="val-gramaj"><%- prod.tip%></span></p>
                         </div> -->
                         <ul>
-                            <li>Pret: <span class="val-pret"><%- prod.pret%></span> lei</li>
-                            <li>Pret Lansare: <span class="val-calorii"><%- prod.pret_lansare%></span> lei</li>
-                            <li>Tip: <span class="val-gramaj"><%- prod.tip%></span></li>
-                            <li>Marime: <span class="val-marime"><%- prod.marime%></span></li>
-                            <li>Brand:<span class="val-categorie"><%- prod.brand%></span></li>
+                            <li><span style="font-weight: bold; color: var(--culoare2);">Pret:</span> <span class="val-pret"><%- prod.pret%></span> lei</li>
+                            <!-- <li>Pret Lansare: <span class="val-pret"><%- prod.pret_lansare%></span> lei</li> -->
+                            <li><span style="font-weight: bold; color: var(--culoare2);">Tip:</span> <span class="val-gramaj"><%- prod.tip%></span></li>
+                            <li><span style="font-weight: bold; color: var(--culoare2);">Culoare: </span><span class="val-gramaj"><%- prod.culoare%></span></li>
+                            <li><span style="font-weight: bold; color: var(--culoare2);">Data: </span><span class="val-categorie"><%- prod.data_adaugare%></span></li>
+                            <li><span style="font-weight: bold; color: var(--culoare2);">Conditie: </span>
+            <span class="pt_diabetici"
+              ><% if (prod.pret_lansare) { %> Nou <% } else { %> Purtat
+              <% } %></span
+            ></li>
+                        </ul>
+                        <ul>
+                            <li><span style="font-weight: bold; color: var(--culoare2);">Pret Lansare:</span> <span class="val-pret"><%- prod.pret_lansare%></span> lei</li>
+                            <!-- <li>Pret Lansare: <span class="val-pret"><%- prod.pret_lansare%></span> lei</li> -->
+                            <li><span style="font-weight: bold; color: var(--culoare2);">Marime: </span> <span class="val-calorii"><%- prod.marime%></span></li>
+                            <li><span style="font-weight: bold; color: var(--culoare2);">Brand: </span><span class="val-categorie"><%- prod.brand%></span></li>
+                            
                         </ul>
                         <!-- <p class="marime">Pret: <span class="val-pret"><%- prod.pret%></span> lei</p>
                         <p class="marime">Pret Lansare: <span class="val-calorii"><%- prod.pret_lansare%></span> lei</p>
