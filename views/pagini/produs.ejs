@@ -22,30 +22,30 @@
         <h2>Pagină produs</h2>
         <article id="art-produs">
           <h3><span class="nume"><%- locals.prod.nume %></span></h3>
-          <p>Pret: <span class="pret"><%- locals.prod.pret %> </span></p>
+          <p>Pret: <span class="pret"><%- locals.prod.pret %> </span> lei</p>
           <p>
             Descriere:
             <span class="descriere"><%- locals.prod.descriere %> </span>
           </p>
           <p>
-            Ingrediente:
-            <span class="ingrediente"><%- locals.prod.ingrediente %> </span>
+            Culoare:
+            <span class="ingrediente"><%- locals.prod.culoare %> </span>
+          </p>
+          <p>Tip: <span class="calorii"><%- locals.prod.tip %> </span></p>
+          <p>
+            Brand:
+            <span class="categorie"><%- locals.prod.brand %> </span>
           </p>
           <p>
-            Calorii: <span class="calorii"><%- locals.prod.calorii %> </span>
-          </p>
-          <p>Gramaj: <span class="gramaj"><%- locals.prod.gramaj %> </span></p>
-          <p>
-            Categorie:
-            <span class="categorie"><%- locals.prod.categorie %> </span>
-          </p>
-          <p>
-            Pentru diabetici:
-            <span class="pt_diabetici"><%- locals.prod.pt_diabetici %> </span>
+            Conditie:
+            <span class="pt_diabetici"
+              ><% if (locals.prod.pret_lansare) { %> Nou <% } else { %> Purtat
+              <% } %></span
+            >
           </p>
           <p>
-            Data adăugare:
-            <span class="categorie"><%- locals.prod.data_adaugare %> </span>
+            Pret Lansare:
+            <span class="categorie"><%- locals.prod.pret_lansare %> </span>
           </p>
           <figure class="imag-produs">
             <img
@@ -56,7 +56,7 @@
         </article>
       </section>
     </main>
-
+    <br />
     <%- include("../fragmente/footer") %>
   </body>
 </html>

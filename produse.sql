@@ -3,7 +3,7 @@ DROP TYPE IF EXISTS tip_vestimentar;
 
 CREATE TYPE branduri AS ENUM( 'Nike', 'Adidas', 'Reebok', 'Asics', 'Balenciaga', 'Louis Vuitton', 'Prada', 'Supreme', 'Bape');
 CREATE TYPE tip_vestimentar AS ENUM('incaltaminte', 'imbracaminte', 'accesorii');
-CREATE TYPE marimi AS ENUM('Universal','XS','S','M','L','XL','XXL)
+CREATE TYPE marimi AS ENUM('Universal','XS','S','M','L','XL','XXL','36','37','38','39','40','41','42','42.5','43','44','45');
 
 CREATE TABLE IF NOT EXISTS produse(
    id serial PRIMARY KEY,
@@ -11,58 +11,17 @@ CREATE TABLE IF NOT EXISTS produse(
    descriere TEXT,
    pret NUMERIC(8,2) NOT NULL,
    pret_lansare INT NOT NULL CHECK (pret_lansare>=0),
-   tipul tip_vestimentar DEFAULT 'imbracaminte',
-   brandul branduri DEFAULT 'Nike',
+   tip tip_vestimentar DEFAULT 'imbracaminte',
+   brand branduri DEFAULT 'Nike',
    marime marimi DEFAULT 'Universal',
    culoare VARCHAR [], --pot sa nu fie specificare deci nu punem NOT NULL
-   deadstock BOOLEAN NOT NULL DEFAULT TRUE,
+   nou BOOLEAN NOT NULL DEFAULT TRUE,
    imagine VARCHAR(300),
    data_adaugare TIMESTAMP DEFAULT current_timestamp
 );
 
-INSERT into produse (nume,descriere,pret, gramaj, pret_lansare, tip_produs, categorie, marime, culoare, pt_diabetici, imagine) VALUES 
-('Savarină', 'Prăjitură insiropată, cu frișcă', 7.5 , 200, 400, 'cofetarie', 'comuna', '{"faina","lapte","frisca","zahar"}', False, 'aproximativ-savarina.jpg'),
-
-('Amandină', 'Prăjitură cu ciocolată', 6 , 200, 400, 'cofetarie', 'comuna', '{"faina","ciocolata","lapte","zahar","unt"}', False, 'posibil-amandina.jpg'),
-
-('Tort glazurat', 'Tort pentru evenimente, poate fi decorat cu diverse culori', 35 , 1000, 2500, 'cofetarie', 'comanda speciala', '{"oua","zahar","faina","lapte","ciocolata","alune"}', False,'tort-glazurat.jpg'),
-
-('Dulcelind cu fructe', 'Rețetă proprie, cu conținut sănătos (dacă ignorați tonele de zahăr) de fruncte proaspete', 10 , 250, 620, 'cofetarie', 'aniversara', '{"frisca","zahar","faina","zmeura","lapte","mure","capsuni"}', False,'dulcelind.jpg'),
-
-('Tartă cu căpșuni', 'Sub căpșuni se află o tartă.', 6 , 245, 280, 'cofetarie', 'comuna', '{"vanilie","faina","capsuni","lapte", "indulcitor"}', True,'tarta-capsuni.jpg'),
-
-('Nimic', 'Nimic', 10 , 0, 0, 'cofetarie', 'dietetica', '{}', False, 'nimic.jpg'),
-
-('Cozonac zburător', 'Cineva a vărsat heliu peste aluat.', 25.5 , 1000, 1800, 'patiserie', 'comuna', '{"zahar","unt","faina","lapte","cacao","alune", "nuca"}', False, 'cozonac-zburator.jpg'),
-
-('Brioșe', 'Aluat pufos, cu bucățele de ciocolată. Bucățelele de ciocolata, însă, nu sunt tocmai pufoase.', 8 , 145, 320, 'patiserie', 'comuna', '{"ciocolata","lapte","unt","migdale","faina","zahar"}', False, 'briose.jpg'),
-
-('Turtă dulce', 'Un produs bun de savurat de Craciun. Sau și mai târziu dacă stocul a depășit cererea. De obicei mai găsiți și prin iunie...', 12 , 400, 550, 'patiserie', 'aniversara', '{"faina","lapte","scortisoara","zahar","unt"}', False, 'turta-dulce.jpg'),
-
-('Turtă dulce dietetică', 'Îndulcitor în loc de zahăr. Dar nu vă lăsați păcăliți de nume, în rest nimic nu-i dietetic.', 10 , 400, 520, 'patiserie', 'aniversara', '{"faina","lapte","zaharina","unt","scortisoara"}', True, 'turta-dulce-dietetica.jpg'),
-
-('Căsuță din turtă dulce', 'Vine cu tot cu vrăjitoare și cuptor la pachet. A nu se lăsa în mijlocul pădurii.', 70 , 450, 2700, 'patiserie', 'aniversara', '{"unt","scortisoara", "oua","faina","lapte","zahar"}', False, 'casuta-turta-dulce.jpg'),
-
-('Croissant', 'Un răsfăț pufos și dulce... mda... dulce... dacă nu încurcă Dorelina, iar, sarea cu zahărul!!!', 5 , 150, 285, 'patiserie', 'comuna', '{"faina","lapte","zahar/sare","unt","ciocolata","migdale"}', False, 'croissant.jpg'),
-
-('Prajitura căpșuni', 'Prăjitura se face doar cu comandă specială, fiindcă apoi o comandăm și noi la rândul nostru la cofetăria vecină.', 15 , 180, 385, 'cofetarie', 'comanda speciala', '{"faina","lapte","zahar", "capsuni","unt","gelatina"}', False, 'prajitura-capsuni.jpg'),
-
-('Nasturei cu dulceață', 'Pentru când năstureii normali cedează fiindcă ați mâncat prea multă dulceață', 20.5 , 350, 700, 'patiserie', 'comuna', '{"migdale", "faina","lapte","zahar","unt","dulceata"}', False, 'nasturei-dulceata.jpg'),
-
-
-('Bomboane de ciocolată pe băț', 'Bățul e cel comestibil, nu bomboana.', 6, 100, 210,'cofetarie', 'pentru copii', '{"ciocolata", "zahar", "lapte", "alune", "faina"}', False, 'bomboane-ciocolata-bat.jpg'),
-
-('Înghețată fumătoare', 'Din când în când, tușește... Dar nu are COVID!', 18.5 , 225, 370, 'gelaterie', 'comuna', '{"smantana","lapte","migdale", "dulceata","zahar","vanilie","ciocolata", "frisca"}', False, 'inghetata-fumatoare.jpg'),
-
-
-('Înghețată multicoloră', 'Când storci un curcubeu peste înghețată... Ediție limitată; fabricăm doar după ploaie.', 12 , 120, 270, 'gelaterie', 'editie limitata', '{"smantana","lapte","migdale", "dulceata","zahar","vanilie","ciocolata", "frisca"}', False, 'inghetata-multicolora.jpg'),
-
-
-('Brioșă cu înghețată', 'Nu încercam să fim creativi... Dorelina a încurcat iar rețetele. Măcar are culoare roz', 14 , 235, 340, 'gelaterie', 'pentru copii', '{"frisca", "smantana", "lapte", "ceva roz", "faina","zahar","vanilie"}', False, 'briosa-inghetata.jpg'),
-
-('Înghețată generică', 'Când bușim așa de tare rețeta încât nu se mai încadrează în niuna dintre celelalte categorii.', 8, 90, 130, 'gelaterie','comuna','{"frisca", "smantana", "lapte", "ceva roz", "faina","zahar","vanilie"}', False, 'inghetata-generica.jpg'),
-
-('Imagine cu înghețată', 'Pentru cei aflați la dietă.', 5, 10,10,'gelaterie', 'comuna', '{"hârtie", "tuș"}', False, 'imagine-cu-inghetata.jpg'),
-
-
-('Bomboane colorate', 'Pentru copiii care doresc să afle devreme cum e o vizită la dentist.', 7, 150,340,'cofetarie', 'pentru copii', '{"zahar", "ciocolata","lapte"}', False, 'bomboane-colorate.jpg');
+INSERT into produse (nume,descriere,pret,pret_lansare,tip,brand,marime,culoare,nou,imagine) VALUES 
+('Dunk SB Low Travis', 'O silueta care a acaparat atentia tuturor fanilor Nike, colaborarea cu Travis Scott a ajuns clasica in doar cateva zile.', 15000.99, 900, 'incaltaminte', 'Nike', '42.5', '{BLACK,BEIGE-PETRA,BROWN}', true, 'dunksbtrav.jpg'),
+('Dunk SB Low Orange Lobster', 'Aceasta silueta se alatura clasicei colectii de concepts lobsters.', 3000.00, 750, 'incaltaminte', 'Nike', '43', '{ORANGE FROST,WHITE}', true, 'dunkorangelobster.jpg'),
+('Ultraboost 1.0', 'O silueta devenita iconica dupa ce a fost purtata de Ye West', 524.00, 500, 'incaltaminte', 'Adidas', '37', '{BLACK}', true, 'ultraboost1black.jpeg'),
+('Nike SB Dunk Low Pro J-Pack Chicago', 'Lansat în 1985, Nike Dunk a fost un pantof de baschet bine realizat și accesibil, disponibil în designuri de tip low și high top. A fost lansat în multe variante de-a lungul anilor. În anii 2000, skateboarderii au devenit interesați de Dunks, deoarece modelul a obținut aderența extremă necesară pantofilor de skate: atât de mult încât SB Dunks sunt o parte semnificativă a produselor de Skateboarding de la Nike până în prezent. Au avut loc mai multe colaborări în anii precedenți cu participarea Supreme, Jeff Staple, Stüssy, Diamond Supply și Off-White, iar Ben and Jerry’s și Medicom au fost, de asemenea, parteneri în acest nou val.', 1200.00, 600, 'incaltaminte', 'Nike', '42', '{VARSITY RED,BLACK-WHITE}', true, 'dunkchicago.jpeg')

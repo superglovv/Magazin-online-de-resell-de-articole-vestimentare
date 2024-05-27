@@ -1,6 +1,6 @@
 @use "../../node_modules/bootstrap/scss/bootstrap.scss" with (
   $primary: #00ffec,
-  $secondary: #edeae0
+  $secondary: #5e6167
 );
 
 $text-color: #000000;
@@ -21,3 +21,87 @@ $body-font-family: "Madimi One", sans-serif;
 $spatiere: 100px;
 $padd: 20px;
 $inaltime-meniu: 10px;
+
+.rounded {
+  border-radius: $border-radius;
+}
+
+.bi {
+  font-family: inherit;
+}
+
+// Dimensiunea fontului de bază (dacă este 16px)
+$font-size-base: 1rem;
+
+// Definirea variabilelor personalizate
+$custom-range-thumb-size: 1.5 * $font-size-base; // Dimensiunea bulinei
+$custom-range-thumb-color: #00aca0; // Culoarea bulinei
+$custom-range-track-color: #cfc6a9; // Culoarea sliderului
+
+.custom-range {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  background: $custom-range-track-color;
+  border-radius: 5px;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: $custom-range-thumb-size;
+    height: $custom-range-thumb-size;
+    background: $custom-range-thumb-color;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+
+  &::-moz-range-thumb {
+    width: $custom-range-thumb-size;
+    height: $custom-range-thumb-size;
+    background: $custom-range-thumb-color;
+    cursor: pointer;
+    border-radius: 50%;
+    border: none; // Elimină bordura implicită
+  }
+
+  &::-ms-thumb {
+    width: $custom-range-thumb-size;
+    height: $custom-range-thumb-size;
+    background: $custom-range-thumb-color;
+    cursor: pointer;
+    border-radius: 50%;
+    border: none; // Elimină bordura implicită
+  }
+
+  &::-webkit-slider-runnable-track {
+    background: $custom-range-track-color;
+    border-radius: 5px;
+  }
+
+  &::-moz-range-track {
+    background: $custom-range-track-color;
+    border-radius: 5px;
+  }
+
+  &::-ms-track {
+    background: $custom-range-track-color;
+    border-color: transparent; // Elimină bordurile implicite ale track-ului în IE
+    color: transparent; // Elimină culorile implicite ale track-ului în IE
+    border-radius: 5px;
+  }
+
+  &::-ms-fill-lower {
+    background: $custom-range-track-color;
+  }
+
+  &::-ms-fill-upper {
+    background: $custom-range-track-color;
+  }
+}

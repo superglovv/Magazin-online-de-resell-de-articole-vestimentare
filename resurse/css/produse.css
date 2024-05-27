@@ -45,7 +45,8 @@
   font-weight: bold;
 }
 
-.grid-produse .produs p.categorie {
+.grid-produse .produs p.categorie,
+p.marime {
   text-align: center;
   font-weight: bold;
 }

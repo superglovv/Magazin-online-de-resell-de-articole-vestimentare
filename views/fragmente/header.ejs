@@ -1,52 +1,59 @@
 <header>
   <h1 style="display: flex; justify-content: center">Hypero</h1>
-  <nav>
-    <label id="hamburger" for="ch-menu">
-      <div class="ham"></div>
-      <div class="ham"></div>
-      <div class="ham"></div>
-    </label>
-    <input id="ch-menu" type="checkbox" />
-    <ul class="meniu">
-      <li>
-        <div id="acasa">
-          <a href="/index"><i class="fa fa-home"></i> Acasa</a>
-        </div>
-        <div id="acasa-mediu">
-          <i class="fa fa-home"> </i>
-        </div>
-        <ul>
-          <li>
-            <a href="/index#welcome">Bun venit! </a>
-          </li>
-          <li><a href="/index#calendar">Calendar</a></li>
-          <li><a href="/index#diverse">Oferta</a></li>
-          <li><a href="/index#orar">Orar</a></li>
-        </ul>
-      </li>
-      <li><a href="#">Inregistrare</a></li>
-      <li>
-        <div><a href="despre">Despre</a></div>
-        <ul>
-          <li><a href="/despre#statistici">Statistici</a></li>
-          <li><a href="/despre#utilizatori">Utilizatori</a></li>
-          <!-- <li><a href="despre.html#istoric">Istoric</a></li>
+  <!-- <button id="schimba_tema">Schimba tema</button> -->
+  <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" id="schimba_tema" />
+    <label class="form-check-label" for="schimba_tema"> </label>
+  </div>
+
+  <script src="/resurse/js/tema.js"></script>
+</header>
+<nav>
+  <label id="hamburger" for="ch-menu">
+    <div class="ham"></div>
+    <div class="ham"></div>
+    <div class="ham"></div>
+  </label>
+  <input id="ch-menu" type="checkbox" />
+  <ul class="meniu">
+    <li>
+      <div id="acasa">
+        <a href="/index"><i class="fa fa-home"></i> Acasa</a>
+      </div>
+      <div id="acasa-mediu">
+        <i class="fa fa-home"> </i>
+      </div>
+      <ul>
+        <li>
+          <a href="/index#welcome">Bun venit! </a>
+        </li>
+        <li><a href="/index#calendar">Calendar</a></li>
+        <li><a href="/index#diverse">Oferta</a></li>
+        <li><a href="/index#orar">Orar</a></li>
+      </ul>
+    </li>
+    <li><a href="/inregistrare">Inregistrare</a></li>
+    <li>
+      <div>Despre</div>
+      <ul>
+        <li><a href="/despre">Afla</a></li>
+        <li><a href="/despre#utilizatori">Utilizatori</a></li>
+        <!-- <li><a href="despre.html#istoric">Istoric</a></li>
                     <li><a href="despre.html#motivatie">Motivatie</a></li>
                     <li><a href="despre.html#galerie">Galerie</a></li> -->
-        </ul>
-      </li>
-      <li>
-        <div><a href="/produse">Produse</a></div>
-        <ul>
-          <li><a href="/produse?tip=cofetarie">cofetarie</a></li>
-          <li><a href="/produse?tip=gelaterie">gelaterie</a></li>
-          <li><a href="/produse?tip=patiserie">patiserie</a></li>
-          <li><a href="/produse#haine">Haine</a></li>
-          <li><a href="/produse#incaltaminte">Incaltaminte</a></li>
-          <li><a href="/produse#accesorii">Accesorii</a></li>
-        </ul>
-      </li>
-      <li><a href="contact">Contact</a></li>
-    </ul>
-  </nav>
-</header>
+      </ul>
+    </li>
+    <li>
+      <div>Produse</div>
+      <ul>
+        <li><a href="/produse">Toate</a></li>
+        <li><a href="/produse?tip=incaltaminte">Incaltaminte</a></li>
+        <li><a href="/produse?tip=imbracaminte">Imbracaminte</a></li>
+        <li><a href="/produse?tip=accesorii">Accesorii</a></li>
+      </ul>
+    </li>
+    <li><a href="contact">Contact</a></li>
+    <%- include("../fragmente/submeniu-administrare") %> <%-
+    include("../fragmente/submeniu-utilizator-logat") %>
+  </ul>
+</nav>

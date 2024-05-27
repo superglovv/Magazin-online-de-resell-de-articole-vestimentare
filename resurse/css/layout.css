@@ -117,7 +117,7 @@ footer a {
 }
 
 @media print {
-  #absolut {
+  #banner {
     display: block;
     position: absolute;
     width: calc(50%);

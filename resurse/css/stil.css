@@ -13,6 +13,21 @@ body {
   background: var(--offwhite);
 }
 
+body.dark {
+  --culoare1: #faf1d8;
+  --culoare2: #faf1d8;
+  --coolgrey: #5e6167;
+  --dark: #000000;
+  --offwhite: #00aca0;
+  --spatiere: 100px;
+  --padd: 20px;
+  --inaltime-meniu: 10px;
+  padding: 0 var(--spatiere) 0 var(--spatiere);
+  /* padding-left: var(--spatiere);
+    padding-right: var(--spatiere); */
+  background: var(--offwhite);
+}
+
 footer {
   padding: 2px var(--padd);
 }

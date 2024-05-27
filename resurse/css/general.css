@@ -140,6 +140,11 @@
 }
 
 @media screen and (max-width: 1200px) {
+  .container_scroll {
+    width: 23rem;
+    overflow: hidden;
+  }
+
   .tarife tr {
     border: none;
     padding: 0;
@@ -158,6 +163,10 @@
     border: none;
     padding: none;
   }
+}
+
+.is-invalid + label {
+  color: #dc3545;
 }
 
 #text-reflectat {
