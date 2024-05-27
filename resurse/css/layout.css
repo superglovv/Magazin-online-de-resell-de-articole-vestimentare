@@ -68,12 +68,12 @@ footer a {
 
 #grid-pagina {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-areas:
-    "welcome welcome welcome"
-    "calendar orar anunturi "
-    "diverse diverse diverse"
-    "datesite utilizatori statistici";
+    "welcome welcome welcome welcome"
+    "calendar orar orar anunturi "
+    "diverse diverse diverse diverse"
+    "datesite datesite utilizatori statistici";
 }
 
 #grid-pagina > * {

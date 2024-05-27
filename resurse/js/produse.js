@@ -1,4 +1,27 @@
 window.addEventListener("load", function () {
+  var textarea = document.getElementById("inp-nume");
+  textarea.addEventListener("input", function () {
+    var produse = document.getElementsByClassName("produs");
+    var isValid = false;
+    for (let produs of produse) {
+      let valNume = produs
+        .getElementsByClassName("val-nume")[0]
+        .innerHTML.toLowerCase()
+        .trim();
+      if (valNume.startsWith(textarea.value.toLowerCase().trim())) {
+        isValid = true;
+        break;
+      }
+    }
+    if (isValid) {
+      textarea.classList.remove("is-invalid");
+      textarea.classList.add("is-valid");
+    } else {
+      textarea.classList.remove("is-valid");
+      textarea.classList.add("is-invalid");
+    }
+  });
+
   document.getElementById("inp-pret").onchange = function () {
     document.getElementById("infoRange").innerHTML = `(${this.value})`;
   };

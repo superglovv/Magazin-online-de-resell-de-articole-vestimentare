@@ -1,10 +1,54 @@
 <header>
   <h1 style="display: flex; justify-content: center">Hypero</h1>
   <!-- <button id="schimba_tema">Schimba tema</button> -->
-  <div class="form-check form-switch">
+  <!-- <div class="form-check form-switch">
     <input class="form-check-input" type="checkbox" id="schimba_tema" />
     <label class="form-check-label" for="schimba_tema"> </label>
+  </div> -->
+
+  <div class="container mt-5 text-center">
+    <div class="btn-group" role="group" aria-label="Theme Selector">
+      <input
+        type="radio"
+        class="btn-check"
+        name="theme-selector"
+        id="light_theme"
+        autocomplete="off"
+        checked
+      />
+      <label class="btn btn-outline-light" for="light_theme">Light Theme</label>
+
+      <input
+        type="radio"
+        class="btn-check"
+        name="theme-selector"
+        id="dark_theme"
+        autocomplete="off"
+      />
+      <label class="btn btn-outline-dark" for="dark_theme">Dark Theme</label>
+
+      <input
+        type="radio"
+        class="btn-check"
+        name="theme-selector"
+        id="mocha_theme"
+        autocomplete="off"
+      />
+      <label class="btn btn-outline-secondary" for="mocha_theme"
+        >Mocha Theme</label
+      >
+    </div>
   </div>
+  <!-- <div class="container mt-5 text-center">
+    <input
+      type="range"
+      class="form-range"
+      id="theme_slider"
+      min="0"
+      max="2"
+      value="0"
+    />
+  </div> -->
 
   <script src="/resurse/js/tema.js"></script>
 </header>
@@ -52,6 +96,7 @@
         <li><a href="/produse?tip=accesorii">Accesorii</a></li>
       </ul>
     </li>
+    <li><a href="/cos-virtual">Cos</a></li>
     <li><a href="contact">Contact</a></li>
     <%- include("../fragmente/submeniu-administrare") %> <%-
     include("../fragmente/submeniu-utilizator-logat") %>

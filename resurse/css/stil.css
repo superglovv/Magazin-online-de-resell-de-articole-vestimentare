@@ -28,6 +28,19 @@ body.dark {
   background: var(--offwhite);
 }
 
+body.mocha {
+  --culoare1: #d1a684;
+  --culoare2: #3e2723;
+  --coolgrey: #8d6e63;
+  --dark: #4e342e;
+  --offwhite: #d7ccc8;
+  --spatiere: 100px;
+  --padd: 20px;
+  --inaltime-meniu: 10px;
+  padding: 0 var(--spatiere) 0 var(--spatiere);
+  background: var(--offwhite);
+}
+
 footer {
   padding: 2px var(--padd);
 }

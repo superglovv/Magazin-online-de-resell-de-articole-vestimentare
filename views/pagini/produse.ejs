@@ -1,27 +1,5 @@
 <!DOCTYPE html>
 <html  lang="ro">
-    <script>
-    document.getElementById('inp-nume').addEventListener('input', function() {
-      const textarea = document.getElementById('inp-nume');
-      const value = textarea.value.trim();
-      if (value === '') {
-        textarea.classList.add('is-invalid');
-      } else {
-        textarea.classList.remove('is-invalid');
-      }
-    });
-
-    // You can use this function to manually trigger validation if needed
-    function validateTextarea() {
-      const textarea = document.getElementById('inp-nume');
-      const value = textarea.value.trim();
-      if (value === '') {
-        textarea.classList.add('is-invalid');
-      } else {
-        textarea.classList.remove('is-invalid');
-      }
-    }
-  </script>
     <head>
         <meta name="description" content="Cofetaria Dulcelind ofera prajituri, torturi, produse de patiserie cu optiunea de achizitie online si livrare prin curier.">
         <meta name="keywords" content="cofetarie, Dulcelind, prajituri, torturi, dulce, pateuri, produse">
@@ -29,6 +7,7 @@
         <title>Hypero</title>
         <%- include("../fragmente/head") %>     
         <script type="text/javascript" src=/resurse/js/produse.js></script>
+        <script type="text/javascript" src=/resurse/js/produse-cos.js></script>
         <link href="../../node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     </head>
     <body>
