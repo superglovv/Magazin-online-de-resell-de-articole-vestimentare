@@ -224,13 +224,22 @@ async function obtineLocatie() {
 }
 
 app.get(["/", "/home", "/index"], async function (req, res) {
-  res.render("pagini/index", {
-    ip: req.ip,
-    imagini: obGlobal.obImagini.imagini,
-    useriOnline: await obtineUtilizatoriOnline(),
-    locatie: await obtineLocatie(),
-    evenimente: genereazaEvenimente(),
-  });
+  try {
+    const tipuriResult = await client.query(
+      "select * from unnest(enum_range(null::tip_vestimentar))"
+    );
+    res.render("pagini/index", {
+      ip: req.ip,
+      imagini: obGlobal.obImagini.imagini,
+      useriOnline: await obtineUtilizatoriOnline(),
+      locatie: await obtineLocatie(),
+      evenimente: genereazaEvenimente(),
+      tipuri: tipuriResult.rows,
+    });
+  } catch (err) {
+    console.log(err);
+    afisareEroare(res, 2);
+  }
 });
 
 // --------------------- Produse ----------------

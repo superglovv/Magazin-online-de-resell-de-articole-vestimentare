@@ -91,12 +91,14 @@
       <div>Produse</div>
       <ul>
         <li><a href="/produse">Toate</a></li>
-        <% for (let opt of locals.tipuri) { %>
-        <a href="/produse?tip=<%- opt.unnest %>"><%- opt.unnest %></a>
-        <% } %>
-        <!-- <li><a href="/produse?tip=incaltaminte">Incaltaminte</a></li>
+        <% if (typeof tipuri !== 'undefined' && tipuri.length > 0) { %> <% for
+        (let opt of tipuri) { %>
+        <li><a href="/produse?tip=<%- opt.unnest %>"><%- opt.unnest %></a></li>
+        <% } %> <% } else { %>
+        <li><a href="/produse?tip=incaltaminte">Incaltaminte</a></li>
         <li><a href="/produse?tip=imbracaminte">Imbracaminte</a></li>
-        <li><a href="/produse?tip=accesorii">Accesorii</a></li> -->
+        <li><a href="/produse?tip=accesorii">Accesorii</a></li>
+        <% } %>
       </ul>
     </li>
     <li><a href="/cos-virtual">Cos</a></li>
