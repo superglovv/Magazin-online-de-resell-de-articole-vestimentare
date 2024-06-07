@@ -56,6 +56,14 @@
   /* p{
     color: green;
   } */
+
+  .index-roman {
+  counter-reset: roman-counter;
+}
+.index-roman::before {
+  counter-increment: roman-counter;
+  content: counter(roman-counter, upper-roman);
+}
 </style>
 
 <html lang="ro">
@@ -80,6 +88,9 @@
         <section id="welcome">
           <button type="button" class="btn btn-primary btn-lg">Stil-1-mare</button>
           <%- include("../fragmente/formular-login") %>
+          <%- include("../fragmente/locatie") %>
+          <%- include("../fragmente/ora-server-client") %>
+          <%- include("../fragmente/evenimente") %>
           <%- include("../fragmente/useri-online") %>
           <section id="galerie-statica">
             <h2 id="text">
@@ -91,15 +102,21 @@
                   var vLuni=["ianuarie","februarie","martie","aprilie","mai","iunie","iulie","august","septembrie","octombrie","noiembrie","decembrie"];
                   var d=new Date();
                   var lunaCurenta=vLuni[d.getMonth()];
+                  var d=new Date();
+                  var lunaCurenta=vLuni[d.getMonth()];
+                  var oraCurenta = d.getHours();
+                  var minuteCurente = d.getMinutes();
+                  var sfertulDeOraCurent = Math.ceil(minuteCurente / 15); // Determinăm sfertul de oră actual
                   var imagCount = 0;
                   for(let imag of locals.imagini) {
-                    if( imag?.luni?.includes(lunaCurenta) && imagCount < 10){ %>
+                    if( imag?.luni?.includes(lunaCurenta) && imagCount < 10 && imag.sfertOra === sfertulDeOraCurent){ 
+                      var romanIndex = convertToRoman(imagCount + 1);%>
                 <figure>
                   <picture>
                     <source srcset="<%= imag.fisier %>" media="(max-width:1200px)"/>
                     <img src="<%= imag.fisier %>" alt="briose"/>
                   </picture>
-                <figcaption><h6><%= imag.descriere %></h6></figcaption>
+                <figcaption><h6><span class="index-roman"><%= romanIndex %></span><%= imag.descriere %></h6></figcaption>
                 </figure>
                     <% imagCount++;
                    } %>
@@ -107,6 +124,34 @@
             </div>
             
         </section>
+  <section id="galerie-animata">
+            <h2 id="text">
+              Galerie Animata:
+              <div id="text-reflectat">Galerie</div>
+            </h2>
+            <div class="galerie-animata">
+    <% 
+    function generateRandomNumber() {
+        let randomNumber;
+        do {
+            randomNumber = Math.floor(Math.random() * 15) + 2;
+        } while ((randomNumber & (randomNumber - 1)) !== 0);
+        return randomNumber;
+    }
+    const nr_imagini = generateRandomNumber();
+    var imagCount = 0;
+    for(let imag of locals.imagini) { 
+        if (imagCount >= nr_imagini) break; 
+    %>
+    <figure>
+        <source srcset="<%= imag.fisier %>" media="(max-width:1200px)"/>
+        <img src="<%= imag.fisier %>" alt="briose"/>
+        <figcaption><h6><%= imag.descriere %></h6></figcaption>
+    </figure>
+    <% imagCount++; } %>
+</div>
+</section>
+
         <h2>!! Bine ai venit in lumea streetwear !!</h2>
         <p>Ip: <%- locals.ip -%></p>
         <figure>

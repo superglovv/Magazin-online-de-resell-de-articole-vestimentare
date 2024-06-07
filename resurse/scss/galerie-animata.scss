@@ -1,33 +1,92 @@
-#galerie-animata {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 10px;
-}
+$transformare_i: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+$transformare_f: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
+$nr_imagini: 8;
+$border_image_path: "../imagine/hyperoshop.jpeg";
 
-#alt-grid-galerie figure {
+.galerie-animata {
+  width: 400px;
+  height: 320px;
   position: relative;
   overflow: hidden;
+  border: 10px solid transparent;
+  box-sizing: border-box;
+  border-image: url(#{$border_image_path}) 10 round;
+  figure {
+    position: absolute;
+    z-index: 0;
+    animation-name: animatie_galerie;
+    animation-timing-function: linear;
+    animation-direction: reverse;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+    animation-duration: #{3 * $nr_imagini}s;
+    margin: -2rem;
+    padding: 2rem;
+    figcaption {
+      position: absolute;
+      bottom: 2rem;
+      color: black;
+      background: rgba(255, 255, 255, 0.8);
+      width: calc(100% - 4rem);
+      text-align: center;
+    }
+  }
+  @for $i from 1 through $nr_imagini {
+    figure:nth-child(#{$i}) {
+      animation-delay: -#{$i * 3 - 3}s;
+      animation-play-state: running;
+    }
+
+    &:hover {
+      figure:nth-child(#{$i}) {
+        animation-play-state: paused;
+      }
+    }
+  }
 }
 
-#alt-grid-galerie img {
-  width: 100%;
-  height: auto;
-  transition: transform 0.5s ease;
-}
-
-#alt-grid-galerie figure:hover img {
-  transform: scale(1.1);
-}
-
-@keyframes clip-path-animation {
+@keyframes animatie_galerie {
   0% {
-    clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+    z-index: 10;
+    opacity: 1;
+  }
+  #{calc(100 / 2 / $nr_imagini)}% {
+    clip-path: $transformare_i;
+  }
+  #{calc(100 / $nr_imagini) - calc($nr_imagini / 3)}% {
+    opacity: 1;
+  }
+  #{calc(100 / $nr_imagini)}% {
+    z-index: 10;
+    opacity: 0;
+    clip-path: $transformare_f;
+  }
+  #{calc(100 / $nr_imagini) + 0.001}% {
+    z-index: -10;
+    clip-path: $transformare_i;
+  }
+  #{99.9 - calc(100 / $nr_imagini)}% {
+    z-index: -10;
+    opacity: 0;
+    clip-path: $transformare_i;
+  }
+  #{100 - calc(100 / $nr_imagini)}% {
+    z-index: 0;
   }
   100% {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    z-index: 0;
+    opacity: 1;
   }
 }
 
-#grid-galerie figure img {
-  animation: clip-path-animation 4s infinite;
+@media only screen and (max-width: 1200px) {
+  .galerie-animata {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .galerie-animata {
+    display: none;
+  }
 }

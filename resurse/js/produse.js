@@ -1,4 +1,21 @@
 window.addEventListener("load", function () {
+  var minPrice = Math.min(
+    ...Array.from(document.querySelectorAll(".val-pret")).map((elem) =>
+      parseFloat(elem.innerHTML)
+    )
+  );
+  var maxPrice = Math.max(
+    ...Array.from(document.querySelectorAll(".val-pret")).map((elem) =>
+      parseFloat(elem.innerHTML)
+    )
+  );
+
+  document.getElementById("inp-pret").value = minPrice;
+
+  document.getElementById("inp-pret").max = maxPrice;
+
+  document.getElementById("infoRange").innerText = "(" + minPrice + ")";
+
   var textarea = document.getElementById("inp-nume");
   textarea.addEventListener("input", function () {
     var produse = document.getElementsByClassName("produs");
@@ -8,7 +25,11 @@ window.addEventListener("load", function () {
         .getElementsByClassName("val-nume")[0]
         .innerHTML.toLowerCase()
         .trim();
-      if (valNume.startsWith(textarea.value.toLowerCase().trim())) {
+      if (
+        normalizeText(valNume).startsWith(
+          normalizeText(textarea.value.toLowerCase().trim())
+        )
+      ) {
         isValid = true;
         break;
       }
@@ -28,10 +49,9 @@ window.addEventListener("load", function () {
 
   // document.getElementById("filtrare").addEventListener("click", function(){ })
   document.getElementById("filtrare").onclick = function () {
-    var inpNume = document
-      .getElementById("inp-nume")
-      .value.toLowerCase()
-      .trim();
+    var inpNume = normalizeText(
+      document.getElementById("inp-nume").value.toLowerCase().trim()
+    );
 
     var radioCalorii = document.getElementsByName("gr_rad");
     let inpCalorii;
@@ -56,6 +76,7 @@ window.addEventListener("load", function () {
       .trim();
 
     var produse = document.getElementsByClassName("produs");
+    var hasResults = false;
     for (let produs of produse) {
       let valNume = produs
         .getElementsByClassName("val-nume")[0]
@@ -85,11 +106,19 @@ window.addEventListener("load", function () {
 
       if (cond1 && cond2 && cond3 && cond4) {
         produs.style.display = "block";
+        hasResults = true;
       } else {
         produs.style.display = "none";
       }
     }
   };
+
+  // var noResultsMessage = document.getElementById("no-results-message");
+  // if (hasResults == false) {
+  //   noResultsMessage.style.display = "none";
+  // } else {
+  //   noResultsMessage.style.display = "block";
+  // }
 
   document.getElementById("resetare").onclick = function () {
     document.getElementById("inp-nume").value = "";
@@ -99,7 +128,7 @@ window.addEventListener("load", function () {
     document.getElementById("inp-categorie").value = "toate";
     document.getElementById("i_rad4").checked = true;
     var produse = document.getElementsByClassName("produs");
-    document.getElementById("infoRange").innerHTML = "(0)";
+    document.getElementById("infoRange").innerHTML = `(${minPrice})`;
     for (let prod of produse) {
       prod.style.display = "block";
     }
@@ -156,4 +185,21 @@ window.addEventListener("load", function () {
       }
     }
   };
+  function normalizeText(text) {
+    const diacriticsMap = {
+      ă: "a",
+      â: "a",
+      î: "i",
+      ș: "s",
+      ț: "t",
+      Ă: "A",
+      Â: "A",
+      Î: "I",
+      Ș: "S",
+      Ț: "T",
+    };
+    return text.replace(/[ăâîșțĂÂÎȘȚ]/g, function (match) {
+      return diacriticsMap[match];
+    });
+  }
 });

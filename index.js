@@ -15,6 +15,9 @@ const Client = require("pg").Client;
 const QRCode = require("qrcode");
 const puppeteer = require("puppeteer");
 
+const xmljs = require("xml-js");
+const { MongoClient } = require("mongodb");
+
 var client = new Client({
   database: "cti_2024",
   user: "superuser",
@@ -181,11 +184,52 @@ app.use(function (req, res, next) {
   );
 });
 
+function genereazaEvenimente() {
+  var evenimente = [];
+  var texteEvenimente = [
+    "Eveniment important",
+    "Festivitate",
+    "Prajituri gratis",
+    "Zi cu soare",
+    "Aniversare",
+  ];
+  var dataCurenta = new Date();
+  for (i = 0; i < texteEvenimente.length; i++) {
+    evenimente.push({
+      data: new Date(
+        dataCurenta.getFullYear(),
+        dataCurenta.getMonth(),
+        Math.ceil(Math.random() * 27)
+      ),
+      text: texteEvenimente[i],
+    });
+  }
+  return evenimente;
+}
+
+//--------------------------------------locatie---------------------------------------
+async function obtineLocatie() {
+  try {
+    const response = await fetch(
+      "https://secure.geobytes.com/GetCityDetails?key=7c756203dbb38590a66e01a5a3e1ad96&fqcn=109.99.96.15"
+    );
+    const obiectLocatie = await response.json();
+    console.log(obiectLocatie);
+    locatie =
+      obiectLocatie.geobytescountry + " " + obiectLocatie.geobytesregion;
+    return locatie;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 app.get(["/", "/home", "/index"], async function (req, res) {
   res.render("pagini/index", {
     ip: req.ip,
     imagini: obGlobal.obImagini.imagini,
     useriOnline: await obtineUtilizatoriOnline(),
+    locatie: await obtineLocatie(),
+    evenimente: genereazaEvenimente(),
   });
 });
 
@@ -201,7 +245,6 @@ app.get(["/", "/home", "/index"], async function (req, res) {
 //     }
 //   });
 // });
-
 app.get("/produse", function (req, res) {
   console.log(req.query);
   var conditieQuery = "";
@@ -210,19 +253,25 @@ app.get("/produse", function (req, res) {
   }
   client.query(
     "select * from unnest(enum_range(null::branduri))",
-    function (err, rezOptiuni) {
+    function (err, rezBranduri) {
       client.query(
-        `select * from produse ${conditieQuery}`,
-        function (err, rez) {
-          if (err) {
-            console.log(err);
-            afisareEroare(res, 2);
-          } else {
-            res.render("pagini/produse", {
-              produse: rez.rows,
-              optiuni: rezOptiuni.rows,
-            });
-          }
+        "select * from unnest(enum_range(null::tip_vestimentar))",
+        function (err, rezTipuri) {
+          client.query(
+            `select * from produse ${conditieQuery}`,
+            function (err, rezProduse) {
+              if (err) {
+                console.log(err);
+                afisareEroare(res, 2);
+              } else {
+                res.render("pagini/produse", {
+                  produse: rezProduse.rows,
+                  branduri: rezBranduri.rows,
+                  tipuri: rezTipuri.rows,
+                });
+              }
+            }
+          );
         }
       );
     }
@@ -300,6 +349,34 @@ async function genereazaPdf(stringHTML, numeFis, callback) {
   if (callback) callback(numeFis);
 }
 
+// function insereazaFactura(req, rezultatRanduri) {
+//   rezultatRanduri.rows.forEach(function (elem) {
+//     elem.cantitate = 1;
+//   });
+//   let jsonFactura = {
+//     data: new Date(),
+//     username: req.session.utilizator.username,
+//     produse: rezultatRanduri.rows,
+//   };
+//   console.log("JSON factura", jsonFactura);
+//   if (obGlobal.bdMongo) {
+//     obGlobal.bdMongo
+//       .collection("facturi")
+//       .insertOne(jsonFactura, function (err, rezmongo) {
+//         if (err) console.log(err);
+//         else console.log("Am inserat factura in mongodb");
+
+//         obGlobal.bdMongo
+//           .collection("facturi")
+//           .find({})
+//           .toArray(function (err, rezInserare) {
+//             if (err) console.log(err);
+//             else console.log(rezInserare);
+//           });
+//       });
+//   }
+// }
+
 app.post("/cumpara", function (req, res) {
   console.log(req.body);
 
@@ -335,6 +412,7 @@ app.post("/cumpara", function (req, res) {
             ]);
             res.send("Totul e bine!");
           });
+          // insereazaFactura(req, rez);
         }
       }
     );
@@ -426,6 +504,110 @@ app.post("/inregistrare", function (req, res) {
     console.log(nume, fisier);
   });
 });
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+//////////////// Contact
+
+app.use(["/contact"], express.urlencoded({ extended: true }));
+
+caleXMLMesaje = "resurse/xml/contact.xml";
+headerXML = `<?xml version="1.0" encoding="utf-8"?>`;
+function creeazaXMlContactDacaNuExista() {
+  if (!fs.existsSync(caleXMLMesaje)) {
+    let initXML = {
+      declaration: {
+        attributes: {
+          version: "1.0",
+          encoding: "utf-8",
+        },
+      },
+      elements: [
+        {
+          type: "element",
+          name: "contact",
+          elements: [
+            {
+              type: "element",
+              name: "mesaje",
+              elements: [],
+            },
+          ],
+        },
+      ],
+    };
+    let sirXml = xmljs.js2xml(initXML, { compact: false, spaces: 4 }); //obtin sirul xml (cu taguri)
+    console.log(sirXml);
+    fs.writeFileSync(caleXMLMesaje, sirXml);
+    return false; //l-a creat
+  }
+  return true; //nu l-a creat acum
+}
+
+function parseazaMesaje() {
+  let existaInainte = creeazaXMlContactDacaNuExista();
+  let mesajeXml = [];
+  let obJson;
+  if (existaInainte) {
+    let sirXML = fs.readFileSync(caleXMLMesaje, "utf8");
+    obJson = xmljs.xml2js(sirXML, { compact: false, spaces: 4 });
+
+    let elementMesaje = obJson.elements[0].elements.find(function (el) {
+      return el.name == "mesaje";
+    });
+    let vectElementeMesaj = elementMesaje.elements
+      ? elementMesaje.elements
+      : []; // conditie ? val_true: val_false
+    console.log(
+      "Mesaje: ",
+      obJson.elements[0].elements.find(function (el) {
+        return el.name == "mesaje";
+      })
+    );
+    let mesajeXml = vectElementeMesaj.filter(function (el) {
+      return el.name == "mesaj";
+    });
+    return [obJson, elementMesaje, mesajeXml];
+  }
+  return [obJson, [], []];
+}
+
+app.get("/contact", function (req, res) {
+  let obJson, elementMesaje, mesajeXml;
+  [obJson, elementMesaje, mesajeXml] = parseazaMesaje();
+
+  res.render("pagini/contact", {
+    utilizator: req.session.utilizator,
+    mesaje: mesajeXml,
+  });
+});
+
+app.post("/contact", function (req, res) {
+  let obJson, elementMesaje, mesajeXml;
+  [obJson, elementMesaje, mesajeXml] = parseazaMesaje();
+
+  let u = req.session.utilizator ? req.session.utilizator.username : "anonim";
+  let mesajNou = {
+    type: "element",
+    name: "mesaj",
+    attributes: {
+      username: u,
+      data: new Date(),
+    },
+    elements: [{ type: "text", text: req.body.mesaj }],
+  };
+  if (elementMesaje.elements) elementMesaje.elements.push(mesajNou);
+  else elementMesaje.elements = [mesajNou];
+  console.log(elementMesaje.elements);
+  let sirXml = xmljs.js2xml(obJson, { compact: false, spaces: 4 });
+  console.log("XML: ", sirXml);
+  fs.writeFileSync("resurse/xml/contact.xml", sirXml);
+
+  res.render("pagini/contact", {
+    utilizator: req.session.utilizator,
+    mesaje: elementMesaje.elements,
+  });
+});
+///////////////////////////////////////////////////////
 
 app.post("/profil", function (req, res) {
   console.log("profil");
@@ -638,6 +820,32 @@ app.get("/galerie", function (req, res) {
     imagini: obGlobal.obImagini.imagini,
   });
 });
+function generateRandomNumber() {
+  let randomNumber;
+  do {
+    randomNumber = Math.floor(Math.random() * 15) + 2;
+  } while ((randomNumber & (randomNumber - 1)) !== 0);
+  return randomNumber;
+}
+
+const nr_imagini = generateRandomNumber();
+
+// Read the SCSS file
+const scssFilePath = path.join(__dirname, "resurse/scss/galerie-animata.scss");
+let scssContent = fs.readFileSync(scssFilePath, "utf8");
+
+// Replace the EJS statement with the value of nr_imagini
+scssContent = scssContent.replace(/--nr_imagini-placeholder/g, nr_imagini);
+
+// Compile the SCSS to CSS
+const cssResult = sass.renderSync({
+  data: scssContent,
+  outputStyle: "expanded", // Adjust output style as needed
+});
+
+// Write the compiled CSS to a file
+const cssFilePath = path.join(__dirname, "resurse/css/galerie-animata.css");
+fs.writeFileSync(cssFilePath, cssResult.css);
 
 // trimiterea unui mesaj fix
 app.get("/cerere", function (req, res) {
@@ -714,7 +922,13 @@ obGlobal = {
   optiuniMeniu: [],
   protocol: "http://",
   numeDomeniu: "localhost:8080",
+  clientMongo: null,
+  bdMongo: null,
 };
+
+const uri = "mongodb://localhost:27017";
+obGlobal.clientMongo = new MongoClient(uri);
+obGlobal.bdMongo = obGlobal.clientMongo.db("sneakers");
 
 function initErori() {
   var continut = fs
@@ -818,6 +1032,7 @@ function compileazaScss(caleScss, caleCss) {
       path.join(obGlobal.folderBackup, "resurse/css", numeFisCss)
     ); // +(new Date()).getTime()
   }
+
   rez = sass.compile(caleScss, { sourceMap: true });
   fs.writeFileSync(caleCss, rez.css);
   //console.log("Compilare SCSS",rez);
