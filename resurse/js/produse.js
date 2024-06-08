@@ -70,6 +70,16 @@ window.addEventListener("load", function () {
 
     console.log(selectedConditions);
 
+    const selectedTehnologie = Array.from(
+      document.getElementsByName("gr_check2")
+    )
+      .filter((checkbox) => checkbox.checked)
+      .map((checkbox) => checkbox.value);
+
+    const radioButtonValue = document.querySelector(
+      'input[name="nougr_rad"]:checked'
+    ).value;
+
     var radioCalorii = document.getElementsByName("gr_rad");
     let inpCalorii;
     for (let rad of radioCalorii) {
@@ -165,6 +175,21 @@ window.addEventListener("load", function () {
             .trim()
         ).includes(normalizeText(textarea.value.toLowerCase().trim()));
 
+      let cond9 = true;
+      if (selectedTehnologie.length > 0) {
+        const valoriTehnologie = Array.from(
+          produs.getElementsByClassName("val-tehnologie")
+        ).map((elem) => elem.innerHTML.toLowerCase().trim());
+        cond9 =
+          radioButtonValue === "are"
+            ? selectedTehnologie.every((value) =>
+                valoriTehnologie.includes(value)
+              )
+            : !selectedTehnologie.some((value) =>
+                valoriTehnologie.includes(value)
+              );
+      }
+
       if (
         cond1 &&
         cond2 &&
@@ -173,7 +198,8 @@ window.addEventListener("load", function () {
         cond5 &&
         cond6 &&
         cond7 &&
-        cond8
+        cond8 &&
+        cond9
       ) {
         produs.style.display = "block";
         hasResults = true;
@@ -194,7 +220,6 @@ window.addEventListener("load", function () {
   // }
 
   document.getElementById("resetare").onclick = function () {
-    // Ask for confirmation before resetting filters
     var confirmReset = confirm("Sigur dorești să resetezi filtrele?");
     if (confirmReset) {
       document.getElementById("inp-nume").value = "";
@@ -211,6 +236,15 @@ window.addEventListener("load", function () {
       document.getElementById("i_check2").checked = true;
 
       document.getElementById("infoRange").innerHTML = `(${minPrice})`;
+
+      var checkboxes = document.getElementsByName("gr_check2");
+      checkboxes.forEach(function (checkbox) {
+        checkbox.checked = false;
+      });
+
+      document.querySelector(
+        'input[name="nougr_rad"][value="are"]'
+      ).checked = true;
 
       var produse = document.getElementsByClassName("produs");
       for (let prod of produse) {

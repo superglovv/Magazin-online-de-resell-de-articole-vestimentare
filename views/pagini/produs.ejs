@@ -23,10 +23,18 @@
         <article id="art-produs">
           <h3><span class="nume"><%- locals.prod.nume %></span></h3>
           <p>Pret: <span class="pret"><%- locals.prod.pret %> </span> lei</p>
+          <% if (locals.prod.descriere) { %>
           <p>
             Descriere:
             <span class="descriere"><%- locals.prod.descriere %> </span>
           </p>
+          <% } %> <% if (locals.prod.tehnologie) { %>
+          <p>
+            Tehnologie:
+            <span class="tehnologie"><%- locals.prod.tehnologie %> </span>
+          </p>
+          <% } %>
+
           <p>
             Stil:
             <span class="categorie"><%- locals.prod.stil %> </span>
