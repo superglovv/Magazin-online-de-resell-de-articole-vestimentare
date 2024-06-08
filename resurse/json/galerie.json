@@ -2,37 +2,37 @@
   "cale_galerie": "resurse/imagine/galerie",
   "imagini": [
     {
-      "fisier": "briose-frisca.png",
-      "descriere": "Brioșe",
+      "fisier": "trav.png",
+      "descriere": "Dunk SB Travis",
       "luni": ["martie", "februarie", "noiembrie", "aprilie"]
     },
     {
-      "fisier": "clatite.png",
-      "descriere": "Clătite cu dulceață",
+      "fisier": "prada1.png",
+      "descriere": "Prada Bag",
       "luni": ["ianuarie", "februarie", "iunie"]
     },
     {
-      "fisier": "gogosi.png",
-      "descriere": "Gogoși glazurate",
+      "fisier": "prada2.png",
+      "descriere": "Prada Jacket",
       "luni": ["ianuarie", "noiembrie", "iunie", "martie", "aprilie"]
     },
     {
-      "fisier": "tort-scortisoara.png",
-      "descriere": "Tort cu scorțisoară",
+      "fisier": "ultraboost.png",
+      "descriere": "Adidas Ultraboost 1.0",
 
       "luni": ["noiembrie", "aprilie"]
     },
     {
-      "fisier": "prajitura-ciocolata.png",
-      "descriere": "Prăjitură cu ciocolată"
+      "fisier": "bape.png",
+      "descriere": "Bape London Tee"
     },
     {
-      "fisier": "tarta-afine.png",
-      "descriere": "Tartă cu afine"
+      "fisier": "chrome.png",
+      "descriere": "Chrome Pendant"
     },
     {
-      "fisier": "tort-trandafiri.png",
-      "descriere": "Tort special"
+      "fisier": "lobster.png",
+      "descriere": "Dunk SB Orange Lobster"
     }
   ]
 }

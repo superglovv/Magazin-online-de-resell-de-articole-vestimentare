@@ -138,8 +138,8 @@
         <p>
         <button id="filtrare" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-filter"></i>Filtreaza</button> 
         <button id="resetare" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-arrow-clockwise"></i>Reseteaza</button><br/>
-        <button id="sortCrescNume" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-arrow-up"></i>Sorteaza crescator dupa pret si nume</button>
-        <button id="sortDescrescNume" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-arrow-down"></i>Sorteaza descrescator dupa pret si nume</button>
+        <button id="sortCrescNume" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-arrow-up"></i>Sorteaza crescator dupa raport pret_lansare/pret si stil</button>
+        <button id="sortDescrescNume" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-arrow-down"></i>Sorteaza descrescator dupa raport pret_lansare/pret si stil</button>
         <button id="calculeaza-media" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-calculator"></i>Calculează media prețurilor</button>
 
 
@@ -174,6 +174,7 @@
             ></li>
                         </ul>
                         <ul>
+                            <li><span class="nume_categorie">Pret Lansare:</span> <span class="val-pretlansare"><%- prod.pret_lansare%></span> lei</li>
                             <li><span class="nume_categorie">Stil:</span> <span class="val-stil"><%- prod.stil%></span></li>
                             <% if (prod.descriere) { %>
                             <li><span class="nume_categorie">Descriere:</span> <span class="val-descriere"><%- shortenText(prod.descriere)%></span> </li>

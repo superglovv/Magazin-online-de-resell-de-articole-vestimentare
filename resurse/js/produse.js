@@ -1,4 +1,6 @@
 window.addEventListener("load", function () {
+  var initialOrder = Array.from(document.querySelectorAll(".produs"));
+
   var prices = Array.from(document.querySelectorAll(".val-pret")).map((elem) =>
     parseFloat(elem.innerHTML)
   );
@@ -192,23 +194,28 @@ window.addEventListener("load", function () {
   // }
 
   document.getElementById("resetare").onclick = function () {
-    document.getElementById("inp-nume").value = "";
-    document.getElementById("inp-descriere").value = "";
-    document.getElementById("inp-culoare").value = "";
-    document.getElementById("inp-stil").value = "toate";
+    // Ask for confirmation before resetting filters
+    var confirmReset = confirm("Sigur dorești să resetezi filtrele?");
+    if (confirmReset) {
+      document.getElementById("inp-nume").value = "";
+      document.getElementById("inp-descriere").value = "";
+      document.getElementById("inp-culoare").value = "";
+      document.getElementById("inp-stil").value = "toate";
 
-    document.getElementById("inp-pret").value =
-      document.getElementById("inp-pret").min;
-    document.getElementById("inp-categorie").value = "toate";
-    document.getElementById("i_rad5").checked = true;
+      document.getElementById("inp-pret").value =
+        document.getElementById("inp-pret").min;
+      document.getElementById("inp-categorie").value = "toate";
+      document.getElementById("i_rad5").checked = true;
 
-    document.getElementById("i_check1").checked = true;
-    document.getElementById("i_check2").checked = true;
+      document.getElementById("i_check1").checked = true;
+      document.getElementById("i_check2").checked = true;
 
-    var produse = document.getElementsByClassName("produs");
-    document.getElementById("infoRange").innerHTML = `(${minPrice})`;
-    for (let prod of produse) {
-      prod.style.display = "block";
+      document.getElementById("infoRange").innerHTML = `(${minPrice})`;
+
+      var produse = document.getElementsByClassName("produs");
+      for (let prod of produse) {
+        prod.style.display = "block";
+      }
     }
   };
 
