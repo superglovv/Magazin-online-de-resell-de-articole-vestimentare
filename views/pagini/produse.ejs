@@ -16,16 +16,18 @@
     <main>
         <label>
             <br>
-            <!-- <input type="text" id="inp-nume"> -->
+            
             <div class="row">
                 <div class="col-6">
-                    <div class="form-floating">
+                    Nume:
+                    <input type="text" id="inp-nume">
+                    <!-- <div class="form-floating">
                         <textarea class="form-control" placeholder="Enter your text here" id="inp-nume" style="height: 100px;"></textarea>
                         <label for="inp-nume">Nume:</label>
                         <div class="invalid-feedback">
                             Introdu un text corect.
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             <div class="col-6">
                 Marimi populare:
@@ -172,7 +174,7 @@
                         <ul>
                             <li><span class="nume_categorie">Stil:</span> <span class="val-stil"><%- prod.stil%></span></li>
                             <% if (prod.descriere) { %>
-                            <li><span class="nume_categorie">Descriere:</span> <span class="val-pret"><%- shortenText(prod.descriere)%></span> </li>
+                            <li><span class="nume_categorie">Descriere:</span> <span class="val-descriere"><%- shortenText(prod.descriere)%></span> </li>
                             <% } %>
                             <li><span class="nume_categorie">Marime: </span> <span class="val-calorii"><%- prod.marime%></span></li>
                             

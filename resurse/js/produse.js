@@ -97,7 +97,19 @@ window.addEventListener("load", function () {
         .innerHTML.toLowerCase()
         .trim();
 
-      let cond1 = valNume.startsWith(inpNume);
+      let mismatchCount = 0;
+      for (let i = 0; i < Math.min(valNume.length, inpNume.length); i++) {
+        if (valNume[i] !== inpNume[i]) {
+          mismatchCount++;
+          if (mismatchCount > 2) {
+            break;
+          }
+        }
+      }
+
+      let cond1 =
+        mismatchCount <= 2 &&
+        valNume.startsWith(inpNume.slice(0, -Math.min(mismatchCount, 2)));
 
       let valCalorii = parseInt(
         produs.getElementsByClassName("val-calorii")[0].innerHTML
