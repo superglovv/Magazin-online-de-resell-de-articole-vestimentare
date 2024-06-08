@@ -50,6 +50,19 @@ window.addEventListener("load", function () {
       document.getElementById("inp-nume").value.toLowerCase().trim()
     );
 
+    var inpCuloare = document
+      .getElementsByName("inp-culoare")[0]
+      .value.trim()
+      .toLowerCase();
+
+    const selectedConditions = Array.from(
+      document.getElementsByName("gr_check")
+    )
+      .filter((checkbox) => checkbox.checked)
+      .map((checkbox) => checkbox.value);
+
+    console.log(selectedConditions);
+
     var radioCalorii = document.getElementsByName("gr_rad");
     let inpCalorii;
     for (let rad of radioCalorii) {
@@ -101,7 +114,22 @@ window.addEventListener("load", function () {
         .trim();
       let cond4 = inpCateg == valCategorie || inpCateg == "toate";
 
-      if (cond1 && cond2 && cond3 && cond4) {
+      let valCuloare = produs
+        .getElementsByClassName("val-culoare")[0]
+        .innerHTML.toLowerCase()
+        .trim();
+      console.log(valCuloare);
+      let cond5 = valCuloare.startsWith(inpCuloare) || inpCuloare == "";
+
+      let valConditie = produs
+        .getElementsByClassName("val-conditie")[0]
+        .innerHTML.trim();
+
+      let cond6 =
+        selectedConditions.length === 0 ||
+        selectedConditions.includes(valConditie);
+
+      if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6) {
         produs.style.display = "block";
         hasResults = true;
       } else {
@@ -122,11 +150,16 @@ window.addEventListener("load", function () {
 
   document.getElementById("resetare").onclick = function () {
     document.getElementById("inp-nume").value = "";
+    document.getElementById("inp-culoare").value = "";
 
     document.getElementById("inp-pret").value =
       document.getElementById("inp-pret").min;
     document.getElementById("inp-categorie").value = "toate";
-    document.getElementById("i_rad4").checked = true;
+    document.getElementById("i_rad5").checked = true;
+
+    document.getElementById("i_check1").checked = true;
+    document.getElementById("i_check2").checked = true;
+
     var produse = document.getElementsByClassName("produs");
     document.getElementById("infoRange").innerHTML = `(${minPrice})`;
     for (let prod of produse) {

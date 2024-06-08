@@ -30,21 +30,20 @@
             <div class="col-6">
                 Marimi populare:
                 <br>
-                <label class="btn btn-outline-primary">
-                    <input type="radio" name="gr_rad" id="i_rad1" autocomplete="off" value="42.5:43"> 42.5
-                </label>
-                <label class="btn btn-outline-primary">
-                    <input type="radio" name="gr_rad" id="i_rad1" autocomplete="off" value="43:44"> 43
-                </label>
-                <label class="btn btn-outline-primary">
-                    <input type="radio" name="gr_rad" id="i_rad2" autocomplete="off" value="44:45"> 44
-                </label>
-                <label class="btn btn-outline-primary">
-                    <input type="radio" name="gr_rad" id="i_rad3" autocomplete="off" value="45:46"> 45
-                </label>
-                <label class="btn btn-outline-primary">
-                    <input type="radio" name="gr_rad" id="i_rad4" autocomplete="off" value="toate" checked> Toate
-                </label>
+                <input class="btn-check" id="i_rad1" name="gr_rad" value="42:43" type="radio" autocomplete="off" />
+					<label class="btn btn-sm btn-outline-primary" for="i_rad1">42</label>
+
+					<input class="btn-check" id="i_rad2" name="gr_rad" value="43:44" type="radio" autocomplete="off" />
+					<label class="btn btn-sm btn-outline-primary" for="i_rad2">43</label>
+
+                    <input class="btn-check" id="i_rad3" name="gr_rad" value="44:45" type="radio" autocomplete="off" />
+					<label class="btn btn-sm btn-outline-primary" for="i_rad2">44</label>
+
+                    <input class="btn-check" id="i_rad4" name="gr_rad" value="45:46" type="radio" autocomplete="off" />
+					<label class="btn btn-sm btn-outline-primary" for="i_rad2">45</label>
+
+					<input class="btn-check" id="i_rad5" name="gr_rad" value="toate" type="radio" autocomplete="off" checked />
+					<label class="btn btn-sm btn-outline-primary" for="i_rad3">Toate</label>
                 </div>
             </div> 
             
@@ -92,7 +91,28 @@
             </div>
         </label>
         
-        
+        <label><b>Culoare:</b>
+						<div class="form-floating">
+							<input list="culori-hype" id="inp-culoare" name="inp-culoare" class="form-control" />
+							<label id="label-culoare-invalida" for="inp-culoare"></label>
+							<datalist id="culori-hype">
+								<option value="black"></option>
+								<option value="white"></option>
+								<option value="varsity red"></option>
+                                <option value="infrared"></option>
+                                <option value="cool gray"></option>
+                                <option value="volt"></option>
+							</datalist>
+						</div>
+					</label>
+
+                    <b>Conditie:</b>
+                    
+                    <input class="btn-check" id="i_check1" checked name="gr_check" value="Nou" type="checkbox" />
+					<label class="btn btn-sm btn-outline-primary" for="i_check1">Nou</label>
+
+					<input class="btn-check" id="i_check2" checked name="gr_check" value="Purtat" type="checkbox" />
+					<label class="btn btn-sm btn-outline-primary" for="i_check2">Purtat</label>
 
         <br>
         <br>
@@ -131,18 +151,20 @@
                             <li><span class="nume_categorie">Pret:</span> <span class="val-pret"><%- prod.pret%></span> lei</li>
                             <!-- <li>Pret Lansare: <span class="val-pret"><%- prod.pret_lansare%></span> lei</li> -->
                             <li><span class="nume_categorie">Brand: </span><span class="val-categorie"><%- prod.brand%></span></li>
-                            <li><span class="nume_categorie">Culoare: </span><span class="val-gramaj"><%- prod.culoare%></span></li>
+                            <li><span class="nume_categorie">Culoare: </span><span class="val-culoare"><%- prod.culoare%></span></li>
                             
                             <li><span class="nume_categorie">Data: </span><time><%- formatDate(prod.data_adaugare)%></time></li>
                             <li><span class="nume_categorie">Conditie: </span>
-            <span class="pt_diabetici"
-              ><% if (prod.pret_lansare) { %> Nou <% } else { %> Purtat
+            <span class="val-conditie"
+              ><% if (prod.nou === true) { %> Nou <% } else { %> Purtat
               <% } %></span
             ></li>
                         </ul>
                         <ul>
                             <li><span class="nume_categorie">Tip:</span> <span class="val-gramaj"><%- prod.tip%></span></li>
+                            <% if (prod.descriere) { %>
                             <li><span class="nume_categorie">Descriere:</span> <span class="val-pret"><%- shortenText(prod.descriere)%></span> </li>
+                            <% } %>
                             <li><span class="nume_categorie">Marime: </span> <span class="val-calorii"><%- prod.marime%></span></li>
                             
                         </ul>
