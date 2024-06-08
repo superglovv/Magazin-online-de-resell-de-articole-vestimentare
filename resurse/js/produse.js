@@ -12,23 +12,24 @@ window.addEventListener("load", function () {
   document.getElementById("inp-pret").max = maxPrice;
   document.getElementById("infoRange").innerText = `(${minPrice})`;
 
-  var textarea = document.getElementById("inp-nume");
+  var textarea = document.getElementById("inp-descriere");
+
   textarea.addEventListener("input", function () {
     var produse = document.getElementsByClassName("produs");
 
     var isValid = false;
     for (let produs of produse) {
-      let valNume = produs
-        .getElementsByClassName("val-nume")[0]
-        .innerHTML.toLowerCase()
-        .trim();
-      if (
-        normalizeText(valNume).startsWith(
-          normalizeText(textarea.value.toLowerCase().trim())
-        )
-      ) {
-        isValid = true;
-        break;
+      let descriereElement = produs.getElementsByClassName("val-descriere")[0];
+      if (descriereElement) {
+        let valDescriere = descriereElement.innerHTML.toLowerCase().trim();
+        if (
+          normalizeText(valDescriere).includes(
+            normalizeText(textarea.value.toLowerCase().trim())
+          )
+        ) {
+          isValid = true;
+          break;
+        }
       }
     }
     if (isValid) {
@@ -153,7 +154,25 @@ window.addEventListener("load", function () {
         selectedStiluri.includes(valStil) ||
         selectedStiluri[0] === "toate";
 
-      if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6 && cond7) {
+      let cond8 =
+        produs.getElementsByClassName("val-descriere")[0] &&
+        normalizeText(
+          produs
+            .getElementsByClassName("val-descriere")[0]
+            .innerHTML.toLowerCase()
+            .trim()
+        ).includes(normalizeText(textarea.value.toLowerCase().trim()));
+
+      if (
+        cond1 &&
+        cond2 &&
+        cond3 &&
+        cond4 &&
+        cond5 &&
+        cond6 &&
+        cond7 &&
+        cond8
+      ) {
         produs.style.display = "block";
         hasResults = true;
       } else {
@@ -174,6 +193,7 @@ window.addEventListener("load", function () {
 
   document.getElementById("resetare").onclick = function () {
     document.getElementById("inp-nume").value = "";
+    document.getElementById("inp-descriere").value = "";
     document.getElementById("inp-culoare").value = "";
     document.getElementById("inp-stil").value = "toate";
 
@@ -260,4 +280,38 @@ window.addEventListener("load", function () {
       return diacriticsMap[match];
     });
   }
+
+  document.getElementById("calculeaza-media").onclick = function () {
+    var produseVizibile = Array.from(document.getElementsByClassName("produs"));
+
+    var sumaPreturi = 0;
+    produseVizibile.forEach(function (produs) {
+      sumaPreturi += parseFloat(
+        produs.getElementsByClassName("val-pret")[0].innerText
+      );
+    });
+
+    var numarProduse = produseVizibile.length;
+    var mediaPreturilor = sumaPreturi / numarProduse;
+
+    var divSuma = document.createElement("div");
+    divSuma.innerHTML = `Media prețurilor produselor afișate: ${mediaPreturilor.toFixed(
+      2
+    )} lei`;
+    divSuma.style.position = "fixed";
+    divSuma.style.top = "50%";
+    divSuma.style.left = "50%";
+    divSuma.style.transform = "translate(-50%, -50%)";
+    divSuma.style.padding = "10px";
+    divSuma.style.backgroundColor = "#00aca0";
+    divSuma.style.color = "#00ffec";
+    divSuma.style.border = "1px solid #00aca0";
+    divSuma.style.borderRadius = "5px";
+    divSuma.style.zIndex = "9999";
+    document.body.appendChild(divSuma);
+
+    setTimeout(function () {
+      divSuma.remove();
+    }, 2000);
+  };
 });
