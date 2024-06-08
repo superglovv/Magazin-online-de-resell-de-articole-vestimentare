@@ -264,6 +264,11 @@
   }
 }
 
+.nume_categorie {
+  font-weight: bold;
+  color: var(--culoare2);
+}
+
 .pagina-contact {
   background-attachment: fixed;
   animation: schimbare-imagini 10s infinite;

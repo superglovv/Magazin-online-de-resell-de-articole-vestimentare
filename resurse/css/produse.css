@@ -57,9 +57,6 @@ p.marime {
   box-shadow: 0px 0px 0.5rem 0.15rem grey;
 }
 
-.produs {
-  position: relative;
-}
 .selecteaza-cos {
   display: inline-block;
   background-color: var(--culoare-mov);
@@ -78,28 +75,29 @@ p.marime {
   border: 1px solid var(--culoare-mov);
 }
 .produs {
+  position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two columns */
-  grid-template-rows: auto auto auto; /* Three rows, auto for variable content height */
-  gap: 10px; /* Gap between grid items */
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 10px;
 }
 
 .nume {
-  grid-column: 1 / span 2; /* Spanning two columns */
-  text-align: center; /* Centering text */
+  grid-column: 1 / span 2;
+  text-align: center;
 }
 
 figure {
-  grid-row: 2; /* Second row */
-  grid-column: 1; /* First column */
+  grid-row: 2;
+  grid-column: 1;
 }
 
 ul:first-of-type {
-  grid-row: 3; /* Third row */
-  grid-column: 1; /* First column */
+  grid-row: 3;
+  grid-column: 1;
 }
 
 ul:last-of-type {
-  grid-row: 2 / span 2; /* Spanning two rows from the second row */
-  grid-column: 2; /* Second column */
+  grid-row: 2 / span 2;
+  grid-column: 2;
 }

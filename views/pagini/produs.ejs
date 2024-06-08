@@ -10,7 +10,7 @@
       content="cofetarie, Dulcelind, prajituri, torturi, dulce, pateuri, produse"
     />
 
-    <title>Cofetăria Dulcelind - home</title>
+    <title>Hypero</title>
     <%- include("../fragmente/head") %>
     <link href="/Resurse/css/produs.css" type="text/css" rel="stylesheet" />
   </head>
@@ -53,7 +53,7 @@
               alt="[imagine <%- locals.prod.nume %>]"
             />
           </figure>
-          Data:<span class="val-categorie"><%- prod.data_adaugare%></span>
+          Data:<time><%- formatDate(locals.prod.data_adaugare)%></time>
         </article>
       </section>
     </main>

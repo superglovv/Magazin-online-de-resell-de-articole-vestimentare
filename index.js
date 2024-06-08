@@ -254,6 +254,52 @@ app.get(["/", "/home", "/index"], async function (req, res) {
 //     }
 //   });
 // });
+
+function formatDate(dateString) {
+  const daysOfWeek = [
+    "Duminică",
+    "Luni",
+    "Marți",
+    "Miercuri",
+    "Joi",
+    "Vineri",
+    "Sâmbătă",
+  ];
+  const months = [
+    "Ianuarie",
+    "Februarie",
+    "Martie",
+    "Aprilie",
+    "Mai",
+    "Iunie",
+    "Iulie",
+    "August",
+    "Septembrie",
+    "Octombrie",
+    "Noiembrie",
+    "Decembrie",
+  ];
+
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+  const dayOfWeek = daysOfWeek[date.getDay()];
+
+  return `${day} ${month} ${year} [${dayOfWeek}]`;
+}
+
+function shortenText(text) {
+  if (!text || text.length <= 100) {
+    return text || "";
+  }
+  const truncated = text.substring(0, 100);
+  const lastSpace = truncated.lastIndexOf(" ");
+  return lastSpace === -1
+    ? truncated + "..."
+    : truncated.substring(0, lastSpace) + "...";
+}
+
 app.get("/produse", function (req, res) {
   console.log(req.query);
   var conditieQuery = "";
@@ -277,6 +323,8 @@ app.get("/produse", function (req, res) {
                   produse: rezProduse.rows,
                   branduri: rezBranduri.rows,
                   tipuri: rezTipuri.rows,
+                  formatDate: formatDate,
+                  shortenText: shortenText,
                 });
               }
             }
@@ -295,7 +343,10 @@ app.get("/produs/:id", function (req, res) {
         console.log(err);
         afisareEroare(res, 2);
       } else {
-        res.render("pagini/produs", { prod: rez.rows[0] });
+        res.render("pagini/produs", {
+          prod: rez.rows[0],
+          formatDate: formatDate,
+        });
       }
     }
   );

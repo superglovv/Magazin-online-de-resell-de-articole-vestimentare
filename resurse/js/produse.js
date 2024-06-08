@@ -1,24 +1,21 @@
 window.addEventListener("load", function () {
-  var minPrice = Math.min(
-    ...Array.from(document.querySelectorAll(".val-pret")).map((elem) =>
-      parseFloat(elem.innerHTML)
-    )
-  );
-  var maxPrice = Math.max(
-    ...Array.from(document.querySelectorAll(".val-pret")).map((elem) =>
-      parseFloat(elem.innerHTML)
-    )
+  var prices = Array.from(document.querySelectorAll(".val-pret")).map((elem) =>
+    parseFloat(elem.innerHTML)
   );
 
+  var minPrice = Math.min(...prices.filter((price) => !isNaN(price)));
+  var maxPrice = Math.max(...prices.filter((price) => !isNaN(price)));
+
+  document.getElementById("minPrice").innerText = minPrice;
+  document.getElementById("maxPrice").innerText = maxPrice;
   document.getElementById("inp-pret").value = minPrice;
-
   document.getElementById("inp-pret").max = maxPrice;
-
-  document.getElementById("infoRange").innerText = "(" + minPrice + ")";
+  document.getElementById("infoRange").innerText = `(${minPrice})`;
 
   var textarea = document.getElementById("inp-nume");
   textarea.addEventListener("input", function () {
     var produse = document.getElementsByClassName("produs");
+
     var isValid = false;
     for (let produs of produse) {
       let valNume = produs
@@ -110,10 +107,13 @@ window.addEventListener("load", function () {
       } else {
         produs.style.display = "none";
       }
+      document.getElementById("no-results-message").style.display = hasResults
+        ? "none"
+        : "block";
     }
   };
 
-  // var noResultsMessage = document.getElementById("no-results-message");
+  // var noResultsMessage = document.getElementById("results-message");
   // if (hasResults == false) {
   //   noResultsMessage.style.display = "none";
   // } else {

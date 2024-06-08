@@ -85,11 +85,15 @@
         <label> Pret minim: 
             <!-- <input type="range" id="inp-pret" value="0" min="0"  max="30000"> <span id="infoRange">(0)</span> -->
             <div style="display: flex; flex-direction: row; width: 15rem; margin-top: 8px;">
+                <span id="minPrice" style="font-size: small; color: var(--coolgrey); margin-right: 6px;"></span>
                 <input type="range" id="inp-pret" class="custom-range" min="0" max="30000">
+                <span id="maxPrice" style="font-size: small; color: var(--coolgrey); margin-left: 6px; margin-right: 6px;"></span>
                 <span id="infoRange">(0)</span>
             </div>
         </label>
         
+        
+
         <br>
         <br>
         <label style="margin-bottom: 8px;">Brand:
@@ -124,22 +128,22 @@
                             <p class="gramaj">Tip: <span class="val-gramaj"><%- prod.tip%></span></p>
                         </div> -->
                         <ul>
-                            <li><span style="font-weight: bold; color: var(--culoare2);">Pret:</span> <span class="val-pret"><%- prod.pret%></span> lei</li>
+                            <li><span class="nume_categorie">Pret:</span> <span class="val-pret"><%- prod.pret%></span> lei</li>
                             <!-- <li>Pret Lansare: <span class="val-pret"><%- prod.pret_lansare%></span> lei</li> -->
-                            <li><span style="font-weight: bold; color: var(--culoare2);">Tip:</span> <span class="val-gramaj"><%- prod.tip%></span></li>
-                            <li><span style="font-weight: bold; color: var(--culoare2);">Culoare: </span><span class="val-gramaj"><%- prod.culoare%></span></li>
-                            <li><span style="font-weight: bold; color: var(--culoare2);">Data: </span><span ><%- prod.data_adaugare%></span></li>
-                            <li><span style="font-weight: bold; color: var(--culoare2);">Conditie: </span>
+                            <li><span class="nume_categorie">Brand: </span><span class="val-categorie"><%- prod.brand%></span></li>
+                            <li><span class="nume_categorie">Culoare: </span><span class="val-gramaj"><%- prod.culoare%></span></li>
+                            
+                            <li><span class="nume_categorie">Data: </span><time><%- formatDate(prod.data_adaugare)%></time></li>
+                            <li><span class="nume_categorie">Conditie: </span>
             <span class="pt_diabetici"
               ><% if (prod.pret_lansare) { %> Nou <% } else { %> Purtat
               <% } %></span
             ></li>
                         </ul>
                         <ul>
-                            <li><span style="font-weight: bold; color: var(--culoare2);">Pret Lansare:</span> <span class="val-pret"><%- prod.pret_lansare%></span> lei</li>
-                            <!-- <li>Pret Lansare: <span class="val-pret"><%- prod.pret_lansare%></span> lei</li> -->
-                            <li><span style="font-weight: bold; color: var(--culoare2);">Marime: </span> <span class="val-calorii"><%- prod.marime%></span></li>
-                            <li><span style="font-weight: bold; color: var(--culoare2);">Brand: </span><span class="val-categorie"><%- prod.brand%></span></li>
+                            <li><span class="nume_categorie">Tip:</span> <span class="val-gramaj"><%- prod.tip%></span></li>
+                            <li><span class="nume_categorie">Descriere:</span> <span class="val-pret"><%- shortenText(prod.descriere)%></span> </li>
+                            <li><span class="nume_categorie">Marime: </span> <span class="val-calorii"><%- prod.marime%></span></li>
                             
                         </ul>
                         <!-- <p class="marime">Pret: <span class="val-pret"><%- prod.pret%></span> lei</p>
