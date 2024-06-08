@@ -4,6 +4,8 @@ DROP TYPE IF EXISTS tip_vestimentar;
 CREATE TYPE branduri AS ENUM( 'Nike', 'Adidas', 'Reebok', 'Asics', 'Balenciaga', 'Louis Vuitton', 'Prada', 'Supreme', 'Bape');
 CREATE TYPE tip_vestimentar AS ENUM('incaltaminte', 'imbracaminte', 'accesorii');
 CREATE TYPE marimi AS ENUM('Universal','XS','S','M','L','XL','XXL','36','37','38','39','40','41','42','42.5','43','44','45');
+CREATE TYPE stil AS ENUM('Sport','Lux','Streetwear','Functional','Formal');
+
 
 CREATE TABLE IF NOT EXISTS produse(
    id serial PRIMARY KEY,

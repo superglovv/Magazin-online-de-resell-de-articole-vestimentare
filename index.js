@@ -313,20 +313,26 @@ app.get("/produse", function (req, res) {
         "select * from unnest(enum_range(null::tip_vestimentar))",
         function (err, rezTipuri) {
           client.query(
-            `select * from produse ${conditieQuery}`,
-            function (err, rezProduse) {
-              if (err) {
-                console.log(err);
-                afisareEroare(res, 2);
-              } else {
-                res.render("pagini/produse", {
-                  produse: rezProduse.rows,
-                  branduri: rezBranduri.rows,
-                  tipuri: rezTipuri.rows,
-                  formatDate: formatDate,
-                  shortenText: shortenText,
-                });
-              }
+            "select * from unnest(enum_range(null::stiluri))",
+            function (err, rezStiluri) {
+              client.query(
+                `select * from produse ${conditieQuery}`,
+                function (err, rezProduse) {
+                  if (err) {
+                    console.log(err);
+                    afisareEroare(res, 2);
+                  } else {
+                    res.render("pagini/produse", {
+                      produse: rezProduse.rows,
+                      branduri: rezBranduri.rows,
+                      tipuri: rezTipuri.rows,
+                      stiluri: rezStiluri.rows,
+                      formatDate: formatDate,
+                      shortenText: shortenText,
+                    });
+                  }
+                }
+              );
             }
           );
         }

@@ -37,13 +37,13 @@
 					<label class="btn btn-sm btn-outline-primary" for="i_rad2">43</label>
 
                     <input class="btn-check" id="i_rad3" name="gr_rad" value="44:45" type="radio" autocomplete="off" />
-					<label class="btn btn-sm btn-outline-primary" for="i_rad2">44</label>
+					<label class="btn btn-sm btn-outline-primary" for="i_rad3">44</label>
 
                     <input class="btn-check" id="i_rad4" name="gr_rad" value="45:46" type="radio" autocomplete="off" />
-					<label class="btn btn-sm btn-outline-primary" for="i_rad2">45</label>
+					<label class="btn btn-sm btn-outline-primary" for="i_rad4">45</label>
 
 					<input class="btn-check" id="i_rad5" name="gr_rad" value="toate" type="radio" autocomplete="off" checked />
-					<label class="btn btn-sm btn-outline-primary" for="i_rad3">Toate</label>
+					<label class="btn btn-sm btn-outline-primary" for="i_rad5">Toate</label>
                 </div>
             </div> 
             
@@ -124,6 +124,15 @@
                 <% } %>
             </select>
         </label>
+
+        <label style="margin-bottom: 8px;">Stil:
+            <select id="inp-stil" multiple>
+                <option id="sel-toate" selected value="toate">toate</option>
+                <% for (let opt of locals.stiluri) { %>
+                    <option value="<%- opt.unnest %>"><%- opt.unnest %> </option>
+                <% } %>
+            </select>
+        </label>
         <p>
         <button id="filtrare" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-filter"></i>Filtreaza</button> 
         <button id="resetare" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-arrow-clockwise"></i>Reseteaza</button><br/>
@@ -161,7 +170,7 @@
             ></li>
                         </ul>
                         <ul>
-                            <li><span class="nume_categorie">Tip:</span> <span class="val-gramaj"><%- prod.tip%></span></li>
+                            <li><span class="nume_categorie">Stil:</span> <span class="val-stil"><%- prod.stil%></span></li>
                             <% if (prod.descriere) { %>
                             <li><span class="nume_categorie">Descriere:</span> <span class="val-pret"><%- shortenText(prod.descriere)%></span> </li>
                             <% } %>

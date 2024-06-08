@@ -61,6 +61,10 @@ window.addEventListener("load", function () {
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value);
 
+    var selectedStiluri = Array.from(
+      document.getElementById("inp-stil").selectedOptions
+    ).map((option) => option.value);
+
     console.log(selectedConditions);
 
     var radioCalorii = document.getElementsByName("gr_rad");
@@ -129,7 +133,15 @@ window.addEventListener("load", function () {
         selectedConditions.length === 0 ||
         selectedConditions.includes(valConditie);
 
-      if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6) {
+      let valStil = produs
+        .getElementsByClassName("val-stil")[0]
+        .innerHTML.trim();
+      let cond7 =
+        selectedStiluri.length === 0 ||
+        selectedStiluri.includes(valStil) ||
+        selectedStiluri[0] === "toate";
+
+      if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6 && cond7) {
         produs.style.display = "block";
         hasResults = true;
       } else {
@@ -151,6 +163,7 @@ window.addEventListener("load", function () {
   document.getElementById("resetare").onclick = function () {
     document.getElementById("inp-nume").value = "";
     document.getElementById("inp-culoare").value = "";
+    document.getElementById("inp-stil").value = "toate";
 
     document.getElementById("inp-pret").value =
       document.getElementById("inp-pret").min;
