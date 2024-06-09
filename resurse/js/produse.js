@@ -179,15 +179,23 @@ window.addEventListener("load", function () {
       if (selectedTehnologie.length > 0) {
         const valoriTehnologie = Array.from(
           produs.getElementsByClassName("val-tehnologie")
-        ).map((elem) => elem.innerHTML.toLowerCase().trim());
-        cond9 =
-          radioButtonValue === "are"
-            ? selectedTehnologie.every((value) =>
-                valoriTehnologie.includes(value)
-              )
-            : !selectedTehnologie.some((value) =>
-                valoriTehnologie.includes(value)
-              );
+        )
+          .map((elem) => elem.innerHTML.toLowerCase().trim().split(","))
+          .flat();
+
+        console.log("selectedTehnologie:", selectedTehnologie);
+        console.log("valoriTehnologie:", valoriTehnologie);
+
+        if (radioButtonValue === "are") {
+          cond9 = selectedTehnologie.every((value) =>
+            valoriTehnologie.includes(value)
+          );
+        } else {
+          cond9 = !selectedTehnologie.some((value) =>
+            valoriTehnologie.includes(value)
+          );
+        }
+        console.log("cond9:", cond9);
       }
 
       if (
