@@ -1,16 +1,53 @@
 <% if(!locals.utilizator) { %>
-    <form id="form_inreg"  method="post" class="date"  action="/login"  enctype="multipart/form-data">
-        <p>
-            <label>
-                Username: <input type="text" name="username" id="inp-username" value="" required pattern="[A-Za-z0-9]+">
-            </label>
-        </p>
-        <p>
-            <label>
-                Parola: <input id="parl" type="password" required  name="parola" value="">
-            </label>
-        </p>
-        <p><input type="submit" value="Logare"></p>
-    </form>
-<% }  %>
+<form
+  id="form_inreg"
+  method="post"
+  class="date"
+  action="/login"
+  enctype="multipart/form-data"
+  style="margin-left: 10%; display: flex; flex-direction: row; height: 20px"
+>
+  <p>
+    <label style="display: flex; flex-direction: row">
+      <span style="margin-top: 6px">Nume:</span>
+      <input
+        type="text"
+        name="username"
+        id="inp-username"
+        value=""
+        required
+        pattern="[A-Za-z0-9]+"
+        style="margin: 6px; height: 30px"
+      />
+    </label>
+  </p>
+  <p>
+    <label style="display: flex; flex-direction: row">
+      <span style="margin-top: 6px">Parola:</span>
+      <input
+        id="parl"
+        type="password"
+        required
+        name="parola"
+        value=""
+        style="margin: 6px; height: 30px"
+      />
+    </label>
+  </p>
+  <p>
+    <input
+      type="submit"
+      value="Logare"
+      style="
+        background-color: var(--culoare2);
+        color: var(--offwhite);
+        border: 0;
+        border-radius: 10%;
+        margin-top: 6px;
+        margin-right: 4px;
+      "
+    />
+  </p>
+</form>
+<% } %>
 <p><%- locals.mesajLogin %></p>

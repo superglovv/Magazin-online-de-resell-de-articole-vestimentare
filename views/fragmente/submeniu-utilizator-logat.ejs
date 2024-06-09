@@ -1,8 +1,12 @@
-<% if(locals.utilizator) { %>
-    <li><div><%- locals.utilizator.username %></div>
-        <ul>
-            <li><a href="/profil">Profil</a></li>
-            <li><a href="/logout">Logout</a></li>
-        </ul>
-    </li>
+<%- include("../fragmente/head") %> <% if(locals.utilizator) { %>
+<li>
+  <div>
+    <a href="/profil"
+      ><%- locals.utilizator.username %> <%- locals.utilizator.prenume %></a
+    >
+  </div>
+</li>
+<li>
+  <a href="/logout"> <i class="bi bi-door-closed-fill"></i></a>
+</li>
 <% } %>

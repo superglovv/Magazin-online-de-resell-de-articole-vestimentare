@@ -163,7 +163,12 @@ class Utilizator {
   salvareUtilizator() {
     let parolaCriptata = Utilizator.criptareParola(this.parola);
     let utiliz = this;
-    let token = parole.genereazaToken(100);
+    let token =
+      parole.genereazaToken(4) +
+      Utilizator.criptareParola(utiliz.username, utiliz.domeniu).replace(
+        /[^0-9a-zA-Z]/g,
+        "0"
+      );
     AccesBD.getInstanta(Utilizator.tipConexiune).insert(
       {
         tabel: Utilizator.tabel,
@@ -187,7 +192,7 @@ class Utilizator {
             "Cont nou",
             "Bine ai venit in comunitatea Hypero. Username-ul tau este " +
               utiliz.username,
-            `<h1>Bine ai venit in comunitatea Hypero.</h1><p style='color:blue'>Username-ul tau este <span style="color: green;"><strong>${utiliz.username}</strong></span>.</p> <p><a href='http://${Utilizator.numeDomeniu}/cod/${utiliz.username}/${token}'>Click aici pentru confirmare</a></p>`
+            `<h1>Bine ai venit in comunitatea Hypero.</h1><p style='color:blue'>Username-ul tau este <span style="color: green;"><strong>${utiliz.username}</strong></span>.</p> <p><a href='http://${Utilizator.numeDomeniu}/confirmare/${utiliz.username}/${token}'>Click aici pentru confirmare</a></p>`
           );
       }
     );

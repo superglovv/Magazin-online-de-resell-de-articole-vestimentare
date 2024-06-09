@@ -836,8 +836,8 @@ app.post("/sterge_utiliz", function (req, res) {
   }
 });
 
-//http://${Utilizator.numeDomeniu}/cod/${utiliz.username}/${token}
-app.get("/cod/:username/:token", function (req, res) {
+//http://${Utilizator.numeDomeniu}/confirmare/${utiliz.username}/${token}
+app.get("/confirmare/:username/:token", function (req, res) {
   /*TO DO parametriCallback: cu proprietatile: request (req) si token (luat din parametrii cererii)
         setat parametriCerere pentru a verifica daca tokenul corespunde userului
     */
@@ -916,9 +916,14 @@ app.post("/login", function (req, res) {
 });
 
 app.get("/logout", function (req, res) {
-  req.session.destroy();
-  res.locals.utilizator = null;
-  res.render("pagini/logout");
+  req.session.destroy(function (err) {
+    if (err) {
+      console.log(err);
+      return res.status(500).send("Eroare la logout.");
+    }
+    res.locals.utilizator = null;
+    res.redirect("/index");
+  });
 });
 
 app.get("/despre", function (req, res) {
