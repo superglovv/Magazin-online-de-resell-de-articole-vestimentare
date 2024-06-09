@@ -20,9 +20,17 @@
           "<%= locals.utilizator.email %>";
         document.getElementById("p-reintrod").remove();
         var optiuni = document.getElementById("sel-culoare").options;
-        for (let opt of optiuni)
+        for (let opt of optiuni) {
           if (opt.value == "<%= locals.utilizator.culoare_chat %>")
             opt.selected = true;
+        }
+        document.getElementById("inp-data_nastere").value =
+          "<%= locals.utilizator.data_nastere %>";
+        var optiuni = document.getElementById("sel-ocupatie").options;
+        for (let opt of optiuni) {
+          if (opt.value == "<%= locals.utilizator.ocupatie %>")
+            opt.selected = true;
+        }
       });
     </script>
     <% } %>

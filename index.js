@@ -511,13 +511,35 @@ app.post("/inregistrare", function (req, res) {
   var poza;
   var formular = new formidable.IncomingForm();
   formular.parse(req, function (err, campuriText, campuriFisier) {
+    if (
+      !campuriText.username ||
+      !campuriText.nume ||
+      !campuriText.prenume ||
+      !campuriText.parola ||
+      !campuriText.rparola ||
+      !campuriText.email
+    ) {
+      res.status(400).send("Primele 6 câmpuri sunt obligatorii.");
+      return;
+    }
+
+    const regex = /^[A-Za-z]+(?:[-\s][A-Za-z]+)*$/;
+    if (!regex.test(campuriText.nume)) {
+      res.status(400).send("Numele conține caractere nepermise.");
+      return;
+    }
+    if (!regex.test(campuriText.prenume)) {
+      res.status(400).send("Prenumele conține caractere nepermise.");
+      return;
+    }
+
     //4
     console.log("Inregistrare:", campuriText);
 
-    console.log(campuriFisier);
+    console.log(JSON.stringify(campuriText, null, 4));
     console.log(poza, username);
     var eroare = "";
-
+    console.log(campuriText);
     // TO DO var utilizNou = creare utilizator
     var utilizNou = new Utilizator();
     try {
@@ -529,6 +551,9 @@ app.post("/inregistrare", function (req, res) {
       utilizNou.parola = campuriText.parola[0];
       utilizNou.culoare_chat = campuriText.culoare_chat[0];
       utilizNou.poza = poza;
+      utilizNou.data_nastere = campuriText.data_nastere[0];
+
+      utilizNou.ocupatie = campuriText.ocupatie[0];
       Utilizator.getUtilizDupaUsername(
         campuriText.username[0],
         {},
@@ -707,12 +732,21 @@ app.post("/profil", function (req, res) {
     AccesBD.getInstanta().updateParametrizat(
       {
         tabel: "utilizatori",
-        campuri: ["nume", "prenume", "email", "culoare_chat"],
+        campuri: [
+          "nume",
+          "prenume",
+          "email",
+          "culoare_chat",
+          "data_nastere",
+          "ocupatie",
+        ],
         valori: [
           `${campuriText.nume[0]}`,
           `${campuriText.prenume[0]}`,
           `${campuriText.email[0]}`,
           `${campuriText.culoare_chat[0]}`,
+          `${campuriText.data_nastere[0]}`,
+          `${campuriText.ocupatie[0]}`,
         ],
         conditiiAnd: [
           `parola='${parolaCriptata}'`,
@@ -738,6 +772,8 @@ app.post("/profil", function (req, res) {
           req.session.utilizator.prenume = campuriText.prenume[0];
           req.session.utilizator.email = campuriText.email[0];
           req.session.utilizator.culoare_chat = campuriText.culoare_chat[0];
+          req.session.utilizator.data_nastere = campuriText.data_nastere[0];
+          req.session.utilizator.ocupatie = campuriText.ocupatie[0];
           res.locals.utilizator = req.session.utilizator;
         }
 

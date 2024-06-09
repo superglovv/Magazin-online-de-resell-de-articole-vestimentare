@@ -61,6 +61,8 @@ class Utilizator {
    * @param {object} parametri.rol - Rolul utilizatorului.
    * @param {string} [parametri.culoare_chat="black"] - Culoarea chat-ului.
    * @param {string} parametri.poza - Poza utilizatorului.
+   * * @param {string} parametri.data_nastere - Data nasterii utilizatorului.
+   * * @param {string} parametri.ocupatie - Ocupatia utilizatorului.
    */
   constructor({
     id,
@@ -72,9 +74,10 @@ class Utilizator {
     rol,
     culoare_chat = "black",
     poza,
+    data_nastere,
+    ocupatie,
   } = {}) {
     this.id = id;
-
     //optional sa facem asta in constructor
     try {
       if (this.checkUsername(username)) this.username = username;
@@ -101,7 +104,9 @@ class Utilizator {
    * @returns {boolean} - `true` dacă numele este valid, `false` altfel.
    */
   checkName(nume) {
-    return nume != "" && nume.match(new RegExp("^[A-Z][a-z]+$"));
+    return (
+      nume != "" && nume.match(new RegExp("^[A-Za-z]+(?:[-s][A-Za-z]+)*$"))
+    );
   }
 
   /**
@@ -171,15 +176,18 @@ class Utilizator {
           culoare_chat: this.culoare_chat,
           cod: token,
           poza: this.poza,
+          data_nastere: this.data_nastere,
+          ocupatie: this.ocupatie,
         },
       },
       function (err, rez) {
         if (err) console.log(err);
         else
           utiliz.trimiteMail(
-            "Te-ai inregistrat cu succes",
-            "Username-ul tau este " + utiliz.username,
-            `<h1>Salut!</h1><p style='color:blue'>Username-ul tau este ${utiliz.username}.</p> <p><a href='http://${Utilizator.numeDomeniu}/cod/${utiliz.username}/${token}'>Click aici pentru confirmare</a></p>`
+            "Cont nou",
+            "Bine ai venit in comunitatea Hypero. Username-ul tau este " +
+              utiliz.username,
+            `<h1>Bine ai venit in comunitatea Hypero.</h1><p style='color:blue'>Username-ul tau este <span style="color: green;"><strong>${utiliz.username}</strong></span>.</p> <p><a href='http://${Utilizator.numeDomeniu}/cod/${utiliz.username}/${token}'>Click aici pentru confirmare</a></p>`
           );
       }
     );
