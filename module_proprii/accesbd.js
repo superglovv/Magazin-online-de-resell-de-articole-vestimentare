@@ -7,6 +7,9 @@ inca nu am implementat protectia contra SQL injection
 const { Client, Pool } = require("pg");
 
 class AccesBD {
+  /**
+   * @type {AccesBD}
+   */
   static #instanta = null;
   static #initializat = false;
 

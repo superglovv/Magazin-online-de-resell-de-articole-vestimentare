@@ -228,6 +228,9 @@ app.get(["/", "/home", "/index"], async function (req, res) {
     const tipuriResult = await client.query(
       "select * from unnest(enum_range(null::tip_vestimentar))"
     );
+    const produseRez = await client.query(
+      "select * from produse order by RANDOM() limit 5"
+    );
     res.render("pagini/index", {
       ip: req.ip,
       imagini: obGlobal.obImagini.imagini,
@@ -235,10 +238,24 @@ app.get(["/", "/home", "/index"], async function (req, res) {
       locatie: await obtineLocatie(),
       evenimente: genereazaEvenimente(),
       tipuri: tipuriResult.rows,
+      produse: produseRez.rows,
+      shortenText: shortenText,
     });
   } catch (err) {
     console.log(err);
     afisareEroare(res, 2);
+  }
+});
+
+app.get("/random-products", async (req, res) => {
+  try {
+    const produseRez = await client.query(
+      "SELECT * FROM produse ORDER BY RANDOM() LIMIT 5"
+    );
+    res.json(produseRez.rows);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to fetch random products" });
   }
 });
 

@@ -116,6 +116,57 @@ footer a {
   grid-area: utilizatori;
 }
 
+#banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  width: 25vw;
+  height: 25vw;
+  background-color: var(--dark);
+  color: var(--offwhite);
+  transform: scale(0);
+  transform-origin: bottom left;
+  padding: 10px;
+  font-size: calc(1vw + 1vh);
+  animation: fadeInBanner 5s ease forwards;
+}
+
+#banner p {
+  margin: 0;
+}
+
+#banner button {
+  margin-top: 5px;
+  background-color: var(--offwhite);
+  color: var(--culoare2);
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+#banner button:hover {
+  color: var(--culoare1);
+  background-color: var(--culoare2);
+}
+
+@keyframes fadeInBanner {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+    background-color: var(--dark);
+  }
+  75% {
+    opacity: 0.75;
+    background-color: var(--culoare1);
+  }
+  100% {
+    opacity: 0.75;
+    transform: scale(1);
+    background-color: var(--culoare1);
+  }
+}
+
 @media print {
   #banner {
     display: block;
@@ -124,9 +175,9 @@ footer a {
     top: 0;
     right: 0;
     padding: 10px;
-    border: 4px double black;
+    border: 4px double var(--dark);
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: var(--offwhite);
   }
 
   h1 {
