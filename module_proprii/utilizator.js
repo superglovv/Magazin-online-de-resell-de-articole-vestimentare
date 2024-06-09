@@ -150,6 +150,11 @@ class Utilizator {
       .toString("hex");
   }
 
+  /**
+   * Salvează datele utilizatorului în baza de date și trimite un email de confirmare.
+   *
+   * @throws {Error} Aruncă o eroare dacă apare o problemă la salvarea sau trimiterea emailului.
+   */
   salvareUtilizator() {
     let parolaCriptata = Utilizator.criptareParola(this.parola);
     let utiliz = this;
@@ -214,6 +219,12 @@ class Utilizator {
     console.log("trimis mail");
   }
 
+  /**
+   * Caută un utilizator în baza de date după numele de utilizator dat și returnează o promisiune.
+   *
+   * @param {string} username - Numele de utilizator căutat.
+   * @returns {Promise<Utilizator|null>} - Returnează o promisiune care se rezolvă cu un obiect Utilizator dacă utilizatorul este găsit, sau cu null altfel.
+   */
   static async getUtilizDupaUsernameAsync(username) {
     if (!username) return null;
     try {
@@ -235,6 +246,15 @@ class Utilizator {
       return null;
     }
   }
+
+  /**
+   * Caută un utilizator în baza de date după numele de utilizator dat și apelează o funcție de procesare.
+   *
+   * @param {string} username - Numele de utilizator căutat.
+   * @param {Object} obparam - Un obiect care poate fi utilizat în procesarea utilizatorului găsit.
+   * @param {function(Utilizator, Object, number)} proceseazaUtiliz - Funcția de procesare care primește utilizatorul găsit, obiectul parametru și un cod de eroare.
+   * @returns {void} - Nu returnează nimic; procesul este asincron.
+   */
   static getUtilizDupaUsername(username, obparam, proceseazaUtiliz) {
     if (!username) return null;
     let eroare = null;
@@ -258,7 +278,12 @@ class Utilizator {
       }
     );
   }
-
+  /**
+   * Verifică dacă utilizatorul are un anumit drept.
+   *
+   * @param {string} drept - Numele dreptului pe care se face verificarea.
+   * @returns {boolean} - Returnează true dacă utilizatorul are dreptul specificat, sau false altfel.
+   */
   areDreptul(drept) {
     return this.rol.areDreptul(drept);
   }

@@ -1,9 +1,20 @@
+/**
+ * Construiește un șir care conține caracterele alfanumerice.
+ * @type {string}
+ */
 sirAlphaNum = "";
+
+/**
+ * Vector de intervale de coduri ASCII pentru caracterele alfanumerice.
+ * @type {Array.<Array.<number>>}
+ */
 v_intervale = [
   [48, 57],
   [65, 90],
   [97, 122],
 ];
+
+// Parcurge fiecare interval și adaugă caracterele corespunzătoare la șirul sirAlphaNum
 for (let interval of v_intervale) {
   for (let i = interval[0]; i <= interval[1]; i++)
     sirAlphaNum += String.fromCharCode(i);
