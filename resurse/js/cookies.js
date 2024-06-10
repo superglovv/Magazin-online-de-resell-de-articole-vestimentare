@@ -80,3 +80,72 @@ window.addEventListener("load", function () {
   //     document.getElementById("banner").style.display = "none";
   //   };
 });
+
+function saveFilters() {
+  const filters = {
+    nume: document.getElementById("inp-nume").value,
+    descriere: document.getElementById("inp-descriere").value,
+    marime: document.querySelector('input[name="gr_rad"]:checked').value,
+    pret: document.getElementById("inp-pret").value,
+    culoare: document.getElementById("inp-culoare").value,
+    conditie: Array.from(
+      document.querySelectorAll('input[name="gr_check"]:checked')
+    ).map((e) => e.value),
+    caracteristici: Array.from(
+      document.querySelectorAll('input[name="gr_check2"]:checked')
+    ).map((e) => e.value),
+    brand: document.getElementById("inp-categorie").value,
+    stil: Array.from(document.getElementById("inp-stil").selectedOptions).map(
+      (option) => option.value
+    ),
+  };
+
+  localStorage.setItem("savedFilters", JSON.stringify(filters));
+  setCookie("savedFilters", JSON.stringify(filters), 7 * 24 * 60 * 60 * 1000);
+}
+
+// Functie pentru incarcarea filtrelor din localStorage
+function loadFilters() {
+  console.log("loadFilters called");
+  const savedFilters =
+    JSON.parse(localStorage.getItem("savedFilters")) ||
+    JSON.parse(getCookie("savedFilters"));
+  if (savedFilters) {
+    document.getElementById("inp-nume").value = savedFilters.nume;
+    document.getElementById("inp-descriere").value = savedFilters.descriere;
+    document.querySelector(
+      `input[name="gr_rad"][value="${savedFilters.marime}"]`
+    ).checked = true;
+    document.getElementById("inp-pret").value = savedFilters.pret;
+    document.getElementById("inp-culoare").value = savedFilters.culoare;
+    document.querySelectorAll('input[name="gr_check"]').forEach((input) => {
+      input.checked = savedFilters.conditie.includes(input.value);
+    });
+    document.querySelectorAll('input[name="gr_check2"]').forEach((input) => {
+      input.checked = savedFilters.caracteristici.includes(input.value);
+    });
+    document.getElementById("inp-categorie").value = savedFilters.brand;
+    document.getElementById("inp-stil").value = savedFilters.stil;
+  }
+}
+
+// Functie pentru resetarea filtrelor si stergerea din localStorage si cookie
+function resetFilters() {
+  localStorage.removeItem("savedFilters");
+  deleteCookie("savedFilters");
+  document.getElementById("save-filters").checked = false;
+}
+
+document.getElementById("filtrare").addEventListener("click", function () {
+  if (document.getElementById("save-filters").checked) {
+    saveFilters();
+  }
+});
+
+document.getElementById("resetare").addEventListener("click", function () {
+  resetFilters();
+});
+
+window.addEventListener("load", function () {
+  loadFilters();
+});

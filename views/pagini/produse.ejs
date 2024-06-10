@@ -8,6 +8,7 @@
         <%- include("../fragmente/head") %>     
         <script type="text/javascript" src=/resurse/js/produse.js></script>
         <script type="text/javascript" src=/resurse/js/produse-cos.js></script>
+        <script src="/resurse/js/cookies.js"></script>
         <link href="../../node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     </head>
     <body>
@@ -169,13 +170,15 @@
         </div> -->
         
         <p>
-        <button id="filtrare" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-filter"></i>Filtreaza</button> 
-        <button id="resetare" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-arrow-clockwise"></i>Reseteaza</button><br/>
-        <button id="sortCrescNume" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-arrow-up"></i>Sorteaza crescator dupa raport pret_lansare/pret si stil</button>
-        <button id="sortDescrescNume" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-arrow-down"></i>Sorteaza descrescator dupa raport pret_lansare/pret si stil</button>
-        <button id="calculeaza-media" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-calculator"></i>Calculează media prețurilor</button>
-
-
+            <button id="filtrare" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-filter"></i>Filtreaza</button> 
+            <button id="resetare" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-arrow-clockwise"></i>Reseteaza</button> <br>
+            <button id="sortCrescNume" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-arrow-up"></i>Sorteaza crescator dupa raport pret_lansare/pret si stil</button>
+            <button id="sortDescrescNume" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-arrow-down"></i>Sorteaza descrescator dupa raport pret_lansare/pret si stil</button>
+            <button id="calculeaza-media" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-calculator"></i>Calculează media prețurilor</button>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="save-filters">
+                <label class="form-check-label" for="save-filters">Salvează filtrarea</label>
+            </div>
         </p>
         
         <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
@@ -251,4 +254,199 @@
     <br>
     <%- include("../fragmente/footer") %>
     </body>
+
+    <script>
+        function normalizeText(text) {
+  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+}
+        window.addEventListener('load', function() {
+            console.log('Page loaded');
+            loadFilters();
+            var textarea = document.getElementById("inp-descriere");
+            var inpNume = normalizeText(
+      document.getElementById("inp-nume").value.toLowerCase().trim()
+    );
+
+    var inpCuloare = document
+      .getElementsByName("inp-culoare")[0]
+      .value.trim()
+      .toLowerCase();
+
+    const selectedConditions = Array.from(
+      document.getElementsByName("gr_check")
+    )
+      .filter((checkbox) => checkbox.checked)
+      .map((checkbox) => checkbox.value);
+
+    var selectedStiluri = Array.from(
+      document.getElementById("inp-stil").selectedOptions
+    ).map((option) => option.value);
+
+    console.log(selectedConditions);
+
+    const selectedTehnologie = Array.from(
+      document.getElementsByName("gr_check2")
+    )
+      .filter((checkbox) => checkbox.checked)
+      .map((checkbox) => checkbox.value);
+
+    const radioButtonValue = document.querySelector(
+      'input[name="nougr_rad"]:checked'
+    ).value;
+
+    var radioCalorii = document.getElementsByName("gr_rad");
+    let inpCalorii;
+    for (let rad of radioCalorii) {
+      if (rad.checked) {
+        inpCalorii = rad.value;
+        break;
+      }
+    }
+    let minCalorii, maxCalorii;
+    if (inpCalorii != "toate") {
+      vCal = inpCalorii.split(":");
+      minCalorii = parseInt(vCal[0]);
+      maxCalorii = parseInt(vCal[1]);
+    }
+
+    var inpPret = parseInt(document.getElementById("inp-pret").value);
+
+    var inpCateg = document
+      .getElementById("inp-categorie")
+      .value.toLowerCase()
+      .trim();
+
+    var produse = document.getElementsByClassName("produs");
+    var hasResults = false;
+    for (let produs of produse) {
+      let valNume = produs
+        .getElementsByClassName("val-nume")[0]
+        .innerHTML.toLowerCase()
+        .trim();
+
+      let mismatchCount = 0;
+      for (let i = 0; i < Math.min(valNume.length, inpNume.length); i++) {
+        if (valNume[i] !== inpNume[i]) {
+          mismatchCount++;
+          if (mismatchCount > 2) {
+            break;
+          }
+        }
+      }
+
+      let cond1 =
+        mismatchCount <= 2 &&
+        valNume.startsWith(inpNume.slice(0, -Math.min(mismatchCount, 2)));
+
+      let valCalorii = parseInt(
+        produs.getElementsByClassName("val-calorii")[0].innerHTML
+      );
+
+      let cond2 =
+        inpCalorii == "toate" ||
+        (minCalorii <= valCalorii && valCalorii < maxCalorii);
+
+      let valPret = parseFloat(
+        produs.getElementsByClassName("val-pret")[0].innerHTML
+      );
+      let cond3 = valPret > inpPret;
+
+      let valCategorie = produs
+        .getElementsByClassName("val-categorie")[0]
+        .innerHTML.toLowerCase()
+        .trim();
+      let cond4 = inpCateg == valCategorie || inpCateg == "toate";
+
+      let valCuloare = produs
+        .getElementsByClassName("val-culoare")[0]
+        .innerHTML.toLowerCase()
+        .trim();
+      console.log(valCuloare);
+      let cond5 = valCuloare.startsWith(inpCuloare) || inpCuloare == "";
+
+      let valConditie = produs
+        .getElementsByClassName("val-conditie")[0]
+        .innerHTML.trim();
+
+      let cond6 =
+        selectedConditions.length === 0 ||
+        selectedConditions.includes(valConditie);
+
+      let valStil = produs
+        .getElementsByClassName("val-stil")[0]
+        .innerHTML.trim();
+      let cond7 =
+        selectedStiluri.length === 0 ||
+        selectedStiluri.includes(valStil) ||
+        selectedStiluri[0] === "toate";
+
+      let cond8 =
+        produs.getElementsByClassName("val-descriere")[0] &&
+        normalizeText(
+          produs
+            .getElementsByClassName("val-descriere")[0]
+            .innerHTML.toLowerCase()
+            .trim()
+        ).includes(normalizeText(textarea.value.toLowerCase().trim()));
+
+      let cond9 = true;
+      if (selectedTehnologie.length > 0) {
+        const valoriTehnologie = Array.from(
+          produs.getElementsByClassName("val-tehnologie")
+        )
+          .map((elem) => elem.innerHTML.toLowerCase().trim().split(","))
+          .flat();
+
+        console.log("selectedTehnologie:", selectedTehnologie);
+        console.log("valoriTehnologie:", valoriTehnologie);
+
+        if (radioButtonValue === "are") {
+          cond9 = selectedTehnologie.every((value) =>
+            valoriTehnologie.includes(value)
+          );
+        } else {
+          cond9 = !selectedTehnologie.some((value) =>
+            valoriTehnologie.includes(value)
+          );
+        }
+        console.log("cond9:", cond9);
+      }
+
+      if (
+        cond1 &&
+        cond2 &&
+        cond3 &&
+        cond4 &&
+        cond5 &&
+        cond6 &&
+        cond7 &&
+        cond8 &&
+        cond9
+      ) {
+        produs.style.display = "block";
+        hasResults = true;
+      } else {
+        produs.style.display = "none";
+      }
+      document.getElementById("no-results-message").style.display = hasResults
+        ? "none"
+        : "block";
+    };
+     console.log("S-a filtrat");
+        });
+
+        document.getElementById('filtrare').addEventListener('click', function() {
+            console.log('Filtrare button clicked');
+            if (document.getElementById('save-filters').checked) {
+                saveFilters();
+                console.log('Filtre salvate');
+            }
+        });
+
+        document.getElementById('resetare').addEventListener('click', function() {
+            console.log('Resetare button clicked');
+            resetFilters();
+            console.log('Filtre sterse');
+        });
+    </script>
 </html>

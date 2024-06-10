@@ -833,6 +833,7 @@ app.post("/contact", function (req, res) {
   });
 });
 ///////////////////////////////////////////////////////
+
 app.post("/profil", function (req, res) {
   console.log("profil");
   if (!req.session.utilizator) {
@@ -934,6 +935,7 @@ app.post("/profil", function (req, res) {
 
             res.render("pagini/profil", {
               mesaj: "Update-ul s-a realizat cu succes.",
+              esteProfil: true,
             });
           }
         }

@@ -48,12 +48,14 @@
       <input id="rparl" required type="password" name="rparola" value="" />
     </label>
   </p>
+  <% if (locals.utilizator) { %>
   <p id="p-noua-parola">
     <label>
       Parola nouă:
       <input id="noua-parola" type="password" name="noua_parola" />
     </label>
   </p>
+  <% } %>
   <!-- <p id="p-reintrod-noua-parola">
     <label>
       Reintroduceți parola nouă:

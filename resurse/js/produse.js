@@ -354,7 +354,7 @@ window.addEventListener("load", function () {
     divSuma.style.padding = "10px";
     divSuma.style.backgroundColor = "#d1a684";
     divSuma.style.color = "#000000";
-    divSuma.style.border = "1px solid #cfc6a9";
+    divSuma.style.border = "1px solid #d1a684";
     divSuma.style.borderRadius = "5px";
     divSuma.style.zIndex = "9999";
     document.body.appendChild(divSuma);
