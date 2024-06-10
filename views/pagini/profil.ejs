@@ -24,8 +24,9 @@
           if (opt.value == "<%= locals.utilizator.culoare_chat %>")
             opt.selected = true;
         }
-        document.getElementById("inp-data_nastere").value =
-          "<%= locals.utilizator.data_nastere %>";
+        var dataNastere = "<%= locals.utilizator.data_nastere %>";
+        var formattedDate = dataNastere.slice(0, 10);
+        document.getElementById("inp-data_nastere").value = formattedDate;
         var optiuni = document.getElementById("sel-ocupatie").options;
         for (let opt of optiuni) {
           if (opt.value == "<%= locals.utilizator.ocupatie %>")
@@ -35,7 +36,7 @@
     </script>
     <% } %>
   </head>
-  <body class="container">
+  <body>
     <header><%- include("../fragmente/header") %></header>
     <main>
       <% if(locals.utilizator) { %>
@@ -47,8 +48,11 @@
         <img
           src="/<%- locals.utilizator.poza%>"
           alt="nu ati incarcat poza de profil"
+          width="50%"
+          height="50%"
         />
       </section>
+      <br />
       <%- include("../fragmente/formular",{action:"/profil"}) %> <% } else { %>
       <p>Nu sunteti logat</p>
       <% } %>

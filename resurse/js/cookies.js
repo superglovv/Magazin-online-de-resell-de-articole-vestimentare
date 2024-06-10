@@ -7,8 +7,10 @@ function setCookie(nume, val, timpExpirare) {
 }
 
 function setLastVisitedPage() {
-  const lastVisitedPage = window.location.pathname;
-  setCookie("last_visited_page", lastVisitedPage, 604800000);
+  const lastVisitedPage = new URL(document.referrer).pathname;
+  if (lastVisitedPage) {
+    setCookie("last_visited_page", lastVisitedPage, 604800000);
+  }
 }
 
 function getLastVisitedPage() {
@@ -44,10 +46,6 @@ function deleteAllCookies() {
   }
 }
 
-window.addEventListener("beforeunload", function () {
-  setLastVisitedPage();
-});
-
 window.addEventListener("load", function () {
   if (getCookie("acceptat_banner")) {
     document.getElementById("banner").style.display = "none";
@@ -68,8 +66,6 @@ window.addEventListener("load", function () {
     //   deleteAllCookies();
     //   document.getElementById("banner").style.display = "block";
     // };
-
-    setLastVisitedPage();
   }
 
   document.getElementById("ok_cookies").onclick = function () {

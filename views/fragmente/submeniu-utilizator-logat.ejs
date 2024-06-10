@@ -1,3 +1,9 @@
+<style>
+  .iconita:hover {
+    color: var(--offwhite);
+  }
+</style>
+
 <%- include("../fragmente/head") %> <% if(locals.utilizator) { %>
 <li>
   <div>
@@ -6,7 +12,7 @@
     >
   </div>
 </li>
-<li>
-  <a href="/logout"> <i class="bi bi-door-closed-fill"></i></a>
-</li>
+<a href="/logout" title="Logout" style="margin: 8px 12px 8px 12px">
+  <i class="bi bi-door-closed-fill iconita"></i
+></a>
 <% } %>

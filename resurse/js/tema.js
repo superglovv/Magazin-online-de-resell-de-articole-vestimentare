@@ -1,8 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
   const currentTheme = localStorage.getItem("tema");
+
   if (currentTheme) {
     document.body.classList.add(currentTheme);
+
+    if (currentTheme === "dark") {
+      document.getElementById("dark_theme").checked = true;
+    } else if (currentTheme === "mocha") {
+      document.getElementById("mocha_theme").checked = true;
+    } else {
+      document.getElementById("light_theme").checked = true;
+    }
   } else {
+    document.getElementById("light_theme").checked = true;
     document.body.classList.remove("dark", "mocha");
   }
 
