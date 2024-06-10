@@ -14,6 +14,7 @@ const utilizator = require("./module_proprii/utilizator.js");
 const Client = require("pg").Client;
 const QRCode = require("qrcode");
 const puppeteer = require("puppeteer");
+const nodemailer = require("nodemailer");
 
 const xmljs = require("xml-js");
 const { MongoClient } = require("mongodb");
@@ -821,15 +822,38 @@ app.post("/sterge_utiliz", function (req, res) {
   if (req?.utilizator.areDreptul(Drepturi.stergereUtilizatori)) {
     var formular = new formidable.IncomingForm();
 
-    formular.parse(req, function (err, campuriText, campuriFile) {
+    formular.parse(req, async function (err, campuriText, campuriFile) {
+      var userId = campuriText.id_utiliz[0];
+      var emailUser = await client.query(
+        `SELECT email FROM utilizatori WHERE id = $1`,
+        [userId]
+      );
+
       var obiectComanda = {
         tabel: "utilizatori",
         conditiiAnd: [`id=${campuriText.id_utiliz[0]}`],
       };
-      AccesBD.getInstanta().delete(obiectComanda, function (err, rezQuery) {
-        console.log(err);
-        res.redirect("useri");
-      });
+      AccesBD.getInstanta().delete(
+        obiectComanda,
+        async function (err, rezQuery) {
+          var transp = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+              user: "test.tweb.node@gmail.com",
+              pass: "rwgmgkldxnarxrgu",
+            },
+          });
+
+          await transp.sendMail({
+            from: "test.tweb.node@gmail.com",
+            to: emailUser.rows[0].email,
+            subject: "De la Hypero",
+            text: "Cu sinceră părere de rău, vă anunțăm că ați fost șters! Adio...",
+          });
+          console.log(err);
+          res.redirect("useri");
+        }
+      );
     });
   } else {
     afisareEroare(res, 403);

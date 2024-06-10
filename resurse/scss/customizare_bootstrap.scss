@@ -1,7 +1,10 @@
 @use "../../node_modules/bootstrap/scss/bootstrap.scss" with (
-  $primary: #00ffec,
-  $secondary: #00aca0
+  $primary: #d1a684,
+  $secondary: #cfc6a9
 );
+
+$themeprimary: #00ffec;
+$themesecondary: #00aca0;
 
 $text-color: #000000;
 $anchor-color: #5e6167;
@@ -34,7 +37,7 @@ $font-size-base: 1rem;
 
 // Definirea variabilelor personalizate
 $custom-range-thumb-size: 1.5 * $font-size-base; // Dimensiunea bulinei
-$custom-range-thumb-color: #00aca0; // Culoarea bulinei
+$custom-range-thumb-color: #d1a684; // Culoarea bulinei
 $custom-range-track-color: #cfc6a9; // Culoarea sliderului
 
 .custom-range {
@@ -67,7 +70,7 @@ $custom-range-track-color: #cfc6a9; // Culoarea sliderului
     background: $custom-range-thumb-color;
     cursor: pointer;
     border-radius: 50%;
-    border: none; // Elimină bordura implicită
+    border: none;
   }
 
   &::-ms-thumb {
@@ -76,7 +79,7 @@ $custom-range-track-color: #cfc6a9; // Culoarea sliderului
     background: $custom-range-thumb-color;
     cursor: pointer;
     border-radius: 50%;
-    border: none; // Elimină bordura implicită
+    border: none;
   }
 
   &::-webkit-slider-runnable-track {
@@ -91,8 +94,8 @@ $custom-range-track-color: #cfc6a9; // Culoarea sliderului
 
   &::-ms-track {
     background: $custom-range-track-color;
-    border-color: transparent; // Elimină bordurile implicite ale track-ului în IE
-    color: transparent; // Elimină culorile implicite ale track-ului în IE
+    border-color: transparent;
+    color: transparent;
     border-radius: 5px;
   }
 
