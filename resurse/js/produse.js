@@ -363,4 +363,41 @@ window.addEventListener("load", function () {
       divSuma.remove();
     }, 2000);
   };
+  function celMaiIeftinProdus() {
+    const categories = new Set();
+    const produseIeftine = {};
+
+    const produse = document.getElementsByClassName("produs");
+    for (let produs of produse) {
+      const category = produs
+        .getElementsByClassName("val-stil")[0]
+        .textContent.toLowerCase()
+        .trim();
+      const price = parseFloat(
+        produs.getElementsByClassName("val-pret")[0].textContent
+      );
+
+      if (!categories.has(category)) {
+        categories.add(category);
+        produseIeftine[category] = { price: price, element: produs };
+      } else {
+        if (price < produseIeftine[category].price) {
+          produseIeftine[category] = { price: price, element: produs };
+        }
+      }
+    }
+
+    for (let category in produseIeftine) {
+      const produsIeftin = produseIeftine[category].element;
+      const priceElement = produsIeftin.getElementsByClassName("val-pret")[0];
+      priceElement.style.color = "orange";
+
+      const celieftinelement = document.createElement("div");
+      celieftinelement.classList.add("cel_ieftin");
+      celieftinelement.textContent = "Cel mai ieftin produs de acest tip";
+      priceElement.appendChild(celieftinelement);
+    }
+  }
+
+  celMaiIeftinProdus();
 });
