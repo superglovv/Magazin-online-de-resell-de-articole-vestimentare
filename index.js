@@ -262,6 +262,39 @@ app.get(["/", "/home", "/index"], async function (req, res) {
   }
 });
 
+app.get("/seturi", function (req, res) {
+  client.query(
+    `
+        SELECT s.id, s.nume_set, s.descriere_set, 
+               array_agg(p.nume) AS produse, 
+               array_agg(p.pret) AS preturi, 
+               array_agg(p.id) AS produs_ids
+        FROM seturi s
+        JOIN asociere_set a ON s.id = a.id_set
+        JOIN produse p ON a.id_produs = p.id
+        GROUP BY s.id, s.nume_set, s.descriere_set
+    `,
+    function (err, result) {
+      if (err) {
+        console.log(err);
+        afisareEroare(res, 2);
+      } else {
+        let seturi = result.rows.map((set) => {
+          let pret_total = set.preturi.reduce(
+            (total, pret) => total + parseFloat(pret),
+            0
+          );
+          let n = set.preturi.length;
+          let reducere = Math.min(5, n) * 5;
+          let pret_final = pret_total * (1 - reducere / 100);
+          return { ...set, pret_total, pret_final };
+        });
+        res.render("pagini/seturi", { seturi });
+      }
+    }
+  );
+});
+
 app.get("/random-products", async (req, res) => {
   try {
     const produseRez = await client.query(
@@ -374,20 +407,54 @@ app.get("/produse", function (req, res) {
 });
 
 app.get("/produs/:id", function (req, res) {
-  client.query(
-    `select * from produse where id=${req.params.id}`,
-    function (err, rez) {
-      if (err) {
-        console.log(err);
-        afisareEroare(res, 2);
-      } else {
-        res.render("pagini/produs", {
-          prod: rez.rows[0],
-          formatDate: formatDate,
-        });
-      }
+  let produsId = req.params.id;
+
+  let queryProdus = `SELECT * FROM produse WHERE id = $1`;
+
+  let querySeturi = `
+        SELECT s.id, s.nume_set, s.descriere_set, 
+               array_agg(p.nume) AS produse, 
+               array_agg(p.id) AS produs_ids, 
+               array_agg(p.pret) AS preturi
+        FROM seturi s
+        JOIN asociere_set a ON s.id = a.id_set
+        JOIN produse p ON a.id_produs = p.id
+        WHERE s.id IN (SELECT id_set FROM asociere_set WHERE id_produs = $1)
+        GROUP BY s.id, s.nume_set, s.descriere_set
+    `;
+
+  client.query(queryProdus, [produsId], function (errProdus, resultProdus) {
+    if (errProdus || resultProdus.rows.length == 0) {
+      console.log(errProdus);
+      afisareEroare(res, 2);
+    } else {
+      let produs = resultProdus.rows[0];
+
+      client.query(querySeturi, [produsId], function (errSeturi, resultSeturi) {
+        if (errSeturi) {
+          console.log(errSeturi);
+          afisareEroare(res, 2);
+        } else {
+          let seturi = resultSeturi.rows.map((set) => {
+            let pret_total = set.preturi.reduce(
+              (total, pret) => total + parseFloat(pret),
+              0
+            );
+            let n = set.preturi.length;
+            let reducere = Math.min(5, n) * 5;
+            let pret_final = pret_total * (1 - reducere / 100);
+            return { ...set, pret_total, pret_final };
+          });
+
+          res.render("pagini/produs", {
+            prod: produs,
+            seturi: seturi,
+            formatDate: formatDate,
+          });
+        }
+      });
     }
-  );
+  });
 });
 
 app.get("/admin", function (req, res) {

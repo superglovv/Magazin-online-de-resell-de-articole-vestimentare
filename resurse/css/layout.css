@@ -150,6 +150,24 @@ footer a {
   background-color: var(--culoare2);
 }
 
+@media only screen and (max-width: 1200px) {
+  #banner {
+    animation: none;
+    opacity: 1;
+    transform: scale(1);
+    background-color: var(--culoare1);
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  #banner {
+    animation: none;
+    opacity: 1;
+    transform: scale(1);
+    background-color: var(--culoare1);
+  }
+}
+
 @keyframes fadeInBanner {
   0% {
     opacity: 0;

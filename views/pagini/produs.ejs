@@ -66,7 +66,37 @@
               alt="[imagine <%- locals.prod.nume %>]"
             />
           </figure>
+
           Data:<time><%- formatDate(locals.prod.data_adaugare)%></time>
+          <h3 class="mt-4 mb-3">
+            Acest produs este inclus în următoarele seturi:
+          </h3>
+          <div class="row">
+            <% seturi.forEach(set => { %>
+            <div class="card mb-4 bg-secondary">
+              <div class="card-body bg-secondary">
+                <h4 class="card-title"><%= set.nume_set %></h4>
+                <p class="card-text"><%= set.descriere_set %></p>
+                <ul class="list-group list-group-flush">
+                  <% set.produse.forEach((produs, index) => { %>
+                  <li class="list-group-item bg-secondary">
+                    <a href="/produs/<%= set.produs_ids[index] %>"
+                      ><%= produs %></a
+                    >
+                    - <%= set.preturi[index] %> RON
+                  </li>
+                  <% }) %>
+                </ul>
+                <p class="card-text">
+                  Preț total: <%= set.pret_total.toFixed(2) %> RON
+                </p>
+                <p class="card-text">
+                  Preț final cu reducere: <%= set.pret_final.toFixed(2) %> RON
+                </p>
+              </div>
+            </div>
+            <% }) %>
+          </div>
         </article>
       </section>
     </main>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hypero</title>
+    <%- include("../fragmente/head") %>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <%- include("../fragmente/header") %>
+
+    <main class="container">
+      <h1>Seturi:</h1>
+      <div class="seturi">
+        <% seturi.forEach(set => { %>
+        <div class="set card mb-3 bg-secondary">
+          <div class="card-body">
+            <h2 class="card-title"><%= set.nume_set %></h2>
+            <p class="card-text"><%= set.descriere_set %></p>
+            <ul class="list-group list-group-flush">
+              <% set.produse.forEach((produs, index) => { %>
+              <li class="list-group-item bg-secondary">
+                <a href="/produs/<%= set.produs_ids[index] %>"><%= produs %></a>
+                - <%= set.preturi[index] %> RON
+              </li>
+              <% }) %>
+            </ul>
+            <p class="card-text">
+              Preț total: <%= set.pret_total.toFixed(2) %> RON
+            </p>
+            <p class="card-text">
+              Preț final cu reducere: <%= set.pret_final.toFixed(2) %> RON
+            </p>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </main>
+
+    <%- include("../fragmente/footer") %>
+  </body>
+</html>

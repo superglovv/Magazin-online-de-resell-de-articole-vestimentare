@@ -33,7 +33,6 @@ function getCookie(nume) {
 function deleteCookie(nume) {
   console.log(`${nume}; expires=${new Date().toUTCString()}`);
   document.cookie = `${nume}=0; expires=${new Date().toUTCString()}`;
-  document.getElementById("banner").style.display = "block";
 }
 
 function deleteAllCookies() {
@@ -59,6 +58,7 @@ window.addEventListener("load", function () {
     document.getElementById("ok_cookies2").onclick = function () {
       document.getElementById("ultima-pagina").style.display = "none";
       deleteCookie("acceptat_banner");
+      document.getElementById("banner").style.display = "block";
     };
 
     // document.getElementById("ok_cookies2").onclick = function () {
@@ -104,7 +104,6 @@ function saveFilters() {
   setCookie("savedFilters", JSON.stringify(filters), 7 * 24 * 60 * 60 * 1000);
 }
 
-// Functie pentru incarcarea filtrelor din localStorage
 function loadFilters() {
   console.log("loadFilters called");
   const savedFilters =
@@ -129,7 +128,6 @@ function loadFilters() {
   }
 }
 
-// Functie pentru resetarea filtrelor si stergerea din localStorage si cookie
 function resetFilters() {
   localStorage.removeItem("savedFilters");
   deleteCookie("savedFilters");
