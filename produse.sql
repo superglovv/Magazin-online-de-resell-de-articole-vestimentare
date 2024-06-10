@@ -20,6 +20,8 @@ CREATE TABLE IF NOT EXISTS produse(
    nou BOOLEAN NOT NULL DEFAULT TRUE,
    imagine VARCHAR(300),
    data_adaugare TIMESTAMP DEFAULT current_timestamp
+   stil stiluri default 'Streetwear',
+   tehnologie VARCHAR[]
 );
 
 INSERT into produse (nume,descriere,pret,pret_lansare,tip,brand,marime,culoare,nou,imagine) VALUES 

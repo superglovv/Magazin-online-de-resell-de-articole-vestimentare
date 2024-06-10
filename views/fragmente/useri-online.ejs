@@ -1,8 +1,19 @@
 <section>
-    <p><b>Useri online:</b></p>
-    <ol>
-        <% for(let u of locals.useriOnline) { %>
-            <li><%- u.username %>(<%- u.prenume %> <%- u.nume %>)</li>
-        <% } %>
-    </ol>
+  <p><b>Useri online:</b></p>
+  <ol>
+    <% for (let i = 0; i < locals.useriOnline.length; i++) { %>
+    <span style="color: green">
+      <%- locals.useriOnline[i].username %> (<%- locals.useriOnline[i].prenume
+      %> <%- locals.useriOnline[i].nume %>)
+    </span>
+    <%- (i !== locals.useriOnline.length - 1) ? ';' : '' %> <% } if
+    (locals.useriOnline.length > 0) {%> ; <%}%><% for(let i = 0; i <
+    locals.useriOnlineInactivi.length; i++) { %>
+    <span style="color: orange">
+      <%- locals.useriOnlineInactivi[i].username %> (<%-
+      locals.useriOnlineInactivi[i].prenume %> <%-
+      locals.useriOnlineInactivi[i].nume %>)
+    </span>
+    <%- (i !== locals.useriOnlineInactivi.length - 1) ? ';' : '' %> <% } %>
+  </ol>
 </section>

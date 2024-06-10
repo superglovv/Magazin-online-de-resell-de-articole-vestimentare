@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html  lang="ro">
+    <head>
+        <meta name="description" content="Cofetaria Dulcelind ofera prajituri, torturi, produse de patiserie cu optiunea de achizitie online si livrare prin curier.">
+        <meta name="keywords" content="cofetarie, Dulcelind, prajituri, torturi, dulce, pateuri, produse">
+        <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
+        <title>Hypero</title>
+        <%- include("../fragmente/head") %>     
+        <script type="text/javascript" src=/resurse/js/produse.js></script>
+        <script type="text/javascript" src=/resurse/js/produse-cos.js></script>
+        <link href="../../node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    </head>
+    <body>
+    <%- include("../fragmente/header") %>
+
+    <main>
+        <form
+  id="form_produs"
+  method="post"
+  action="/adauga_produs"
+  enctype="multipart/form-data"
+>
+  <p>
+    <label> 
+      Nume:
+      <input type="text" name="nume" id="inp-nume2" required />
+    </label>
+  </p>
+  <p>
+    <label>
+      Descriere:
+      <textarea name="descriere" id="inp-descriere2" required></textarea>
+    </label>
+  </p>
+  <p>
+    <label>
+      Preț:
+      <input type="number" name="pret" id="inp-pret2" required />
+    </label>
+  </p>
+  <p>
+    <label>
+      Preț lansare:
+      <input type="number" name="pret_lansare" id="inp-pret-lansare2" required />
+    </label>
+  </p>
+  <p>
+    <label>
+      Tip vestimentar:
+      <select name="tip_vestimentar" id="sel-tip-vestimentar2">
+        <option value="imbracaminte" selected>Îmbrăcăminte</option>
+        <option value="incaltaminte">Încălțăminte</option>
+        <option value="accesorii">Accesorii</option>
+      </select>
+    </label>
+  </p>
+  <p>
+    <label>
+      Brand:
+      <select id="inp-categorie2">
+        <option id="sel-toate" selected value="toate">toate</option>
+        <% for (let opt of locals.branduri) { %>
+        <option value="<%- opt.unnest %>" style="color: black">
+          <%- opt.unnest %>
+        </option>
+        <% } %>
+      </select>
+    </label>
+  </p>
+  <p>
+    <label>
+      Marime:
+      <input
+        type="text"
+        name="marime"
+        id="inp-marime2"
+        value="Universal"
+        required
+      />
+    </label>
+  </p>
+  <p>
+    <label>
+      Culoare:
+      <input type="text" name="culoare" id="inp-culoare2" />
+    </label>
+  </p>
+  <p>
+    <label>
+      Nou:
+      <input type="checkbox" name="nou" id="inp-nou2" checked />
+    </label>
+  </p>
+  <p>
+    <label>
+      Imagine:
+      <input type="file" name="imagine" />
+    </label>
+  </p>
+  <p>
+    <label>
+      Stil:
+      <select id="inp-categorie2">
+        <option id="sel-toate" selected value="toate">toate</option>
+        <% for (let opt of locals.stiluri) { %>
+        <option value="<%- opt.unnest %>"><%- opt.unnest %></option>
+        <% } %>
+      </select>
+    </label>
+  </p>
+  <p>
+    <label>
+      Tehnologie:
+      <input type="text" name="tehnologie" id="inp-tehnologie2" />
+    </label>
+  </p>
+  <p>
+    <input type="submit" value="Adaugă produs" />
+    <input type="reset" value="Resetează" />
+  </p>
+</form>    
+    </main>
+    <%- include("../fragmente/footer") %>
+    </body>
+</html>

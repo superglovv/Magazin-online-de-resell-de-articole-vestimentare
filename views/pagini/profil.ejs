@@ -57,6 +57,21 @@
       <p>Nu sunteti logat</p>
       <% } %>
       <p><%- locals.mesaj %></p>
+      <form method="post" action="/sterge_cont">
+        <input
+          type="hidden"
+          name="username"
+          value="<%= locals.utilizator.username %>"
+        />
+        <input
+          type="password"
+          name="parola"
+          placeholder="Introduceți parola pentru ștergere"
+          required
+          style="width: 250px"
+        />
+        <input type="submit" value="Șterge cont" />
+      </form>
     </main>
     <%- include("../fragmente/footer") %>
   </body>
