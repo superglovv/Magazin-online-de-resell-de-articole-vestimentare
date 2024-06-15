@@ -32,4 +32,16 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.classList.add("mocha");
     localStorage.setItem("tema", "mocha");
   };
+
+  document.getElementById("schimba_tema").onclick = function () {
+    if (document.body.classList.contains("dark")) {
+      document.body.classList.remove("dark");
+      document.body.classList.add("light");
+      localStorage.setItem("tema", "light");
+    } else {
+      document.body.classList.remove("light");
+      document.body.classList.add("dark");
+      localStorage.setItem("tema", "dark");
+    }
+  };
 });
