@@ -1,452 +1,437 @@
 <!DOCTYPE html>
 <html  lang="ro">
-    <head>
-        <meta name="description" content="Cofetaria Dulcelind ofera prajituri, torturi, produse de patiserie cu optiunea de achizitie online si livrare prin curier.">
-        <meta name="keywords" content="cofetarie, Dulcelind, prajituri, torturi, dulce, pateuri, produse">
-        <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
-        <title>Hypero</title>
-        <%- include("../fragmente/head") %>     
-        <script type="text/javascript" src=/resurse/js/produse.js></script>
-        <script type="text/javascript" src=/resurse/js/produse-cos.js></script>
-        <script src="/resurse/js/cookies.js"></script>
-        <link href="../../node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    </head>
-    <body>
-    <%- include("../fragmente/header") %>
-
-    <main>
-            <div class="container">
-                <div class="row mb-4">
-                    <div class="col-md-4">
-                        <label for="inp-nume" class="form-label">Nume:</label>
-                        <input type="text" class="form-control" id="inp-nume">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="inp-descriere" class="form-label">Descriere:</label>
-                        <div class="form-floating">
-                            <textarea class="form-control" placeholder="Enter your text here" id="inp-descriere" style="height: 100px;"></textarea>
-                            <label for="inp-descriere">Descriere:</label>
-                            <div class="invalid-feedback">Introdu un text corect.</div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        Marimi populare:
-                        <br>
-                        <input class="btn-check" id="i_rad1" name="gr_rad" value="42:43" type="radio" autocomplete="off" />
-                        <label class="btn btn-sm btn-outline-primary" for="i_rad1">42</label>
-
-                        <input class="btn-check" id="i_rad2" name="gr_rad" value="43:44" type="radio" autocomplete="off" />
-                        <label class="btn btn-sm btn-outline-primary" for="i_rad2">43</label>
-
-                        <input class="btn-check" id="i_rad3" name="gr_rad" value="44:45" type="radio" autocomplete="off" />
-                        <label class="btn btn-sm btn-outline-primary" for="i_rad3">44</label>
-
-                        <input class="btn-check" id="i_rad4" name="gr_rad" value="45:46" type="radio" autocomplete="off" />
-                        <label class="btn btn-sm btn-outline-primary" for="i_rad4">45</label>
-
-                        <input class="btn-check" id="i_rad5" name="gr_rad" value="toate" type="radio" autocomplete="off" checked />
-                        <label class="btn btn-sm btn-outline-primary" for="i_rad5">Toate</label>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-md-4">
-                        <label> Pret minim: 
-                        <!-- <input type="range" id="inp-pret" value="0" min="0"  max="30000"> <span id="infoRange">(0)</span> -->
-                        <div style="display: flex; flex-direction: row; width: 15rem; margin-top: 8px;">
-                            <span id="minPrice" style="font-size: small; color: var(--coolgrey); margin-right: 6px;"></span>
-                            <input type="range" id="inp-pret" class="custom-range" min="0" max="30000">
-                            <span id="maxPrice" style="font-size: small; color: var(--coolgrey); margin-left: 6px; margin-right: 6px;"></span>
-                            <span id="infoRange">(0)</span>
-                        </div>
-                    </div> 
-                    <div class="col-md-4">
-                        <label><b>Culoare:</b>
-						<div class="form-floating">
-							<input list="culori-hype" id="inp-culoare" name="inp-culoare" class="form-control" />
-							<label id="label-culoare-invalida" for="inp-culoare"></label>
-							<datalist id="culori-hype">
-								<option value="black"></option>
-								<option value="white"></option>
-								<option value="varsity red"></option>
-                                <option value="infrared"></option>
-                                <option value="cool gray"></option>
-                                <option value="volt"></option>
-							</datalist>
-						</div>
-					    </label>
-                    </div>
-                    <div class="col-md-4">
-                        <b>Conditie:</b>
-                        <input class="btn-check" id="i_check1" checked name="gr_check" value="Nou" type="checkbox" />
-                        <label class="btn btn-sm btn-outline-primary" for="i_check1">Nou</label>
-
-                        <input class="btn-check" id="i_check2" checked name="gr_check" value="Purtat" type="checkbox" />
-                        <label class="btn btn-sm btn-outline-primary" for="i_check2">Purtat</label>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-md-4">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="gr_check2" id="zoomAirCheckbox" value="zoom air">
-                            <label class="form-check-label" for="zoomAirCheckbox">Zoom Air</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="gr_check2" id="boostCheckbox" value="boost">
-                            <label class="form-check-label" for="boostCheckbox">BOOST</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="gr_check2" id="flyKnitCheckbox" value="fly knit">
-                            <label class="form-check-label" for="flyKnitCheckbox">Fly Knit</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="gr_check2" id="primeknitCheckbox" value="primeknit">
-                            <label class="form-check-label" for="primeknitCheckbox">Prime Knit</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="gr_check2" id="multiPocketCheckbox" value="multi pocket">
-                            <label class="form-check-label" for="multiPocketCheckbox">Multi Pocket</label>
-                        </div>
-
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="nougr_rad" id="areRadio" value="are" checked>
-                            <label class="form-check-label" for="areRadio">Are</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="nougr_rad" id="nuAreRadio" value="nu are">
-                            <label class="form-check-label" for="nuAreRadio">Nu are</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <label style="margin-bottom: 8px;">Brand:</label>
-                        <select id="inp-categorie">
-                            <option id="sel-toate" selected value="toate">toate</option>
-                                <% for (let opt of locals.branduri) { %>
-                                    <option value="<%- opt.unnest %>"><%- opt.unnest %> </option>
-                                <% } %>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label style="margin-bottom: 8px;">Stil:
-                            <select id="inp-stil" multiple>
-                                <option id="sel-toate" selected value="toate">toate</option>
-                                <% for (let opt of locals.stiluri) { %>
-                                    <option value="<%- opt.unnest %>"><%- opt.unnest %> </option>
-                                <% } %>
-                            </select>
-                        </label>
-                    </div>
-                </div>
+   <head>
+      <meta name="description" content="Cofetaria Dulcelind ofera prajituri, torturi, produse de patiserie cu optiunea de achizitie online si livrare prin curier.">
+      <meta name="keywords" content="cofetarie, Dulcelind, prajituri, torturi, dulce, pateuri, produse">
+      <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
+      <title>Hypero</title>
+      <%- include("../fragmente/head") %>     
+      <script type="text/javascript" src=/resurse/js/produse.js></script>
+      <script type="text/javascript" src=/resurse/js/produse-cos.js></script>
+      <script src="/resurse/js/cookies.js"></script>
+      <link href="../../node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+   </head>
+   <body>
+      <%- include("../fragmente/header") %>
+      <main>
+         <div class="container">
+            <div class="row mb-4">
+               <div class="col-md-4">
+                  <label for="inp-nume" class="form-label">Nume:</label>
+                  <input type="text" class="form-control" id="inp-nume">
+               </div>
+               <div class="col-md-4">
+                  <label for="inp-descriere" class="form-label">Descriere:</label>
+                  <div class="form-floating">
+                     <textarea class="form-control" placeholder="Enter your text here" id="inp-descriere" style="height: 100px;"></textarea>
+                     <label for="inp-descriere">Descriere:</label>
+                     <div class="invalid-feedback">Introdu un text corect.</div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  Marimi populare:
+                  <br>
+                  <input class="btn-check" id="i_rad1" name="gr_rad" value="42:43" type="radio" autocomplete="off" />
+                  <label class="btn btn-sm btn-outline-primary" for="i_rad1">42</label>
+                  <input class="btn-check" id="i_rad2" name="gr_rad" value="43:44" type="radio" autocomplete="off" />
+                  <label class="btn btn-sm btn-outline-primary" for="i_rad2">43</label>
+                  <input class="btn-check" id="i_rad3" name="gr_rad" value="44:45" type="radio" autocomplete="off" />
+                  <label class="btn btn-sm btn-outline-primary" for="i_rad3">44</label>
+                  <input class="btn-check" id="i_rad4" name="gr_rad" value="45:46" type="radio" autocomplete="off" />
+                  <label class="btn btn-sm btn-outline-primary" for="i_rad4">45</label>
+                  <input class="btn-check" id="i_rad5" name="gr_rad" value="toate" type="radio" autocomplete="off" checked />
+                  <label class="btn btn-sm btn-outline-primary" for="i_rad5">Toate</label>
+               </div>
             </div>
-        <!--<label> Maxim calorii: <input type="number" id="inp-calorii" value="10000"></label>-->
-        <!-- <div> Marime:trebuie sa aiba acelasi name ca sa formeze un grup -->
-<!--             
+            <div class="row mb-4">
+               <div class="col-md-4">
+                  <label>
+                     Pret minim: 
+                     <!-- <input type="range" id="inp-pret" value="0" min="0"  max="30000"> <span id="infoRange">(0)</span> -->
+                     <div style="display: flex; flex-direction: row; width: 15rem; margin-top: 8px;">
+                        <span id="minPrice" style="font-size: small; color: var(--coolgrey); margin-right: 6px;"></span>
+                        <input type="range" id="inp-pret" class="custom-range" min="0" max="30000">
+                        <span id="maxPrice" style="font-size: small; color: var(--coolgrey); margin-left: 6px; margin-right: 6px;"></span>
+                        <span id="infoRange">(0)</span>
+                     </div>
+               </div>
+               <div class="col-md-4">
+               <label><b>Culoare:</b>
+               <div class="form-floating">
+               <input list="culori-hype" id="inp-culoare" name="inp-culoare" class="form-control" />
+               <label id="label-culoare-invalida" for="inp-culoare"></label>
+               <datalist id="culori-hype">
+               <option value="black"></option>
+               <option value="white"></option>
+               <option value="varsity red"></option>
+               <option value="infrared"></option>
+               <option value="cool gray"></option>
+               <option value="volt"></option>
+               </datalist>
+               </div>
+               </label>
+               </div>
+               <div class="col-md-4">
+                  <b>Conditie:</b>
+                  <input class="btn-check" id="i_check1" checked name="gr_check" value="Nou" type="checkbox" />
+                  <label class="btn btn-sm btn-outline-primary" for="i_check1">Nou</label>
+                  <input class="btn-check" id="i_check2" checked name="gr_check" value="Purtat" type="checkbox" />
+                  <label class="btn btn-sm btn-outline-primary" for="i_check2">Purtat</label>
+               </div>
+            </div>
+            <div class="row mb-4">
+               <div class="col-md-4">
+                  <div class="form-check">
+                     <input class="form-check-input" type="checkbox" name="gr_check2" id="zoomAirCheckbox" value="zoom air">
+                     <label class="form-check-label" for="zoomAirCheckbox">Zoom Air</label>
+                  </div>
+                  <div class="form-check">
+                     <input class="form-check-input" type="checkbox" name="gr_check2" id="boostCheckbox" value="boost">
+                     <label class="form-check-label" for="boostCheckbox">BOOST</label>
+                  </div>
+                  <div class="form-check">
+                     <input class="form-check-input" type="checkbox" name="gr_check2" id="flyKnitCheckbox" value="fly knit">
+                     <label class="form-check-label" for="flyKnitCheckbox">Fly Knit</label>
+                  </div>
+                  <div class="form-check">
+                     <input class="form-check-input" type="checkbox" name="gr_check2" id="primeknitCheckbox" value="primeknit">
+                     <label class="form-check-label" for="primeknitCheckbox">Prime Knit</label>
+                  </div>
+                  <div class="form-check">
+                     <input class="form-check-input" type="checkbox" name="gr_check2" id="multiPocketCheckbox" value="multi pocket">
+                     <label class="form-check-label" for="multiPocketCheckbox">Multi Pocket</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                     <input class="form-check-input" type="radio" name="nougr_rad" id="areRadio" value="are" checked>
+                     <label class="form-check-label" for="areRadio">Are</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                     <input class="form-check-input" type="radio" name="nougr_rad" id="nuAreRadio" value="nu are">
+                     <label class="form-check-label" for="nuAreRadio">Nu are</label>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <label style="margin-bottom: 8px;">Brand:</label>
+                  <select id="inp-categorie">
+                     <option id="sel-toate" selected value="toate">toate</option>
+                     <% for (let opt of locals.branduri) { %>
+                     <option value="<%- opt.unnest %>"><%- opt.unnest %> </option>
+                     <% } %>
+                  </select>
+               </div>
+               <div class="col-md-4">
+                  <label style="margin-bottom: 8px;">
+                     Stil:
+                     <select id="inp-stil" multiple>
+                        <option id="sel-toate" selected value="toate">toate</option>
+                        <% for (let opt of locals.stiluri) { %>
+                        <option value="<%- opt.unnest %>"><%- opt.unnest %> </option>
+                        <% } %>
+                     </select>
+                  </label>
+               </div>
+            </div>
+         </div>
+         <!--<label> Maxim calorii: <input type="number" id="inp-calorii" value="10000"></label>-->
+         <!-- <div> Marime:trebuie sa aiba acelasi name ca sa formeze un grup -->
+         <!--             
             <p> -->
-                <!-- <input id="i_rad1"  name="gr_rad" value="0:350" type="radio"/>  -->
-                <!-- <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="i_rad1" name="gr_rad" value="0:350"> -->
-                    <!-- <label>Dietetic (calorii &lt; 350)
-                    <label>S</label>
-                </div>
+         <!-- <input id="i_rad1"  name="gr_rad" value="0:350" type="radio"/>  -->
+         <!-- <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="i_rad1" name="gr_rad" value="0:350"> -->
+         <!-- <label>Dietetic (calorii &lt; 350)
+            <label>S</label>
+            </div>
             </label></p>
             <p> -->
-                <!-- <input id="i_rad2"  name="gr_rad" value="350:700" type="radio"/> -->
-                <!-- <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="i_rad2" name="gr_rad" value="350:700">
-                    <label>Mediu (350 &le; calorii &lt; 700) -->
-                        <!-- <label>M</label>
-                </div>
+         <!-- <input id="i_rad2"  name="gr_rad" value="350:700" type="radio"/> -->
+         <!-- <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="i_rad2" name="gr_rad" value="350:700">
+            <label>Mediu (350 &le; calorii &lt; 700) -->
+         <!-- <label>M</label>
+            </div>
             </label>
             <p> -->
-                <!-- <input id="i_rad3" name="gr_rad" value="700:1000000000" type="radio"/> -->
-                <!-- <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="i_rad3" name="gr_rad" value="700:1000000000">
-                    <label>Ridicat caloric (700 &le; calorii)
-                        <label>Universal</label>
-                </div>
+         <!-- <input id="i_rad3" name="gr_rad" value="700:1000000000" type="radio"/> -->
+         <!-- <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="i_rad3" name="gr_rad" value="700:1000000000">
+            <label>Ridicat caloric (700 &le; calorii)
+                <label>Universal</label>
+            </div>
             </label>
             <p><label>Toate
-                <input id="i_rad4" checked name="gr_rad" value="toate" type="radio"/>
+            <input id="i_rad4" checked name="gr_rad" value="toate" type="radio"/>
             </label>
-        </div> -->
-        
-        <p>
+            </div> -->
+         <p>
             <button id="filtrare" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-filter"></i>Filtreaza</button> 
             <button id="resetare" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-arrow-clockwise"></i>Reseteaza</button> <br>
             <button id="sortCrescNume" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-arrow-up"></i>Sorteaza crescator dupa raport pret_lansare/pret si stil</button>
             <button id="sortDescrescNume" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-arrow-down"></i>Sorteaza descrescator dupa raport pret_lansare/pret si stil</button>
             <button id="calculeaza-media" class="btn btn-primary border border-secondary rounded btn-md mb-2"><i class="bi bi-calculator"></i>Calculează media prețurilor</button>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="save-filters">
-                <label class="form-check-label" for="save-filters">Salvează filtrarea</label>
-            </div>
-        </p>
-        
-        <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
-        <section id="produse">
+         <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="save-filters">
+            <label class="form-check-label" for="save-filters">Salvează filtrarea</label>
+         </div>
+         </p>
+         <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
+         <section id="produse">
             <h2>Produse</h2>
             <div class="grid-produse">
-                <% for( let prod of locals.produse) { %>
-                    <article class="produs" >
-                        <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>" ><span class="val-nume"><%- prod.nume%></span></a></h3>
-                        <figure >
-                            <a href="/produs/<%-prod.id %>" ><img src="/resurse/imagine/produse/<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
-                        </figure>
-                        <!-- <div class="info-prod">
-                            <p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span> lei</p>
-                            <p class="calorii">Pret Lansare: <span class="val-calorii"><%- prod.pret_lansare%></span> lei</p>
-                            <p class="gramaj">Tip: <span class="val-gramaj"><%- prod.tip%></span></p>
-                        </div> -->
-                        <ul>
-                            <li><span class="nume_categorie">Pret:</span> <span class="val-pret"><%- prod.pret%></span> lei</li>
-                            <!-- <li>Pret Lansare: <span class="val-pret"><%- prod.pret_lansare%></span> lei</li> -->
-                            <li><span class="nume_categorie">Brand: </span><span class="val-categorie"><%- prod.brand%></span></li>
-                            <li><span class="nume_categorie">Culoare: </span><span class="val-culoare"><%- prod.culoare%></span></li>
-                            
-                            <li><span class="nume_categorie">Data: </span><time><%- formatDate(prod.data_adaugare)%></time></li>
-                            <li><span class="nume_categorie">Conditie: </span>
-            <span class="val-conditie"
-              ><% if (prod.nou === true) { %> Nou <% } else { %> Purtat
-              <% } %></span
-            ></li>
-                        </ul>
-                        <ul>
-                            <li><span class="nume_categorie">Pret Lansare:</span> <span class="val-pretlansare"><%- prod.pret_lansare%></span> lei</li>
-                            <li><span class="nume_categorie">Stil:</span> <span class="val-stil"><%- prod.stil%></span></li>
-                            <% if (prod.descriere) { %>
-                            <li><span class="nume_categorie">Descriere:</span> <span class="val-descriere"><%- shortenText(prod.descriere)%></span> </li>
-                            <% } %>
-                            <% if (prod.tehnologie) { %>
-                            <li><span class="nume_categorie">Tehnologie:</span> <span class="val-tehnologie"><%- shortenText(prod.tehnologie)%></span> </li>
-                            <% } %>
-                            <li><span class="nume_categorie">Marime: </span> <span class="val-calorii"><%- prod.marime%></span></li>
-                            
-                        </ul>
-                        <!-- <p class="marime">Pret: <span class="val-pret"><%- prod.pret%></span> lei</p>
-                        <p class="marime">Pret Lansare: <span class="val-calorii"><%- prod.pret_lansare%></span> lei</p>
-                        <p class="marime">Tip: <span class="val-gramaj"><%- prod.tip%></span></p>
-                        <p class="marime">Marime: <span class="val-marime"><%- prod.marime%></span></p>
-                        <p class="categorie">Brand:<span class="val-categorie"><%- prod.brand%></span></p> -->
-                        
-<button class="btn btn-outline-primary" data-action="keep">
-    <i class="bi bi-pin-fill"></i>
-</button>
-
-<button class="btn btn-outline-primary" data-action="temp-delete">
-    <i class="bi bi-trash"></i>
-</button>
-
-<button class="btn btn-outline-primary" data-action="session-delete">
-    <i class="bi bi-x-lg"></i>
-</button>
-
-                        
-                        <label class="selecteaza-cos">
-                            Selectează:<br/>
-                            <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
-                        </label>
-                    </article>
-                <% }%>
+               <% for( let prod of locals.produse) { %>
+               <article class="produs" >
+                  <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>" ><span class="val-nume"><%- prod.nume%></span></a></h3>
+                  <figure >
+                     <a href="/produs/<%-prod.id %>" ><img src="/resurse/imagine/produse/<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
+                  </figure>
+                  <!-- <div class="info-prod">
+                     <p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span> lei</p>
+                     <p class="calorii">Pret Lansare: <span class="val-calorii"><%- prod.pret_lansare%></span> lei</p>
+                     <p class="gramaj">Tip: <span class="val-gramaj"><%- prod.tip%></span></p>
+                     </div> -->
+                  <ul>
+                     <li><span class="nume_categorie">Pret:</span> <span class="val-pret"><%- prod.pret%></span> lei</li>
+                     <!-- <li>Pret Lansare: <span class="val-pret"><%- prod.pret_lansare%></span> lei</li> -->
+                     <li><span class="nume_categorie">Brand: </span><span class="val-categorie"><%- prod.brand%></span></li>
+                     <li><span class="nume_categorie">Culoare: </span><span class="val-culoare"><%- prod.culoare%></span></li>
+                     <li><span class="nume_categorie">Data: </span><time><%- formatDate(prod.data_adaugare)%></time></li>
+                     <li><span class="nume_categorie">Conditie: </span>
+                        <span class="val-conditie"
+                           ><% if (prod.nou === true) { %> Nou <% } else { %> Purtat
+                        <% } %></span
+                           >
+                     </li>
+                  </ul>
+                  <ul>
+                     <li><span class="nume_categorie">Pret Lansare:</span> <span class="val-pretlansare"><%- prod.pret_lansare%></span> lei</li>
+                     <li><span class="nume_categorie">Stil:</span> <span class="val-stil"><%- prod.stil%></span></li>
+                     <% if (prod.descriere) { %>
+                     <li><span class="nume_categorie">Descriere:</span> <span class="val-descriere"><%- shortenText(prod.descriere)%></span> </li>
+                     <% } %>
+                     <% if (prod.tehnologie) { %>
+                     <li><span class="nume_categorie">Tehnologie:</span> <span class="val-tehnologie"><%- shortenText(prod.tehnologie)%></span> </li>
+                     <% } %>
+                     <li><span class="nume_categorie">Marime: </span> <span class="val-calorii"><%- prod.marime%></span></li>
+                  </ul>
+                  <!-- <p class="marime">Pret: <span class="val-pret"><%- prod.pret%></span> lei</p>
+                     <p class="marime">Pret Lansare: <span class="val-calorii"><%- prod.pret_lansare%></span> lei</p>
+                     <p class="marime">Tip: <span class="val-gramaj"><%- prod.tip%></span></p>
+                     <p class="marime">Marime: <span class="val-marime"><%- prod.marime%></span></p>
+                     <p class="categorie">Brand:<span class="val-categorie"><%- prod.brand%></span></p> -->
+                  <button class="btn btn-outline-primary" data-action="keep">
+                  <i class="bi bi-pin-fill"></i>
+                  </button>
+                  <button class="btn btn-outline-primary" data-action="temp-delete">
+                  <i class="bi bi-trash"></i>
+                  </button>
+                  <button class="btn btn-outline-primary" data-action="session-delete">
+                  <i class="bi bi-x-lg"></i>
+                  </button>
+                  <label class="selecteaza-cos">
+                  Selectează:<br/>
+                  <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
+                  </label>
+               </article>
+               <% }%>
             </div>
-            
-        </section>
-        <p id="no-results-message">Nu există produse conform filtrării curente.</p>
-    </main>
-    <br>
-    <%- include("../fragmente/footer") %>
-    </body>
-
-    <script>
-        function normalizeText(text) {
-  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
-}
-        window.addEventListener('load', function() {
-            console.log('Page loaded');
-            loadFilters();
-            var textarea = document.getElementById("inp-descriere");
-            var inpNume = normalizeText(
+         </section>
+         <p id="no-results-message">Nu există produse conform filtrării curente.</p>
+      </main>
+      <br>
+      <%- include("../fragmente/footer") %>
+   </body>
+   <script>
+      function normalizeText(text) {
+      return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+      }
+      window.addEventListener('load', function() {
+          console.log('Page loaded');
+          loadFilters();
+          var textarea = document.getElementById("inp-descriere");
+          var inpNume = normalizeText(
       document.getElementById("inp-nume").value.toLowerCase().trim()
-    );
-
-    var inpCuloare = document
+      );
+      
+      var inpCuloare = document
       .getElementsByName("inp-culoare")[0]
       .value.trim()
       .toLowerCase();
-
-    const selectedConditions = Array.from(
+      
+      const selectedConditions = Array.from(
       document.getElementsByName("gr_check")
-    )
+      )
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value);
-
-    var selectedStiluri = Array.from(
+      
+      var selectedStiluri = Array.from(
       document.getElementById("inp-stil").selectedOptions
-    ).map((option) => option.value);
-
-    console.log(selectedConditions);
-
-    const selectedTehnologie = Array.from(
+      ).map((option) => option.value);
+      
+      console.log(selectedConditions);
+      
+      const selectedTehnologie = Array.from(
       document.getElementsByName("gr_check2")
-    )
+      )
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value);
-
-    const radioButtonValue = document.querySelector(
+      
+      const radioButtonValue = document.querySelector(
       'input[name="nougr_rad"]:checked'
-    ).value;
-
-    var radioCalorii = document.getElementsByName("gr_rad");
-    let inpCalorii;
-    for (let rad of radioCalorii) {
+      ).value;
+      
+      var radioCalorii = document.getElementsByName("gr_rad");
+      let inpCalorii;
+      for (let rad of radioCalorii) {
       if (rad.checked) {
-        inpCalorii = rad.value;
-        break;
+      inpCalorii = rad.value;
+      break;
       }
-    }
-    let minCalorii, maxCalorii;
-    if (inpCalorii != "toate") {
+      }
+      let minCalorii, maxCalorii;
+      if (inpCalorii != "toate") {
       vCal = inpCalorii.split(":");
       minCalorii = parseInt(vCal[0]);
       maxCalorii = parseInt(vCal[1]);
-    }
-
-    var inpPret = parseInt(document.getElementById("inp-pret").value);
-
-    var inpCateg = document
+      }
+      
+      var inpPret = parseInt(document.getElementById("inp-pret").value);
+      
+      var inpCateg = document
       .getElementById("inp-categorie")
       .value.toLowerCase()
       .trim();
-
-    var produse = document.getElementsByClassName("produs");
-    var hasResults = false;
-    for (let produs of produse) {
+      
+      var produse = document.getElementsByClassName("produs");
+      var hasResults = false;
+      for (let produs of produse) {
       let valNume = produs
-        .getElementsByClassName("val-nume")[0]
-        .innerHTML.toLowerCase()
-        .trim();
-
+      .getElementsByClassName("val-nume")[0]
+      .innerHTML.toLowerCase()
+      .trim();
+      
       let mismatchCount = 0;
       for (let i = 0; i < Math.min(valNume.length, inpNume.length); i++) {
-        if (valNume[i] !== inpNume[i]) {
-          mismatchCount++;
-          if (mismatchCount > 2) {
-            break;
-          }
+      if (valNume[i] !== inpNume[i]) {
+        mismatchCount++;
+        if (mismatchCount > 2) {
+          break;
         }
       }
-
+      }
+      
       let cond1 =
-        mismatchCount <= 2 &&
-        valNume.startsWith(inpNume.slice(0, -Math.min(mismatchCount, 2)));
-
+      mismatchCount <= 2 &&
+      valNume.startsWith(inpNume.slice(0, -Math.min(mismatchCount, 2)));
+      
       let valCalorii = parseInt(
-        produs.getElementsByClassName("val-calorii")[0].innerHTML
+      produs.getElementsByClassName("val-calorii")[0].innerHTML
       );
-
+      
       let cond2 =
-        inpCalorii == "toate" ||
-        (minCalorii <= valCalorii && valCalorii < maxCalorii);
-
+      inpCalorii == "toate" ||
+      (minCalorii <= valCalorii && valCalorii < maxCalorii);
+      
       let valPret = parseFloat(
-        produs.getElementsByClassName("val-pret")[0].innerHTML
+      produs.getElementsByClassName("val-pret")[0].innerHTML
       );
       let cond3 = valPret > inpPret;
-
+      
       let valCategorie = produs
-        .getElementsByClassName("val-categorie")[0]
-        .innerHTML.toLowerCase()
-        .trim();
+      .getElementsByClassName("val-categorie")[0]
+      .innerHTML.toLowerCase()
+      .trim();
       let cond4 = inpCateg == valCategorie || inpCateg == "toate";
-
+      
       let valCuloare = produs
-        .getElementsByClassName("val-culoare")[0]
-        .innerHTML.toLowerCase()
-        .trim();
+      .getElementsByClassName("val-culoare")[0]
+      .innerHTML.toLowerCase()
+      .trim();
       console.log(valCuloare);
       let cond5 = valCuloare.startsWith(inpCuloare) || inpCuloare == "";
-
+      
       let valConditie = produs
-        .getElementsByClassName("val-conditie")[0]
-        .innerHTML.trim();
-
+      .getElementsByClassName("val-conditie")[0]
+      .innerHTML.trim();
+      
       let cond6 =
-        selectedConditions.length === 0 ||
-        selectedConditions.includes(valConditie);
-
+      selectedConditions.length === 0 ||
+      selectedConditions.includes(valConditie);
+      
       let valStil = produs
-        .getElementsByClassName("val-stil")[0]
-        .innerHTML.trim();
+      .getElementsByClassName("val-stil")[0]
+      .innerHTML.trim();
       let cond7 =
-        selectedStiluri.length === 0 ||
-        selectedStiluri.includes(valStil) ||
-        selectedStiluri[0] === "toate";
-
+      selectedStiluri.length === 0 ||
+      selectedStiluri.includes(valStil) ||
+      selectedStiluri[0] === "toate";
+      
       let cond8 =
-        produs.getElementsByClassName("val-descriere")[0] &&
-        normalizeText(
-          produs
-            .getElementsByClassName("val-descriere")[0]
-            .innerHTML.toLowerCase()
-            .trim()
-        ).includes(normalizeText(textarea.value.toLowerCase().trim()));
-
+      produs.getElementsByClassName("val-descriere")[0] &&
+      normalizeText(
+        produs
+          .getElementsByClassName("val-descriere")[0]
+          .innerHTML.toLowerCase()
+          .trim()
+      ).includes(normalizeText(textarea.value.toLowerCase().trim()));
+      
       let cond9 = true;
       if (selectedTehnologie.length > 0) {
-        const valoriTehnologie = Array.from(
-          produs.getElementsByClassName("val-tehnologie")
-        )
-          .map((elem) => elem.innerHTML.toLowerCase().trim().split(","))
-          .flat();
-
-        console.log("selectedTehnologie:", selectedTehnologie);
-        console.log("valoriTehnologie:", valoriTehnologie);
-
-        if (radioButtonValue === "are") {
-          cond9 = selectedTehnologie.every((value) =>
-            valoriTehnologie.includes(value)
-          );
-        } else {
-          cond9 = !selectedTehnologie.some((value) =>
-            valoriTehnologie.includes(value)
-          );
-        }
-        console.log("cond9:", cond9);
-      }
-
-      if (
-        cond1 &&
-        cond2 &&
-        cond3 &&
-        cond4 &&
-        cond5 &&
-        cond6 &&
-        cond7 &&
-        cond8 &&
-        cond9
-      ) {
-        produs.style.display = "block";
-        hasResults = true;
+      const valoriTehnologie = Array.from(
+        produs.getElementsByClassName("val-tehnologie")
+      )
+        .map((elem) => elem.innerHTML.toLowerCase().trim().split(","))
+        .flat();
+      
+      console.log("selectedTehnologie:", selectedTehnologie);
+      console.log("valoriTehnologie:", valoriTehnologie);
+      
+      if (radioButtonValue === "are") {
+        cond9 = selectedTehnologie.every((value) =>
+          valoriTehnologie.includes(value)
+        );
       } else {
-        produs.style.display = "none";
+        cond9 = !selectedTehnologie.some((value) =>
+          valoriTehnologie.includes(value)
+        );
+      }
+      console.log("cond9:", cond9);
+      }
+      
+      if (
+      cond1 &&
+      cond2 &&
+      cond3 &&
+      cond4 &&
+      cond5 &&
+      cond6 &&
+      cond7 &&
+      cond8 &&
+      cond9
+      ) {
+      produs.style.display = "block";
+      hasResults = true;
+      } else {
+      produs.style.display = "none";
       }
       document.getElementById("no-results-message").style.display = hasResults
-        ? "none"
-        : "block";
-    };
-     console.log("S-a filtrat");
-        });
-
-        document.getElementById('filtrare').addEventListener('click', function() {
-            console.log('Filtrare button clicked');
-            if (document.getElementById('save-filters').checked) {
-                saveFilters();
-                console.log('Filtre salvate');
-            }
-        });
-
-        document.getElementById('resetare').addEventListener('click', function() {
-            console.log('Resetare button clicked');
-            resetFilters();
-            console.log('Filtre sterse');
-        });
-    </script>
+      ? "none"
+      : "block";
+      };
+      console.log("S-a filtrat");
+      });
+      
+      document.getElementById('filtrare').addEventListener('click', function() {
+          console.log('Filtrare button clicked');
+          if (document.getElementById('save-filters').checked) {
+              saveFilters();
+              console.log('Filtre salvate');
+          }
+      });
+      
+      document.getElementById('resetare').addEventListener('click', function() {
+          console.log('Resetare button clicked');
+          resetFilters();
+          console.log('Filtre sterse');
+      });
+   </script>
 </html>

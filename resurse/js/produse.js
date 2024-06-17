@@ -220,13 +220,6 @@ window.addEventListener("load", function () {
     }
   };
 
-  // var noResultsMessage = document.getElementById("results-message");
-  // if (hasResults == false) {
-  //   noResultsMessage.style.display = "none";
-  // } else {
-  //   noResultsMessage.style.display = "block";
-  // }
-
   document.getElementById("resetare").onclick = function () {
     var confirmReset = confirm("Sigur dorești să resetezi filtrele?");
     if (confirmReset) {

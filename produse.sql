@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS produse(
    tehnologie VARCHAR[]
 );
 
+--stil si tehnologie au fost adaugate ulterior si am facut modificari direct din pgAdmin
 INSERT into produse (nume,descriere,pret,pret_lansare,tip,brand,marime,culoare,nou,imagine) VALUES 
 ('Dunk SB Low Travis', 'O silueta care a acaparat atentia tuturor fanilor Nike, colaborarea cu Travis Scott a ajuns clasica in doar cateva zile.', 15000.99, 900, 'incaltaminte', 'Nike', '42.5', '{BLACK,BEIGE-PETRA,BROWN}', true, 'dunksbtrav.jpg'),
 ('Dunk SB Low Orange Lobster', 'Aceasta silueta se alatura clasicei colectii de concepts lobsters.', 3000.00, 750, 'incaltaminte', 'Nike', '43', '{ORANGE FROST,WHITE}', true, 'dunkorangelobster.jpg'),

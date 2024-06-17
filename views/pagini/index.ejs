@@ -1,644 +1,453 @@
 <!DOCTYPE html>
-<!--
--->
 <script>
-  document.addEventListener('DOMContentLoaded', (event) => {
-  function loadRandomProducts() {
-    fetch('/random-products')
-      .then(response => response.json())
-      .then(products => {
-        const carouselInner = document.querySelector('.carousel-inner');
-        const carouselIndicators = document.querySelector('.carousel-indicators');
-        carouselInner.innerHTML = '';
-        carouselIndicators.innerHTML = '';
-        products.forEach((product, index) => {
-          const indicator = document.createElement('li');
-          indicator.setAttribute('data-target', '#productCarousel');
-          indicator.setAttribute('data-slide-to', index);
-          if (index === 0) {
-            indicator.classList.add('active');
-          }
-          carouselIndicators.appendChild(indicator);
-
-          const item = document.createElement('div');
-          item.classList.add('carousel-item');
-          if (index === 0) {
-            item.classList.add('active');
-          }
-
-          const img = document.createElement('img');
-          img.src = `/resurse/imagine/produse/${product.imagine}`;
-          img.classList.add('d-block', 'w-100');
-          img.alt = product.nume;
-          img.style.height = '400px';
-
-          const caption = document.createElement('div');
-          caption.classList.add('carousel-caption', 'd-none', 'd-md-block','bg-secondary','text-light','rounded');
-          caption.innerHTML = `<h5>${product.nume}</h5><p>Stil: ${product.stil}</p>`;
-
-          item.appendChild(img);
-          item.appendChild(caption);
-
-          carouselInner.appendChild(item);
-        });
-      })
-      .catch(error => console.error('Error loading random products:', error));
-  }
-
-  loadRandomProducts();
-  setInterval(loadRandomProducts, 15000);
-});
+   document.addEventListener('DOMContentLoaded', (event) => {
+   function loadRandomProducts() {
+     fetch('/random-products')
+       .then(response => response.json())
+       .then(products => {
+         const carouselInner = document.querySelector('.carousel-inner');
+         const carouselIndicators = document.querySelector('.carousel-indicators');
+         carouselInner.innerHTML = '';
+         carouselIndicators.innerHTML = '';
+         products.forEach((product, index) => {
+           const indicator = document.createElement('li');
+           indicator.setAttribute('data-target', '#productCarousel');
+           indicator.setAttribute('data-slide-to', index);
+           if (index === 0) {
+             indicator.classList.add('active');
+           }
+           carouselIndicators.appendChild(indicator);
+   
+           const item = document.createElement('div');
+           item.classList.add('carousel-item');
+           if (index === 0) {
+             item.classList.add('active');
+           }
+   
+           const img = document.createElement('img');
+           img.src = `/resurse/imagine/produse/${product.imagine}`;
+           img.classList.add('d-block', 'w-100');
+           img.alt = product.nume;
+           img.style.height = '400px';
+   
+           const caption = document.createElement('div');
+           caption.classList.add('carousel-caption', 'd-none', 'd-md-block','bg-secondary','text-light','rounded');
+           caption.innerHTML = `<h5>${product.nume}</h5><p>Stil: ${product.stil}</p>`;
+   
+           item.appendChild(img);
+           item.appendChild(caption);
+   
+           carouselInner.appendChild(item);
+         });
+       })
+       .catch(error => console.error('Error loading random products:', error));
+   }
+   
+   loadRandomProducts();
+   setInterval(loadRandomProducts, 15000);
+   });
 </script>
-
-
 <style>
- #productCarousel {
-  max-width: 500px; 
-  margin: 0 auto;
-}
-
-.custom-img {
-  width: 100%; 
-  height: 300px; 
-}
-
-
-
-  /* .navbar {
-    margin: 0;
-    height: 60px;
-    display: flex;
-    flex-direction: row;
-    background-color: #b91d47;
-    border-radius: 12px;
-    box-shadow: 0px 5px 102px black;
-  }
-
-  .titlu {
-    padding-top: 10px;
-    margin: 0;
-    color: white;
-    font-size: 30px;
-    padding-right: 10px;
-  }
-
-  a {
-    padding-top: 20px;
-    color: white;
-    text-decoration: none;
-    padding-left: 12px;
-  }
-
-  a:hover {
-    color: white;
-    font-size: large;
-    text-decoration: underline;
-    padding-left: 12px;
-  }
-
-  .black {
-    color:var(--black);
-  }
-
-  .black:hover {
-    color:va
-  } */
-
-  .iframe {
-    display: flex;
-    flex-direction: row;
-    margin: auto;
-    justify-content: space-between;
-  }
-
-  /* p{
-    color: green;
-  } */
-
-  .index-roman {
-  counter-reset: roman-counter;
-}
-.index-roman::before {
-  counter-increment: roman-counter;
-  content: counter(roman-counter, upper-roman);
-}
+   #productCarousel {
+   max-width: 500px; 
+   margin: 0 auto;
+   }
+   .custom-img {
+   width: 100%; 
+   height: 300px; 
+   }
+   .iframe {
+   display: flex;
+   flex-direction: row;
+   margin: auto;
+   justify-content: space-between;
+   }
+   .index-roman {
+   counter-reset: roman-counter;
+   }
+   .index-roman::before {
+   counter-increment: roman-counter;
+   content: counter(roman-counter, upper-roman);
+   }
 </style>
-
 <html lang="ro">
-  <head>
-    <%- include("../fragmente/head") %>
-    <meta
-      name="keywords"
-      content=": Hypero, magazin haine, magazin adidasi, magazin incaltaminte, Sneaker Shop, Streetwear, Bucuresti, Nike, Adidas, Supreme, Bape, Balenciaga"
-    />
-    <meta
-      name="description"
-      content="Hypero! Avem cei mai hyped sneakersi din Romania. Gasesti la noi ultimele lansari Nike, Yeezy si Jordan.
+   <head>
+      <%- include("../fragmente/head") %>
+      <meta
+         name="keywords"
+         content=": Hypero, magazin haine, magazin adidasi, magazin incaltaminte, Sneaker Shop, Streetwear, Bucuresti, Nike, Adidas, Supreme, Bape, Balenciaga"
+         />
+      <meta
+         name="description"
+         content="Hypero! Avem cei mai hyped sneakersi din Romania. Gasesti la noi ultimele lansari Nike, Yeezy si Jordan.
          Urmareste-ne pe instagram la @Hypero pentru a fi la curent cu giveaway-urile pe care le facem!"
-    />
-    <title>Hypero</title>
-  </head>
-
-  <body>
-    <%- include("../fragmente/header")  %>
-    <main>
-      <div id="grid-pagina">
-        <section id="welcome">
-          <!-- <button type="button" class="btn btn-primary btn-lg">Stil-1-mare</button> -->
-          <br>
-          <% if(locals.utilizator) { %>
+         />
+      <title>Hypero</title>
+   </head>
+   <body>
+      <%- include("../fragmente/header")  %>
+      <main>
+         <div id="grid-pagina">
+         <section id="welcome">
+            <!-- <button type="button" class="btn btn-primary btn-lg">Stil-1-mare</button> -->
+            <br>
+            <% if(locals.utilizator) { %>
             <h1>Bine ai venit, <%- locals.utilizator.nume%></h1>
             <img src="/<%- locals.utilizator.poza%>" onerror="this.onerror=null; this.src='../../resurse/imagine/hyperoshop.jpeg'" width="17%" height="5%">
-          <% } %>
-
-          <%- include("../fragmente/locatie") %>
-          <%- include("../fragmente/ora-server-client") %>
-          <%- include("../fragmente/evenimente") %>
-          <%- include("../fragmente/useri-online") %>
-          <section id="galerie-statica">
-            <h2 id="text">
-              Galerie
-              <div id="text-reflectat">Galerie</div>
-            </h2>
-            <div id="grid-galerie">
-                <%
-                  var vLuni=["ianuarie","februarie","martie","aprilie","mai","iunie","iulie","august","septembrie","octombrie","noiembrie","decembrie"];
-                  var d=new Date();
-                  var lunaCurenta=vLuni[d.getMonth()];
-                  var d=new Date();
-                  var lunaCurenta=vLuni[d.getMonth()];
-                  var oraCurenta = d.getHours();
-                  var minuteCurente = d.getMinutes();
-                  var sfertulDeOraCurent = Math.ceil(minuteCurente / 15); // Determinăm sfertul de oră actual
-                  var imagCount = 0;
-                  for(let imag of locals.imagini) {
-                    if( imag?.luni?.includes(lunaCurenta) && imagCount < 10 && imag.sfertOra === sfertulDeOraCurent){ 
-                      var romanIndex = convertToRoman(imagCount + 1);%>
-                <figure>
-                  <picture>
-                    <source srcset="<%= imag.fisier %>" media="(max-width:1200px)"/>
-                    <img src="<%= imag.fisier %>" alt="briose"/>
-                  </picture>
-                <figcaption><h6><span class="index-roman"><%= romanIndex %></span><%= imag.descriere %></h6></figcaption>
-                </figure>
-                    <% imagCount++;
-                   } %>
-                <%}%>
+            <% } %>
+            <%- include("../fragmente/evenimente") %>
+            <section id="galerie-animata">
+               <h2 id="text">
+                  Galerie Animata:
+                  <div id="text-reflectat">Galerie Animata:</div>
+               </h2>
+               <div class="galerie-animata">
+                  <% 
+                     function generateRandomNumber() {
+                         let randomNumber;
+                         do {
+                             randomNumber = Math.floor(Math.random() * 15) + 2;
+                         } while ((randomNumber & (randomNumber - 1)) !== 0);
+                         return randomNumber;
+                     }
+                     const nr_imagini = generateRandomNumber();
+                     var imagCount = 0;
+                     for(let imag of locals.imagini) { 
+                         if (imagCount >= nr_imagini) break; 
+                     %>
+                  <figure>
+                     <source srcset="<%= imag.fisier %>" media="(max-width:1200px)"/>
+                     <img src="<%= imag.fisier %>" alt="briose"/>
+                     <figcaption>
+                        <h6><%= imag.descriere %></h6>
+                     </figcaption>
+                  </figure>
+                  <% imagCount++; } %>
+               </div>
+            </section>
+            <section id="galerie-statica">
+               <h2 id="text">
+                  Galerie
+                  <div id="text-reflectat">Galerie</div>
+               </h2>
+               <div id="grid-galerie">
+                  <%
+                     function convertToRoman(num) {
+                       const romanNumerals = ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii","xiii", "xiv", "xv"];
+                       if (num >= 1 && num <= romanNumerals.length) {
+                           return romanNumerals[num - 1];
+                       } else {
+                           return num.toString();
+                       }
+                     }
+                     var vLuni=["ianuarie","februarie","martie","aprilie","mai","iunie","iulie","august","septembrie","octombrie","noiembrie","decembrie"];
+                     var d=new Date();
+                     var lunaCurenta=vLuni[d.getMonth()];
+                     var d=new Date();
+                     var lunaCurenta=vLuni[d.getMonth()];
+                     var oraCurenta = d.getHours();
+                     var minuteCurente = d.getMinutes();
+                     var sfertulDeOraCurent = Math.ceil(minuteCurente / 15); // Determinăm sfertul de oră actual
+                     var imagCount = 0;
+                     var index = 1;
+                     for(let imag of locals.imagini) {
+                       if( imag?.luni?.includes(lunaCurenta) && imagCount < 10 && imag.sfertOra === sfertulDeOraCurent){ 
+                       var indexRoman = convertToRoman(index)%>
+                  <figure>
+                     <picture>
+                        <source srcset="<%= imag.fisier %>" media="(max-width:1200px)"/>
+                        <img src="<%= imag.fisier %>" alt="briose"/>
+                     </picture>
+                     <figcaption>
+                        <h6><span class="index-roman"><%= indexRoman + '. ' + imag.descriere %></h6>
+                     </figcaption>
+                     romanIndex %></span><%= imag.descriere %></h6></figcaption>
+                  </figure>
+                  <% imagCount++;
+                     } %>
+                  <%}%>
+               </div>
+            </section>
+            <h2>!! Bine ai venit in lumea streetwear !!</h2>
+            <p>Ip: <%- locals.ip -%></p>
+            <figure>
+               <picture>
+                  <source
+                     media="(min-width: 1000px)"
+                     srcset="./resurse/imagine/2.png"
+                     />
+                  <source
+                     media="(min-width: 700px)"
+                     srcset="./resurse/imagine/1.png"
+                     />
+                  <img
+                     src="./resurse/imagine/Logo.png"
+                     alt="GFG"
+                     title="adidasi"
+                     class="imagine"
+                     />
+               </picture>
+               <figcaption>Adidasi noi</figcaption>
+            </figure>
+            <div style="display: flex; flex-direction: row;">
+               <video id="video-vtt" controls preload="metadata" poster="./resurse/video/banner_video.jpeg" style="width: 100%; min-width: 300px; max-width: 800px; margin-right: 20px;">
+                  <source src="./resurse/video/video_promo2.mp4" type="video/mp4">
+                  <source src="./resurse/video/video_promo2.avi" type="video/avi">
+                  <track src="./resurse/video/promo2_subs.vtt" kind="subtitles" srclang="ro" label="Română" default>
+                  <track src="./resurse/video/promo2_subs2.vtt" kind="subtitles" srclang="en" label="Engleză" >
+               </video>
+               <div class="efect-duotone"></div>
             </div>
-            
-        </section>
-  <section id="galerie-animata">
-            <h2 id="text">
-              Galerie Animata:
-              <div id="text-reflectat">Galerie Animata:</div>
-            </h2>
-            <div class="galerie-animata">
-    <% 
-    function generateRandomNumber() {
-        let randomNumber;
-        do {
-            randomNumber = Math.floor(Math.random() * 15) + 2;
-        } while ((randomNumber & (randomNumber - 1)) !== 0);
-        return randomNumber;
-    }
-    const nr_imagini = generateRandomNumber();
-    var imagCount = 0;
-    for(let imag of locals.imagini) { 
-        if (imagCount >= nr_imagini) break; 
-    %>
-    <figure>
-        <source srcset="<%= imag.fisier %>" media="(max-width:1200px)"/>
-        <img src="<%= imag.fisier %>" alt="briose"/>
-        <figcaption><h6><%= imag.descriere %></h6></figcaption>
-    </figure>
-    <% imagCount++; } %>
-</div>
-</section>
-
-        <h2>!! Bine ai venit in lumea streetwear !!</h2>
-        <p>Ip: <%- locals.ip -%></p>
-        <figure>
-          <picture>
-            <source
-              media="(min-width: 1000px)"
-              srcset="./resurse/imagine/2.png"
-            />
-
-            <source
-              media="(min-width: 700px)"
-              srcset="./resurse/imagine/1.png"
-            />
-
-            <img
-              src="./resurse/imagine/Logo.png"
-              alt="GFG"
-              title="adidasi"
-              class="imagine"
-            />
-          </picture>
-          <figcaption>Adidasi noi</figcaption>
-        </figure>
-        <video id="video-vtt" controls preload="metadata" poster="./resurse/video/banner_video.jpeg" style="width: 100%; min-width: 300px; max-width: 800px;">
-              <source src="./resurse/video/video_promo2.mp4" type="video/mp4">
-              <source src="./resurse/video/video_promo2.avi" type="video/avi">
-              <track src="./resurse/video/promo2_subs.vtt" kind="subtitles" srclang="ro" label="Română" default>
-              <track src="./resurse/video/promo2_subs2.vtt" kind="subtitles" srclang="en" label="Engleză" >
-        </video>
-        <div class="efect-duotone"></div>
-        <p style="color:var(--dark); font-variant: small-caps;">
-          <hr>
-          <span>
+            <p style="color:var(--dark); font-variant: small-caps;">
+            <hr>
+            <span>
             Cauti <b>ADIDASI</b> la moda? Ai ajuns in locul potrivit.
             <ins>Cele mai <abbr title="populare">hyped</abbr> siluete</ins>, cum
             <s>rar</s> <ins>nu</ins> gasesti altundeva. Motto-ul nostru este
             <q>Preventie si nu reactie</q>, cumpara la pretul de acum pentru a
             nu regreta mai tarziu!!!
             <i>
-              consectetur adipiscing elit. Pellentesque sed sollicitudin mi.
-              Aenean pharetra ligula metus, at gravida magna feugiat eu. Nunc
-              laoreet ut dui id rutrum. Vivamus at vehicula metus, et hendrerit
-              elit. Ut sed diam sed nulla euismod elementum euismod a turpis.
-              Integer et ipsum id arcu eleifend pulvinar interdum at elit.
-              Mauris leo sem, convallis sed elit pretium, ultrices bibendum
-              nibh. Etiam vitae sem hendrerit, pharetra dui vel, imperdiet
-              tellus. Interdum et malesuada fames ac ante ipsum primis in
-              faucibus. Pellentesque vitae lectus id odio placerat fermentum sed
-              id nisl. Fusce imperdiet luctus scelerisque. Duis in elit
-              scelerisque, malesuada neque nec, venenatis purus. Donec posuere
-              congue nibh eget laoreet. Sed neque mi, vestibulum consectetur
-              diam vel, rutrum vehicula nibh. Duis ut neque nisl. Suspendisse eu
-              ultrices neque. In et rutrum justo. Mauris rhoncus, mauris non
-              pretium tincidunt, odio augue condimentum eros, sit amet consequat
-              diam tellus quis turpis. Curabitur mi felis, hendrerit vel nisl
-              et, suscipit dignissim risus. Duis sit amet dolor est. Cras nec ex
-              eu tellus gravida laoreet. Donec mattis semper orci non blandit.
-              Nulla et sollicitudin lectus, nec accumsan est. Nulla quis arcu
-              suscipit leo dictum convallis. Quisque fringilla, mi id lacinia
-              porttitor, lacus quam pretium risus, ac consectetur lacus elit sed
-              tortor. Quisque ut felis non ante blandit congue. Integer
-              porttitor sed metus nec luctus. Aliquam euismod dui eu libero
-              posuere tristique. Quisque sed urna eu felis lobortis tempor id
-              sit amet libero. Fusce tincidunt auctor velit sit amet suscipit.
-              Aenean viverra a ex sed tincidunt. Aenean ornare ornare accumsan.
-              Etiam eu lectus nec odio vulputate interdum. Quisque non lacus
-              bibendum, sagittis ante ac, semper turpis. Nullam id maximus
-              felis. Sed in tincidunt dolor. Vivamus ut dolor sit amet tortor
-              laoreet lobortis quis quis lorem. Phasellus scelerisque elit eget
-              tortor dapibus aliquam. Duis euismod pretium metus nec lacinia. In
-              tincidunt leo quis facilisis pulvinar. In malesuada elementum
-              justo mollis scelerisque. Aenean in tristique mi, viverra
-              porttitor purus. Donec varius, ipsum et tempus aliquet, augue elit
-              euismod ex, et vehicula velit nunc in justo. Phasellus id nisi
-              suscipit leo commodo dapibus. Morbi elementum placerat aliquam.
-              Integer bibendum nisi a nibh posuere tincidunt. Vestibulum ante
-              ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-              curae; Nam suscipit pretium ipsum id condimentum. Sed hendrerit
-              nisl eget tempor porta. Curabitur ac augue a odio ultricies
-              suscipit. Donec interdum elit sit amet metus fringilla tincidunt.
-              Nam lorem magna, fermentum ut elit at, rutrum iaculis dolor. Nam
-              vulputate, mauris sit amet placerat facilisis, risus risus maximus
-              lectus, vel imperdiet neque nisi interdum leo. Donec venenatis
-              mattis mauris id dictum. Class aptent taciti sociosqu ad litora
-              torquent per conubia nostra, per inceptos himenaeos. Sed non odio
-              non nibh maximus vestibulum ut eu elit. Pellentesque sagittis est
-              sed risus sodales, id posuere diam accumsan. Aenean pretium cursus
-              ex, auctor facilisis tellus faucibus ut.
+            Descoperă colecțiile noastre unice și fii mereu cu un pas înainte în lumea modei. 
+            La Hypero, ne asigurăm că fiecare pereche de adidași te face să te simți special și în tendințe. 
+            Colaborăm cu cei mai cunoscuți designeri și branduri pentru a-ți aduce exclusivități și ediții limitate, 
+            direct la tine. Fie că ești un colecționar pasionat sau doar cauți următoarea pereche care să îți completeze 
+            ținuta, la Hypero găsești tot ce ai nevoie. Serviciul nostru de resell îți oferă nu doar produse autentice, 
+            ci și o experiență de cumpărături fără egal, cu suport dedicat și livrare rapidă. Transformă-ți garderoba cu 
+            Hypero și simte diferența calității și stilului de top.
             </i>
-          </span>
-        </p>
-          <div class="iframe">
-          <iframe
-            name="ifr-video"
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/2JHpcPHMdPg?si=ddYu2nN1ayQ0HSgu"
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-          ></iframe>
-          <div class="taburi-iframe">
-            <a
-              class="black"
-              href="https://www.youtube.com/embed/2JHpcPHMdPg?si=ddYu2nN1ayQ0HSgu"
-              target="ifr-video"
-              >Video 1</a
-            >
-            <br /><br />
-            <a
-              class="black"
-              href="https://www.youtube.com/embed/DsDi4x1LErQ?si=B6WiF7irju2mY5q9"
-              target="ifr-video"
-              >Video 2</a
-            >
-            <a
-              class="black"
-              href="https://www.youtube.com/embed/IpQ6PxBWK_Y?si=PpxhbtkYn_QkKMDE"
-              target="ifr-video"
-              >Video 3</a
-            >
-          </div>
-          </div>
-        <a
-          href="./resurse/Tema 0 Proiect Tehnici Web Văsii Alexandru-Alin.docx"
-          download
-          >Download PDF</a
-        >
-        </section>
-        <section id="statistici"> 
-          <h1>Statistici</h1> 
-          Statisticile site-ului vor aparea in curand.
-        </section> 
-        <section id="utilizatori"> 
-          <h1>Utilizatori</h1>  
-          Datele despre  utilizatori vor aparea in curand.
-        </section> 
-        <section id="anunturi">
-        <h3>Anunturi</h3>
-        <p>
-          <span></span>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Pellentesque sed sollicitudin mi. Aenean pharetra ligula metus, at
-            gravida magna feugiat eu. Nunc laoreet ut dui id rutrum. Vivamus at
-            vehicula metus, et hendrerit elit. Ut sed diam sed nulla euismod
-            elementum euismod a turpis. Integer et ipsum id arcu eleifend
-            pulvinar interdum at elit. Mauris leo sem, convallis sed elit
-            pretium, ultrices bibendum nibh. Etiam vitae sem hendrerit, pharetra
-            dui vel, imperdiet tellus. Interdum et malesuada fames ac ante ipsum
-            primis in faucibus. Pellentesque vitae lectus id odio placerat
-            fermentum sed id nisl. Fusce imperdiet luctus scelerisque. Duis in
-            elit scelerisque, malesuada neque nec, venenatis purus. Donec
-            posuere congue nibh eget laoreet. Sed neque mi, vestibulum
-            consectetur diam vel, rutrum vehicula nibh. Duis ut neque nisl.
-            Suspendisse eu ultrices neque. In et rutrum justo. Mauris rhoncus,
-            mauris non pretium tincidunt, odio augue condimentum eros, sit amet
-            consequat diam tellus quis turpis. Curabitur mi felis, hendrerit vel
-            nisl et, suscipit dignissim risus. Duis sit amet dolor est. Cras nec
-            ex eu tellus gravida laoreet. Donec mattis semper orci non blandit.
-            Nulla et sollicitudin lectus, nec accumsan est. Nulla quis arcu
-            suscipit leo dictum convallis. Quisque fringilla, mi id lacinia
-            porttitor, lacus quam pretium risus, ac consectetur lacus elit sed
-            tortor. Quisque ut felis non ante blandit congue. Integer porttitor
-            sed metus nec luctus. Aliquam euismod dui eu libero posuere
-            tristique. Quisque sed urna eu felis lobortis tempor id sit amet
-            libero. Fusce tincidunt auctor velit sit amet suscipit. Aenean
-            viverra a ex sed tincidunt. Aenean ornare ornare accumsan. Etiam eu
-            lectus nec odio vulputate interdum. Quisque non lacus bibendum,
-            sagittis ante ac, semper turpis. Nullam id maximus felis. Sed in
-            tincidunt dolor. Vivamus ut dolor sit amet tortor laoreet lobortis
-            quis quis lorem. Phasellus scelerisque elit eget tortor dapibus
-            aliquam. Duis euismod pretium metus nec lacinia. In tincidunt leo
-            quis facilisis pulvinar. In malesuada elementum justo mollis
-            scelerisque. Aenean in tristique mi, viverra porttitor purus. Donec
-            varius, ipsum et tempus aliquet, augue elit euismod ex, et vehicula
-            velit nunc in justo. Phasellus id nisi suscipit leo commodo dapibus.
-            Morbi elementum placerat aliquam. Integer bibendum nisi a nibh
-            posuere tincidunt. Vestibulum ante ipsum primis in faucibus orci
-            luctus et ultrices posuere cubilia curae; Nam suscipit pretium ipsum
-            id condimentum. Sed hendrerit nisl eget tempor porta. Curabitur ac
-            augue a odio ultricies suscipit. Donec interdum elit sit amet metus
-            fringilla tincidunt. Nam lorem magna, fermentum ut elit at, rutrum
-            iaculis dolor. Nam vulputate, mauris sit amet placerat facilisis,
-            risus risus maximus lectus, vel imperdiet neque nisi interdum leo.
-            Donec venenatis mattis mauris id dictum. Class aptent taciti
-            sociosqu ad litora torquent per conubia nostra, per inceptos
-            himenaeos. Sed non odio non nibh maximus vestibulum ut eu elit.
-            Pellentesque sagittis est sed risus sodales, id posuere diam
-            accumsan. Aenean pretium cursus ex, auctor facilisis tellus faucibus
-            ut.
-          </span>
-        </p>
-        </section>
-        <section id="calendar">
-        <p>
-          <span></span>
+            </span>
+            </p>
+            <div class="iframe">
+               <iframe
+                  name="ifr-video"
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/2JHpcPHMdPg?si=ddYu2nN1ayQ0HSgu"
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                  ></iframe>
+               <div class="taburi-iframe">
+                  <a
+                     class="black"
+                     href="https://www.youtube.com/embed/2JHpcPHMdPg?si=ddYu2nN1ayQ0HSgu"
+                     target="ifr-video"
+                     >Video 1
+                  </a>
+                  <br /><br />
+                  <a
+                     class="black"
+                     href="https://www.youtube.com/embed/DsDi4x1LErQ?si=B6WiF7irju2mY5q9"
+                     target="ifr-video"
+                     >Video 2</a>
+                  <a
+                     class="black"
+                     href="https://www.youtube.com/embed/IpQ6PxBWK_Y?si=PpxhbtkYn_QkKMDE"
+                     target="ifr-video"
+                     >Video 3</a>
+               </div>
+            </div>
+         </section>
+         <section id="statistici">
+            <h1>Statistici</h1>
+            Statisticile site-ului vor aparea in curand.
+         </section>
+         <section id="utilizatori">
+            <h1>Utilizatori</h1>
+            <%- include("../fragmente/useri-online") %>
+         </section>
+         <section id="anunturi">
+            <h1>Anunturi</h1>
+            <p>
+               <span>
+            <h3>Nike Dunk Lobster</h3> - Descoperă unul dintre cele mai râvnite modele de adidași din lume, Nike Dunk Lobster. Inspirat de culoarea și textura homarului, acest model unic prezintă detalii remarcabile precum talpa cu pattern de crustaceu, materialul texturat și accentele vibrante de portocaliu și roșu. Fiecare pereche vine cu un set special de șireturi și o cutie de prezentare personalizată. Este o achiziție obligatorie pentru orice colecționar pasionat de streetwear. Stocurile sunt extrem de limitate, așa că grăbește-te să îi adaugi în colecția ta!
+            <h3>Adidas Ultraboost 21</h3> - Redefinește-ți confortul și performanța cu Adidas Ultraboost 21. Echipat cu cea mai recentă tehnologie Boost, acest model oferă o amortizare excepțională și o revenire de energie la fiecare pas. Designul său modern și aerodinamic este completat de o talpă Continental™ pentru tracțiune superioară și o parte superioară Primeknit care se mulează perfect pe picior. Disponibili într-o varietate de culori, acești adidași sunt ideali atât pentru alergători, cât și pentru cei care caută un stil de viață activ. Nu rata ocazia de a experimenta cea mai bună tehnologie de la Adidas!
+            <h3>Prada Cloudbust Thunder</h3>- Fii în avangarda modei cu Prada Cloudbust Thunder, o adevărată declarație de stil și lux. Acești adidași de designer sunt confecționați din materiale premium și dispun de un design robust și futurist, cu straturi suprapuse și detalii tehnice impresionante. Talpa chunky oferă un confort de neegalat și un aspect îndrăzneț, perfect pentru cei care doresc să iasă în evidență. Fiecare pereche este finisată cu detalii subtile de brand și o construcție durabilă, asigurându-se că vei arăta impecabil și te vei simți confortabil. Disponibili acum într-o selecție exclusivă, nu rata șansa de a deține o piesă de lux autentică!
+            </span>
+            </p>
+         </section>
+         <section id="calendar">
+            <p>
+               <span></span>
             <table class="tarife">
-              <caption>Tarife de livrare</caption>
-              <thead>
-                <tr>
-                  <th>Destinație</th>
-                  <th>Tarif standard</th>
-                  <th>Tarif expres</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Național</td>
-                  <td>10 lei</td>
-                  <td>20 lei</td>
-                </tr>
-                <tr>
-                  <td>Europa</td>
-                  <td>20 euro</td>
-                  <td>30 euro</td>
-                </tr>
-                <tr>
-                  <td>Restul lumii</td>
-                  <td>30 dolari</td>
-                  <td>40 dolari</td>
-                </tr>
-              </tbody>
+               <caption>Tarife de livrare</caption>
+               <thead>
+                  <tr>
+                     <th>Destinație</th>
+                     <th>Tarif standard</th>
+                     <th>Tarif expres</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>Național</td>
+                     <td>10 lei</td>
+                     <td>20 lei</td>
+                  </tr>
+                  <tr>
+                     <td>Europa</td>
+                     <td>20 euro</td>
+                     <td>30 euro</td>
+                  </tr>
+                  <tr>
+                     <td>Restul lumii</td>
+                     <td>30 dolari</td>
+                     <td>40 dolari</td>
+                  </tr>
+               </tbody>
             </table>
-          </span>
-        </p>
-        </section>
-        <section id="orar">
-          <table id="tab-orar">
-                    <thead>
-                        <caption>ORAR LANSĂRI</caption>
-                        <tr>
-                            <th>Brand</th>
-                            <th>Nume</th>
-                            <th>Culoare</th>
-                            <th>Data Lansare</th>
-                            <th>Pret</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Nike SB</td>
-                            <td>Dunk Low</td>
-                            <td>The Rayssa Leal</td>
-                            <td>20 Martie</td>
-                            <td>$125</td>
-                        </tr>
-                        <tr>
-                            <td>Nike</td>
-                            <td>Dunk Low</td>
-                            <td>Plum</td>
-                            <td>21 Martie</td>
-                            <td>$115</td>
-                        </tr>
-                        <tr>
-                            <td>ASICS</td>
-                            <td>GEL-KAYANO 14</td>
-                            <td>IMPERFECTION</td>
-                            <td>22 Martie</td>
-                            <td>$160</td>
-                        </tr>
-                        <tr>
-                            <td >Reebok</td>
-                            <td colspan="2">Hunter x Hunter Bundle</td>
-                            <td >22 Martie</td>
-                            <td >de la<br> $110</td>
-                        </tr>
-                        <tr>
-                            <td>ONE PIECE X PUMA</td>
-                            <td>SUEDE</td>
-                            <td>BUGGY</td>
-                            <td>23 Martie</td>
-                            <td>$85</td>
-                        </tr>
-                    </tbody>
-                    <tfoot><tr><td colspan="6" style="text-align: center;">Vom face update listei pe masura ce apar informatii noi!</td></tr></tfoot>
-                </table> 
-                
-       
-        </section>
-        <section id="datesite">
-        <h3>Date site</h3>
-        <address>
-          Adresa: Strada Academiei 14, București 010014
-          <br />
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.8842997291954!2d26.0995867!3d44.4355355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ff472f47f047%3A0x493984726f0235f9!2sFacultatea%20de%20Matematic%C4%83%20%C8%99i%20Informatic%C4%83!5e0!3m2!1sro!2sro!4v1709538484707!5m2!1sro!2sro"
-            width="600"
-            height="450"
-            style="border: 0"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
-          <br />
-          
-        </address>
-         <details>
-          <summary>De ce sa cumperi de la noi?</summary>
-          <p>Pentru ca avem cea mai variata gama de produse.</p>
-        </details>
-        
-        
-        <p>
-          <small
-            >Copyright &copy
-            <time datetime="2012-10-18">18 oct 2012</time></small
-          >
-        </p>
-        </section>
-        <section id="diverse">
-        <h3>Noutati:</h3>
-        <div class="container_scroll">
-          <div class="scrolling-text">Ceva text de umplutura sa vad ca da scroll</div>
-          
-          <div id="productCarousel" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <% for(let i = 0; i < produse.length; i++) { %>
-      <li data-target="#productCarousel" data-slide-to="<%= i %>" class="<%= i === 0 ? 'active' : '' %>"></li>
-    <% } %>
-  </ol>
-  <div class="carousel-inner">
-    <% for(let i = 0; i < produse.length; i++) { %>
-      <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
-        <img src="/resurse/imagine/produse/<%= produse[i].imagine %>" class="d-block mx-auto custom-img" alt="<%= produse[i].nume %>">
-        <div class="carousel-caption d-none d-md-block bg-secondary text-light rounded">
-          <h5><%= produse[i].nume %></h5>
-          <p>Stil: <%= produse[i].stil %></p>
-        </div>
-      </div>
-    <% } %>
-  </div>
-  <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-
-
-        
-        <p>
-          <a
-        href="https://www.nike.com/ro/?cp=56073097904_search_&Macro=-nike-g-10567125798-103103793023-e-c-RO-pure-449982677430-kwd-11642601-1011837&ds_rl=1252249&gad_source=1&gclid=CjwKCAiA3JCvBhA8EiwA4kujZoZAx6G4CTgW76iIcfVGUDVgHV_PiCRNA8TKOyTDwIyqbHqg0Rtj_RoC5BAQAvD_BwE&gclsrc=aw.ds"
-        target="blank">Visit nike</a>
-        <br>
-          <span class="info-oferte">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Pellentesque sed sollicitudin mi. Aenean pharetra ligula metus, at
-            gravida magna feugiat eu. Nunc laoreet ut dui id rutrum. Vivamus at
-            vehicula metus, et hendrerit elit. Ut sed diam sed nulla euismod
-            elementum euismod a turpis. Integer et ipsum id arcu eleifend
-            pulvinar interdum at elit. Mauris leo sem, convallis sed elit
-            pretium, ultrices bibendum nibh. Etiam vitae sem hendrerit, pharetra
-            dui vel, imperdiet tellus. Interdum et malesuada fames ac ante ipsum
-            primis in faucibus. Pellentesque vitae lectus id odio placerat
-            fermentum sed id nisl. Fusce imperdiet luctus scelerisque. Duis in
-            elit scelerisque, malesuada neque nec, venenatis purus. Donec
-            posuere congue nibh eget laoreet. Sed neque mi, vestibulum
-            consectetur diam vel, rutrum vehicula nibh. Duis ut neque nisl.
-            Suspendisse eu ultrices neque. In et rutrum justo. Mauris rhoncus,
-            mauris non pretium tincidunt, odio augue condimentum eros, sit amet
-            consequat diam tellus quis turpis. Curabitur mi felis, hendrerit vel
-            nisl et, suscipit dignissim risus. Duis sit amet dolor est. Cras nec
-            ex eu tellus gravida laoreet. Donec mattis semper orci non blandit.
-            Nulla et sollicitudin lectus, nec accumsan est. Nulla quis arcu
-            suscipit leo dictum convallis. Quisque fringilla, mi id lacinia
-            porttitor, lacus quam pretium risus, ac consectetur lacus elit sed
-            tortor. Quisque ut felis non ante blandit congue. Integer porttitor
-            sed metus nec luctus. Aliquam euismod dui eu libero posuere
-            tristique. Quisque sed urna eu felis lobortis tempor id sit amet
-            libero. Fusce tincidunt auctor velit sit amet suscipit. Aenean
-            viverra a ex sed tincidunt. Aenean ornare ornare accumsan. Etiam eu
-            lectus nec odio vulputate interdum. Quisque non lacus bibendum,
-            sagittis ante ac, semper turpis. Nullam id maximus felis. Sed in
-            tincidunt dolor. Vivamus ut dolor sit amet tortor laoreet lobortis
-            quis quis lorem. Phasellus scelerisque elit eget tortor dapibus
-            aliquam. Duis euismod pretium metus nec lacinia. In tincidunt leo
-            quis facilisis pulvinar. In malesuada elementum justo mollis
-            scelerisque. Aenean in tristique mi, viverra porttitor purus. Donec
-            varius, ipsum et tempus aliquet, augue elit euismod ex, et vehicula
-            velit nunc in justo. Phasellus id nisi suscipit leo commodo dapibus.
-            Morbi elementum placerat aliquam. Integer bibendum nisi a nibh
-            posuere tincidunt. Vestibulum ante ipsum primis in faucibus orci
-            luctus et ultrices posuere cubilia curae; Nam suscipit pretium ipsum
-            id condimentum. Sed hendrerit nisl eget tempor porta. Curabitur ac
-            augue a odio ultricies suscipit. Donec interdum elit sit amet metus
-            fringilla tincidunt. Nam lorem magna, fermentum ut elit at, rutrum
-            iaculis dolor. Nam vulputate, mauris sit amet placerat facilisis,
-            risus risus maximus lectus, vel imperdiet neque nisi interdum leo.
-            Donec venenatis mattis mauris id dictum. Class aptent taciti
-            sociosqu ad litora torquent per conubia nostra, per inceptos
-            himenaeos. Sed non odio non nibh maximus vestibulum ut eu elit.
-            Pellentesque sagittis est sed risus sodales, id posuere diam
-            accumsan. Aenean pretium cursus ex, auctor facilisis tellus faucibus
-            ut.
-          </span>
-          
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-        <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-        
-        <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-    <mtext style="font-style: italic;">Număr total de permutări al adidasilor: </mtext>
-    <msup style="margin-left: 8px; color:var(--culoare2)">
-        <mi>n</mi>
-        <mi>k</mi>
-    </msup>
-    <mo style="color:var(--culoare2)">=</mo>
-    <mfrac style="color:var(--culoare2)">
-        <mi>n!</mi>
-        <mrow>
-            <mi>n</mi>
-            <mo>-</mo>
-            <mi>k</mi>
-            <mo>!</mo>
-        </mrow>
-    </mfrac>
-</math>
-        </p>
-        </section>
-      </div>
-    </main>
-    <%- include("../fragmente/footer")  %>
-  </body>
+            </span>
+            </p>
+         </section>
+         <section id="orar">
+            <table id="tab-orar">
+               <thead>
+                  <caption>ORAR LANSĂRI</caption>
+                  <tr>
+                     <th>Brand</th>
+                     <th>Nume</th>
+                     <th>Culoare</th>
+                     <th>Data Lansare</th>
+                     <th>Pret</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>Nike SB</td>
+                     <td>Dunk Low</td>
+                     <td>The Rayssa Leal</td>
+                     <td>20 Martie</td>
+                     <td>$125</td>
+                  </tr>
+                  <tr>
+                     <td>Nike</td>
+                     <td>Dunk Low</td>
+                     <td>Plum</td>
+                     <td>21 Martie</td>
+                     <td>$115</td>
+                  </tr>
+                  <tr>
+                     <td>ASICS</td>
+                     <td>GEL-KAYANO 14</td>
+                     <td>IMPERFECTION</td>
+                     <td>22 Martie</td>
+                     <td>$160</td>
+                  </tr>
+                  <tr>
+                     <td >Reebok</td>
+                     <td colspan="2">Hunter x Hunter Bundle</td>
+                     <td >22 Martie</td>
+                     <td >de la<br> $110</td>
+                  </tr>
+                  <tr>
+                     <td>ONE PIECE X PUMA</td>
+                     <td>SUEDE</td>
+                     <td>BUGGY</td>
+                     <td>23 Martie</td>
+                     <td>$85</td>
+                  </tr>
+               </tbody>
+               <tfoot>
+                  <tr>
+                     <td colspan="6" style="text-align: center;">Vom face update listei pe masura ce apar informatii noi!</td>
+                  </tr>
+               </tfoot>
+            </table>
+         </section>
+         <section id="datesite">
+            <h3>Date site</h3>
+            <address>
+               Adresa: Strada Academiei 14, București 010014
+               <br />
+               <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.8842997291954!2d26.0995867!3d44.4355355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ff472f47f047%3A0x493984726f0235f9!2sFacultatea%20de%20Matematic%C4%83%20%C8%99i%20Informatic%C4%83!5e0!3m2!1sro!2sro!4v1709538484707!5m2!1sro!2sro"
+                  width="600"
+                  height="450"
+                  style="border: 0"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  ></iframe>
+               <br />
+            </address>
+            <details>
+               <summary>De ce sa cumperi de la noi?</summary>
+               <p>Pentru ca avem cea mai variata gama de produse.</p>
+            </details>
+            <p>
+               <small
+                  >Copyright &copy
+               <time datetime="2012-10-18">18 oct 2012</time></small>
+            </p>
+            <%- include("../fragmente/locatie") %>
+            <%- include("../fragmente/ora-server-client") %>
+         </section>
+         <section id="diverse">
+            <h3>Noutati:</h3>
+            <div class="container_scroll">
+               <div class="scrolling-text">Breaking news! Colectia de Dunk Lobsters a intrat in stock la o reducere incendiara! Breaking news!</div>
+               <div id="productCarousel" class="carousel slide" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                     <% for(let i = 0; i < produse.length; i++) { %>
+                     <li data-target="#productCarousel" data-slide-to="<%= i %>" class="<%= i === 0 ? 'active' : '' %>"></li>
+                     <% } %>
+                  </ol>
+                  <div class="carousel-inner">
+                     <% for(let i = 0; i < produse.length; i++) { %>
+                     <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+                        <img src="/resurse/imagine/produse/<%= produse[i].imagine %>" class="d-block mx-auto custom-img" alt="<%= produse[i].nume %>">
+                        <div class="carousel-caption d-none d-md-block bg-secondary text-light rounded">
+                           <h5><%= produse[i].nume %></h5>
+                           <p>Stil: <%= produse[i].stil %></p>
+                        </div>
+                     </div>
+                     <% } %>
+                  </div>
+                  <a
+                     href="./resurse/Tema 0 Proiect Tehnici Web Văsii Alexandru-Alin.docx"
+                     download
+                     >Download PDF
+                  </a>
+                  <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                  </a>
+               </div>
+               <p>
+                  <a
+                     href="https://www.nike.com/ro/?cp=56073097904_search_&Macro=-nike-g-10567125798-103103793023-e-c-RO-pure-449982677430-kwd-11642601-1011837&ds_rl=1252249&gad_source=1&gclid=CjwKCAiA3JCvBhA8EiwA4kujZoZAx6G4CTgW76iIcfVGUDVgHV_PiCRNA8TKOyTDwIyqbHqg0Rtj_RoC5BAQAvD_BwE&gclsrc=aw.ds"
+                     target="blank">Visit nike</a>
+                  <br>
+                  <span class="info-oferte">
+                  Rămâi la curent cu ultimele noutăți de la Hypero! În fiecare săptămână, aducem în stoc cele mai recente lansări și ediții limitate de la branduri de top. Fii printre primii care descoperă noile modele de Nike Dunk, Adidas Ultraboost și colecțiile exclusiviste de la Prada. Pe lângă acestea, pregătim surprize speciale și colaborări cu designeri renumiți pentru a-ți oferi cele mai râvnite perechi de adidași de pe piață. Abonează-te la newsletter-ul nostru și urmărește-ne pe rețelele de socializare pentru a nu rata nicio lansare și pentru a beneficia de oferte și promoții exclusive. La Hypero, ne asigurăm că ești mereu în pas cu tendințele și că ai acces la cele mai dorite produse din lumea sneakerilor.
+                  </span>
+                  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+                  <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+                  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+                     <mtext style="font-style: italic;">Număr total de permutări al adidasilor: </mtext>
+                     <msup style="margin-left: 8px; color:var(--culoare2)">
+                        <mi>n</mi>
+                        <mi>k</mi>
+                     </msup>
+                     <mo style="color:var(--culoare2)">=</mo>
+                     <mfrac style="color:var(--culoare2)">
+                        <mi>n!</mi>
+                        <mrow>
+                           <mi>n</mi>
+                           <mo>-</mo>
+                           <mi>k</mi>
+                           <mo>!</mo>
+                        </mrow>
+                     </mfrac>
+                  </math>
+               </p>
+         </section>
+         </div>
+      </main>
+      <%- include("../fragmente/footer")  %>
+   </body>
 </html>
